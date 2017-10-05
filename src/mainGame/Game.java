@@ -3,6 +3,8 @@ package mainGame;
 import java.awt.Canvas;
 import java.awt.Color;
 import java.awt.Graphics;
+import java.awt.GraphicsDevice;
+import java.awt.GraphicsEnvironment;
 import java.awt.image.BufferStrategy;
 
 /**
@@ -16,7 +18,9 @@ public class Game extends Canvas implements Runnable {
 
 	private static final long serialVersionUID = 1L;
 
-	public static final int WIDTH = 1920, HEIGHT = 1080;
+	//public static final int WIDTH = 1920, HEIGHT = 1080;
+	public static int WIDTH;
+	public static int HEIGHT;
 	private Thread thread;
 	private boolean running = false;
 
@@ -44,6 +48,19 @@ public class Game extends Canvas implements Runnable {
 	 * Initialize the core mechanics of the game
 	 */
 	public Game() {
+		//God bless you, Stack Overflow users Colin Hebert and Devon_C_Miller.
+		/*
+		 * The purpose of this is to dynamically set the screen size based on the
+		 * user's resolution of their default monitor.
+		 * 
+		 * This can be improved. Most notably: allow for resizing and either
+		 * take a taskbar into account or do a proper fullscreen display.S
+		 */
+		GraphicsDevice gd = GraphicsEnvironment.getLocalGraphicsEnvironment().getDefaultScreenDevice();
+		WIDTH = gd.getDisplayMode().getWidth();
+		HEIGHT = gd.getDisplayMode().getHeight();
+		
+		
 		handler = new Handler();
 		hud = new HUD();
 		spawner = new Spawn1to10(this.handler, this.hud, this);

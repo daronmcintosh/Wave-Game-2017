@@ -50,7 +50,9 @@ public class KeyInput extends KeyAdapter {
 			GameObject tempObject = handler.object.get(i);
 
 			// using only if's allows multiple keys to be triggered at once
-			if (tempObject.getId() == ID.Player) {// find the player object, as he is the only one the user can control
+			if (tempObject.getId() == ID.Player) {// find the player object, as
+													// he is the only one the
+													// user can control
 				// key events for player 1
 				if (key == KeyEvent.VK_W) {
 					tempObject.setVelY(-(this.speed));
@@ -73,7 +75,9 @@ public class KeyInput extends KeyAdapter {
 				}
 				if (key == KeyEvent.VK_ENTER) {
 					ability = upgrades.getAbility();
-					if (ability.equals("clearScreen")) {
+					if (ability.equals("")) {
+						// do nothing
+					} else if (ability.equals("clearScreen")) {
 						upgrades.clearScreenAbility();
 					} else if (ability.equals("levelSkip")) {
 						upgrades.levelSkipAbility();

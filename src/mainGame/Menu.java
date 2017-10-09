@@ -85,19 +85,6 @@ public class Menu {
 			Font font = new Font("Amoebic", 1, 100);
 			Font font2 = new Font("Amoebic", 1, 60);
 
-			/*
-			 * Note to self:
-			 * 
-			 * Abstract each of these calls out to a window.
-			 * 
-			 * Each of these buttons should be drawn at a relative location.
-			 * Since each was placed precisely at 1920x1080, every position
-			 * should instead be multiplied by found width/height divided by
-			 * 1920/1080 depending.
-			 * 
-			 * Really it should be a layout manager, but baby steps.
-			 */
-			
 			g.setFont(font);
 			g.setColor(Color.white);
 			g.drawString("Game Modes", 1140, 100);
@@ -157,9 +144,14 @@ public class Menu {
 			g.drawString("Help", 900, 70);
 
 			g.setFont(font2);
-			g.drawString("Waves: Simply use WASD to avoid enemies. Once you avoid" + " \n"
-					+ "them long enough, a new batch will spawn in! Defeat each boss to win!", 40, 200);
-
+			
+			String stringToPrint = "How To Play: To play, Waves, you must first understand that you are playing" +" \n"
+					 + " as the small white box in the center of the screen, with the purpose to try to " + " \n"
+					 + "stay alive as long as possible while dodging enemies. To start avoiding enemies," +  " \n"
+					 + " you simply use the keys, “W-A-S-D” to navigate the page.";
+			
+			g.drawString(stringToPrint, 40, 200);
+			
 			g.setFont(font2);
 			g.setColor(Color.white);
 			g.drawRect(850, 300, 200, 64);

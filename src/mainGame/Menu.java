@@ -85,6 +85,19 @@ public class Menu {
 			Font font = new Font("Amoebic", 1, 100);
 			Font font2 = new Font("Amoebic", 1, 60);
 
+			/*
+			 * Note to self:
+			 * 
+			 * Abstract each of these calls out to a window.
+			 * 
+			 * Each of these buttons should be drawn at a relative location.
+			 * Since each was placed precisely at 1920x1080, every position
+			 * should instead be multiplied by found width/height divided by
+			 * 1920/1080 depending.
+			 * 
+			 * Really it should be a layout manager, but baby steps.
+			 */
+			
 			g.setFont(font);
 			g.setColor(Color.white);
 			g.drawString("Game Modes", 1140, 100);

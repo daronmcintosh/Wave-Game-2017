@@ -55,24 +55,54 @@ public class HUD {
 		Font font = new Font("Amoebic", 1, 30);
 
 		g.setColor(Color.GRAY);
-		g.fillRect(15, 15, healthBarWidth, 64);
+		g.fillRect(
+				(int) (15 * (Game.WIDTH / 1920f)), 
+				(int) (15 * (Game.HEIGHT / 1080f)),
+				(int)	(healthBarWidth * (Game.WIDTH / 1920f)), 
+				(int) (64 * (Game.HEIGHT / 1800f)));
 		g.setColor(new Color(75, (int) greenValue, 0));
-		g.fillRect((int) 15, (int) 15, (int) health * 4, 64);
+		g.fillRect(
+				(int) (15 * (Game.WIDTH / 1920f)), 
+				(int) (15 * (Game.HEIGHT / 1080f)),
+				(int)	((health * 4) * (Game.WIDTH / 1920f)), 
+				(int) (64 * (Game.HEIGHT / 1080f)));
 		g.setColor(scoreColor);
-		g.drawRect(15, 15, healthBarWidth, 64);
+		g.drawRect(
+				(int) (15 * (Game.WIDTH / 1920f)), 
+				(int) (15 * (Game.HEIGHT / 1080f)),
+				(int)	(healthBarWidth * (Game.WIDTH / 1920f)), 
+				(int) (64 * (Game.HEIGHT / 1080f)));
 
 		g.setFont(font);
 
-		g.drawString("Score: " + score, 15, 115);
-		g.drawString("Level: " + level, 15, 150);
-		g.drawString("Extra Lives: " + extraLives, 15, 185);
+		g.drawString(
+				"Score: " + score, 
+				(int) (15 * (Game.WIDTH / 1920f)), 
+				(int) (115 * (Game.HEIGHT / 1080f)));
+		g.drawString(
+				"Level: " + level, 
+				(int) (15 * (Game.WIDTH / 1920f)), 
+				(int) (150 * (Game.HEIGHT / 1080f)));
+		g.drawString(
+				"Extra Lives: " + extraLives, 
+				(int) (15 * (Game.WIDTH / 1920f)), 
+				(int) (185 * (Game.HEIGHT / 1080f)));
 
 		if (ability.equals("freezeTime")) {
-			g.drawString("Time Freezes: " + abilityUses, Game.WIDTH - 300, 64);
+			g.drawString(
+					"Time Freezes: " + abilityUses, 
+					Game.WIDTH - ( (int) (300 * (Game.WIDTH / 1920f))), 
+					(int) (185 * (Game.HEIGHT / 1080f)));
 		} else if (ability.equals("clearScreen")) {
-			g.drawString("Screen Clears: " + abilityUses, Game.WIDTH - 300, 64);
+			g.drawString(
+					"Screen Clears: " + abilityUses, 
+					Game.WIDTH - ( (int) (300 * (Game.WIDTH / 1920f))), 
+					(int) (185 * (Game.HEIGHT / 1920f)));
 		} else if (ability.equals("levelSkip")) {
-			g.drawString("Level Skips: " + abilityUses, Game.WIDTH - 300, 64);
+			g.drawString(
+					"Level Skips: " + abilityUses, 
+					Game.WIDTH - ( (int) (300 * (Game.WIDTH / 1920f))), 
+					(int) (185 * (Game.HEIGHT / 1920f)));
 		}
 	}
 

@@ -100,8 +100,17 @@ public class MouseListener extends MouseAdapter {
 			}
 
 			// Help Button
+
 			else if (mouseOver(mx, my, 80, 135, 850, 250)) {
-				game.gameState = STATE.Help;
+				// game.gameState = STATE.Help;
+
+				JOptionPane.showMessageDialog(game,
+						"How To Play: To play, Waves, you must first understand that you are playing" + " \n"
+								+ " as the small white box in the center of the screen, with the purpose to try to "
+								+ " \n"
+								+ "stay alive as long as possible while dodging enemies. To start avoiding enemies,"
+								+ " \n" + " you simply use the keys, “W-A-S-D” to navigate the page.",
+						"Help", JOptionPane.INFORMATION_MESSAGE);
 			}
 
 			// Credits
@@ -133,7 +142,8 @@ public class MouseListener extends MouseAdapter {
 	}
 
 	/**
-	 * Helper method to detect is the mouse is over a "button" drawn via Graphics
+	 * Helper method to detect is the mouse is over a "button" drawn via
+	 * Graphics
 	 * 
 	 * @param mx
 	 *            mouse x position

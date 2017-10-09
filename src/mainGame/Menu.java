@@ -135,29 +135,30 @@ public class Menu {
 			g.setColor(Color.white);
 			g.drawString("Quit", 400, 900);
 
-		} else if (game.gameState == STATE.Help) {// if the user clicks on "help"
-			Font font = new Font("impact", 1, 50);
-			Font font2 = new Font("impact", 1, 30);
-
-			g.setFont(font);
-			g.setColor(Color.white);
-			g.drawString("Help", 900, 70);
-
-			g.setFont(font2);
-			
-			String stringToPrint = "How To Play: To play, Waves, you must first understand that you are playing" +" \n"
-					 + " as the small white box in the center of the screen, with the purpose to try to " + " \n"
-					 + "stay alive as long as possible while dodging enemies. To start avoiding enemies," +  " \n"
-					 + " you simply use the keys, “W-A-S-D” to navigate the page.";
-			
-			g.drawString(stringToPrint, 40, 200);
-			
-			g.setFont(font2);
-			g.setColor(Color.white);
-			g.drawRect(850, 300, 200, 64);
-			g.drawString("Back", 920, 340);
-		}
-
+		} 
+		//else if (game.gameState == STATE.Help) {// if the user clicks on "help"
+//			Font font = new Font("impact", 1, 50);
+//			Font font2 = new Font("impact", 1, 30);
+//
+//			g.setFont(font);
+//			g.setColor(Color.white);
+//			g.drawString("Help", 900, 70);
+//
+//			g.setFont(font2);
+////			
+////			String stringToPrint = "How To Play: To play, Waves, you must first understand that you are playing" +" \n"
+////					 + " as the small white box in the center of the screen, with the purpose to try to " + " \n"
+////					 + "stay alive as long as possible while dodging enemies. To start avoiding enemies," +  " \n"
+////					 + " you simply use the keys, “W-A-S-D” to navigate the page.";
+////			
+////			g.drawString(stringToPrint, 40, 200);
+//			
+//			g.setFont(font2);
+//			g.setColor(Color.white);
+//			g.drawRect(850, 300, 200, 64);
+//			g.drawString("Back", 920, 340);
+//		}
+//
 	}
 
 }

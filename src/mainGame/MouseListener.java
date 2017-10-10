@@ -159,7 +159,16 @@ public class MouseListener extends MouseAdapter {
 	 *            button height
 	 * @return boolean, true if the mouse is contained within the button
 	 */
-	private boolean mouseOver(int mx, int my, int x, int y, int width, int height) {
+	private boolean mouseOver(int mx, int my, int x, int y, 
+			int width, int height) {
+		//mx = (int) (mx * (Game.WIDTH / 1920f));
+		x = (int) (x * (Game.WIDTH / 1920f));
+		width = (int) (width * (Game.WIDTH / 1920f));
+		//my = (int) (my * (Game.HEIGHT / 1080f));
+		y = (int) (y * (Game.HEIGHT / 1080f));
+		height = (int) (height * (Game.HEIGHT / 1080f));
+		System.out.println("" + mx + " " + x + " " + 
+				width + " " + my + " " + y + " " + height);
 		if (mx > x && mx < x + width) {
 			if (my > y && my < y + height) {
 				return true;

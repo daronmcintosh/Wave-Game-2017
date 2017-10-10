@@ -16,6 +16,7 @@ public class KeyInput extends KeyAdapter {
 
 	private Handler handler;
 	private boolean[] keyDown = new boolean[5];
+	private boolean[] keyUp = new boolean[5];
 	private int speed;
 	private Game game;
 	private HUD hud;
@@ -38,6 +39,12 @@ public class KeyInput extends KeyAdapter {
 		keyDown[2] = false;
 		keyDown[3] = false;
 		keyDown[4] = false;
+
+		keyUp[0] = false;
+		keyUp[1] = false;
+		keyUp[2] = false;
+		keyUp[3] = false;
+		keyUp[4] = false;
 
 	}
 
@@ -70,14 +77,32 @@ public class KeyInput extends KeyAdapter {
 					tempObject.setVelX(this.speed);
 					keyDown[3] = true;
 				}
+
+				// arrow keys as input
+				if (key == KeyEvent.VK_UP) {
+					tempObject.setVelY(-(this.speed));
+					keyUp[0] = true;
+				}
+				if (key == KeyEvent.VK_LEFT) {
+					tempObject.setVelX(-(this.speed));
+					keyUp[1] = true;
+				}
+				if (key == KeyEvent.VK_DOWN) {
+					tempObject.setVelY(this.speed);
+					keyUp[2] = true;
+				}
+				if (key == KeyEvent.VK_RIGHT) {
+					tempObject.setVelX(this.speed);
+					keyUp[3] = true;
+				}
+
 				if (key == KeyEvent.VK_SPACE) {
 					upgrades.levelSkipAbility();
 				}
+
 				if (key == KeyEvent.VK_ENTER) {
 					ability = upgrades.getAbility();
-					if (ability.equals("")) {
-						// do nothing
-					} else if (ability.equals("clearScreen")) {
+					if (ability.equals("clearScreen")) {
 						upgrades.clearScreenAbility();
 					} else if (ability.equals("levelSkip")) {
 						upgrades.levelSkipAbility();
@@ -111,11 +136,29 @@ public class KeyInput extends KeyAdapter {
 					keyDown[4] = false;
 				}
 
+				if (key == KeyEvent.VK_UP)
+					keyUp[0] = false;// tempObject.setVelY(0);
+				if (key == KeyEvent.VK_LEFT)
+					keyUp[1] = false;// tempObject.setVelX(0);
+				if (key == KeyEvent.VK_DOWN)
+					keyUp[2] = false;// tempObject.setVelY(0);
+				if (key == KeyEvent.VK_RIGHT) {
+					keyUp[3] = false;// tempObject.setVelX(0);
+					keyUp[4] = false;
+				}
+
 				// vertical movement
 				if (!keyDown[0] && !keyDown[2])
 					tempObject.setVelY(0);
 				// horizontal movement
 				if (!keyDown[1] && !keyDown[3])
+					tempObject.setVelX(0);
+
+				// vertical movement
+				if (!keyUp[0] && !keyUp[2])
+					tempObject.setVelY(0);
+				// horizontal movement
+				if (!keyUp[1] && !keyUp[3])
 					tempObject.setVelX(0);
 			}
 
@@ -123,5 +166,4 @@ public class KeyInput extends KeyAdapter {
 
 		// if (key == KeyEvent.VK_ESCAPE) System.exit(1);
 	}
-
 }

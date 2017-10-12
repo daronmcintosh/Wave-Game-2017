@@ -75,7 +75,7 @@ public class Handler {
 	public void removeObject(GameObject object) {
 		System.out.println("Before " + this.object.size()); // Print the length before the object is removed
 		this.object.remove(object);
-		System.out.println("Before " + this.object.size()); // Print the length after the object is removed
+		System.out.println("After " + this.object.size()); // Print the length after the object is removed
 	}
 
 	public void addPickup(Pickup object) {

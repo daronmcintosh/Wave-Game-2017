@@ -31,6 +31,12 @@ public class EnemyShooterBullet extends GameObject {
 
 		handler.addObject(new Trail(x, y, ID.Trail, Color.yellow, 4, 4, 0.025, this.handler));
 
+		if (this.y <= 0 || this.y >= Game.HEIGHT) {
+
+		}
+		if (this.x <= 0 || this.x >= Game.WIDTH) {
+
+		}
 		removeBullets();
 	}
 
@@ -39,19 +45,19 @@ public class EnemyShooterBullet extends GameObject {
 		for (int i = 0; i < handler.object.size(); i++) {
 			GameObject tempObject = handler.object.get(i);
 			if (tempObject.getId() == ID.EnemyShooterBullet) {
-				if (tempObject.getX() >= Game.WIDTH || tempObject.getY() >= Game.HEIGHT) {
+				if (tempObject.getX() >= Game.WIDTH || tempObject.getX() <= 0) {
+					handler.removeObject(tempObject);
+				}else if(tempObject.getY() >= Game.HEIGHT || tempObject.getY() <= 0){
 					handler.removeObject(tempObject);
 				}
 			}
 
 		}
-
 	}
 
 	public void render(Graphics g) {
 		g.setColor(Color.red);
 		g.fillRect((int) x, (int) y, 4, 4);
-
 	}
 
 	@Override

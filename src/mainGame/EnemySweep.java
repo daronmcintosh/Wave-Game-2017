@@ -30,7 +30,13 @@ public class EnemySweep extends GameObject {
 		if (this.x <= 0 || this.x >= Game.WIDTH - 16) {
 			velX *= -1;
 		}
-		if (this.y > Game.HEIGHT) {	// removes the object from the array list when it goes off the top of the screen
+		if (this.y >= Game.HEIGHT) { // removes the object from the array list
+										// when it goes off the top of the
+										// screen
+			handler.removeObject(this);
+		}
+		if (this.y <= 0) { // removes the object from the array list when it
+							// goes off the bottom of the screen
 			handler.removeObject(this);
 		}
 

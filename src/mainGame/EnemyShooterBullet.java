@@ -31,12 +31,6 @@ public class EnemyShooterBullet extends GameObject {
 
 		handler.addObject(new Trail(x, y, ID.Trail, Color.yellow, 4, 4, 0.025, this.handler));
 
-		if (this.y <= 0 || this.y >= Game.HEIGHT) {
-
-		}
-		if (this.x <= 0 || this.x >= Game.WIDTH) {
-
-		}
 		removeBullets();
 	}
 
@@ -47,7 +41,8 @@ public class EnemyShooterBullet extends GameObject {
 			if (tempObject.getId() == ID.EnemyShooterBullet) {
 				if (tempObject.getX() >= Game.WIDTH || tempObject.getX() <= 0) {
 					handler.removeObject(tempObject);
-				}else if(tempObject.getY() >= Game.HEIGHT || tempObject.getY() <= 0){
+				}
+				if (tempObject.getY() >= Game.HEIGHT || tempObject.getY() <= 0) {
 					handler.removeObject(tempObject);
 				}
 			}

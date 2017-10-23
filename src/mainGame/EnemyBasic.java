@@ -39,7 +39,7 @@ public class EnemyBasic extends GameObject {
 
 	public void render(Graphics g) {
 		g.setColor(Color.red);
-		g.fillRect((int) x, (int) y, 16, 16);
+		g.fillRect((int) x, (int) y, (int) Game.scaleX(16), (int) Game.scaleY(16));
 
 	}
 

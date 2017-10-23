@@ -218,6 +218,15 @@ public class Game extends Canvas implements Runnable {
 		else
 			return var;
 	}
+	
+	//Add comments later --Nick
+	public static double scaleX(double screenCoordinate) {
+		return (screenCoordinate * (Game.WIDTH/1920f)); 
+	}
+	
+	public static double scaleY(double screenCoordinate) {
+		return (screenCoordinate * (Game.HEIGHT/1080f)); 
+	}
 
 	public static void main(String[] args) {
 

@@ -20,7 +20,7 @@ public class Handler {
 	 * the tick() function on each object
 	 */
 	public void tick() {
-		System.out.println("Amount is " + this.object.size());
+		//System.out.println("Amount is " + this.object.size());
 		for (int i = 0; i < object.size(); i++) {
 			GameObject tempObject = object.get(i);
 			if (tempObject.getId() == ID.Player || tempObject.getId() == ID.Trail

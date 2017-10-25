@@ -17,10 +17,11 @@ public class Spawn1to10 {
 	private Handler handler;
 	private HUD hud;
 	private Game game;
-	private int scoreKeep = 0;
+	private int temp = 0;
 	private Random r = new Random();
 	private int spawnTimer;
 	private int levelTimer;
+	private int onScreenTimer; // used to make the level text disappear off the screen
 	private String[] side = { "left", "right", "top", "bottom" };
 	ArrayList<Integer> levels = new ArrayList<Integer>(); // MAKE THIS AN ARRAY
 															// LIST SO I CAN
@@ -29,6 +30,7 @@ public class Spawn1to10 {
 	private int levelsRemaining;
 	private int levelNumber = 0;
 	private int tempCounter = 0;
+	private LevelText levelString;
 
 	public Spawn1to10(Handler handler, HUD hud, Game game) {
 		this.handler = handler;
@@ -40,12 +42,15 @@ public class Spawn1to10 {
 		hud.setLevel(1);
 		spawnTimer = 10;
 		levelTimer = 150;
+		onScreenTimer = 100;
 		levelsRemaining = 9;
 		hud.setLevel(1);
 		tempCounter = 0;
 		addLevels();
 		index = 0;
 		levelNumber = 1;
+		levelString = new LevelText(Game.WIDTH / 2 - 675, Game.HEIGHT / 2 - 200, "Level " + levelNumber,
+				ID.Levels1to10Text);
 
 	}
 
@@ -96,6 +101,17 @@ public class Spawn1to10 {
 				tempCounter = 0;// reset tempCounter
 				levels.remove(levelNumber);
 				levelNumber += 1;
+				temp = 0;
+				onScreenTimer = 100;
+			}
+			if (onScreenTimer != 0) {
+				if (temp < 1) { // used the same way as tempCounter
+					handler.addObject(levelString);
+					temp++;
+				}
+				onScreenTimer--;
+			} else if (onScreenTimer == 0) {
+				handler.removeObject(levelString);
 			}
 		} else if (levelNumber == 2) {
 			spawnTimer--;
@@ -125,7 +141,20 @@ public class Spawn1to10 {
 				tempCounter = 0;
 				levels.remove(levelNumber);
 				levelNumber += 1;
+				temp = 0;
+				onScreenTimer = 100;
 			}
+			if (onScreenTimer != 0) {
+				if (temp < 1) {
+					levelString.setString("Level " + levelNumber);
+					handler.addObject(levelString);
+					temp++;
+				}
+				onScreenTimer--;
+			} else if (onScreenTimer == 0) {
+				handler.removeObject(levelString);
+			}
+
 		} else if (levelNumber == 3) {
 			spawnTimer--;
 			levelTimer--;
@@ -145,7 +174,18 @@ public class Spawn1to10 {
 				tempCounter = 0;
 				levels.remove(levelNumber);
 				levelNumber += 1;
-
+				temp = 0;
+				onScreenTimer = 100;
+			}
+			if (onScreenTimer != 0) {
+				if (temp < 1) {
+					levelString.setString("Level " + levelNumber);
+					handler.addObject(levelString);
+					temp++;
+				}
+				onScreenTimer--;
+			} else if (onScreenTimer == 0) {
+				handler.removeObject(levelString);
 			}
 		} else if (levelNumber == 4) {
 			levelTimer--;
@@ -163,7 +203,18 @@ public class Spawn1to10 {
 				tempCounter = 0;
 				levels.remove(levelNumber);
 				levelNumber += 1;
-
+				temp = 0;
+				onScreenTimer = 100;
+			}
+			if (onScreenTimer != 0) {
+				if (temp < 1) {
+					levelString.setString("Level " + levelNumber);
+					handler.addObject(levelString);
+					temp++;
+				}
+				onScreenTimer--;
+			} else if (onScreenTimer == 0) {
+				handler.removeObject(levelString);
 			}
 		} else if (levelNumber == 5) {
 			spawnTimer--;
@@ -184,7 +235,18 @@ public class Spawn1to10 {
 				tempCounter = 0;
 				levels.remove(levelNumber);
 				levelNumber += 1;
-
+				temp = 0;
+				onScreenTimer = 100;
+			}
+			if (onScreenTimer != 0) {
+				if (temp < 1) {
+					levelString.setString("Level " + levelNumber);
+					handler.addObject(levelString);
+					temp++;
+				}
+				onScreenTimer--;
+			} else if (onScreenTimer == 0) {
+				handler.removeObject(levelString);
 			}
 		} else if (levelNumber == 6) {
 			spawnTimer--;
@@ -214,7 +276,18 @@ public class Spawn1to10 {
 				tempCounter = 0;
 				levels.remove(levelNumber);
 				levelNumber += 1;
-
+				temp = 0;
+				onScreenTimer = 100;
+			}
+			if (onScreenTimer != 0) {
+				if (temp < 1) {
+					levelString.setString("Level " + levelNumber);
+					handler.addObject(levelString);
+					temp++;
+				}
+				onScreenTimer--;
+			} else if (onScreenTimer == 0) {
+				handler.removeObject(levelString);
 			}
 		} else if (levelNumber == 7) {
 			spawnTimer--;
@@ -235,7 +308,18 @@ public class Spawn1to10 {
 				tempCounter = 0;
 				levels.remove(levelNumber);
 				levelNumber += 1;
-
+				temp = 0;
+				onScreenTimer = 100;
+			}
+			if (onScreenTimer != 0) {
+				if (temp < 1) {
+					levelString.setString("Level " + levelNumber);
+					handler.addObject(levelString);
+					temp++;
+				}
+				onScreenTimer--;
+			} else if (onScreenTimer == 0) {
+				handler.removeObject(levelString);
 			}
 		} else if (levelNumber == 8) {
 			levelTimer--;
@@ -253,6 +337,18 @@ public class Spawn1to10 {
 				tempCounter = 0;
 				levels.remove(levelNumber);
 				levelNumber += 1;
+				temp = 0;
+				onScreenTimer = 100;
+			}
+			if (onScreenTimer != 0) {
+				if (temp < 1) {
+					levelString.setString("Level " + levelNumber);
+					handler.addObject(levelString);
+					temp++;
+				}
+				onScreenTimer--;
+			} else if (onScreenTimer == 0) {
+				handler.removeObject(levelString);
 			}
 		} else if (levelNumber == 9) {
 			spawnTimer--;
@@ -273,11 +369,33 @@ public class Spawn1to10 {
 				tempCounter = 0;
 				levels.remove(levelNumber);
 				levelNumber += 1;
-
+				temp = 0;
+				onScreenTimer = 100;
+			}
+			if (onScreenTimer != 0) {
+				if (temp < 1) {
+					levelString.setString("Level " + levelNumber);
+					handler.addObject(levelString);
+					temp++;
+				}
+				onScreenTimer--;
+			} else if (onScreenTimer == 0) {
+				handler.removeObject(levelString);
 			}
 		}
 
 		else if (levelNumber == 10) {// arbitrary number for the boss
+			if (onScreenTimer != 0) {
+				if (temp < 1) {
+					levelString.setString("Boss Fight!!!");
+					handler.addObject(levelString);
+					temp++;
+				}
+				onScreenTimer--;
+			} else if (onScreenTimer == 0) {
+				handler.removeObject(levelString);
+			}
+			
 			if (tempCounter < 1) {
 				handler.addObject(new EnemyBoss(ID.EnemyBoss, handler));
 				tempCounter++;
@@ -294,20 +412,26 @@ public class Spawn1to10 {
 				}
 			}
 
+
 		}
 
 	}
 
 	public void skipLevel() {
+
 		if (levelsRemaining == 1) {
 			levelsRemaining--;
 			tempCounter = 0;
+			temp = 0;
+			onScreenTimer = 100;
 			levelNumber = 10;
 		} else if (levelsRemaining > 1) {
 			levels.remove(index);
 			levelsRemaining--;
 			System.out.println(levelsRemaining);
 			tempCounter = 0;
+			temp = 0;
+			onScreenTimer = 100;
 			levelNumber += 1;
 		} else if (levelsRemaining == 0) {
 			LEVEL_SET++;

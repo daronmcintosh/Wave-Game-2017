@@ -107,6 +107,7 @@ public class Spawn1to10 {
 			if (onScreenTimer != 0) {
 				if (temp < 1) { // used the same way as tempCounter
 					handler.addObject(levelString);
+					levelString.setString("Level " + levelNumber);
 					temp++;
 				}
 				onScreenTimer--;

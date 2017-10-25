@@ -29,23 +29,33 @@ public class EnemyBurst extends GameObject {
 		this.side = side;
 		this.size = size;
 		if (this.side.equals("left")) {
-			handler.object.add(new EnemyBurstWarning(0, 0, 25, Game.HEIGHT, ID.EnemyBurstWarning, handler));
+			handler.object.add(
+					new EnemyBurstWarning(
+							0, 0, (int) Game.scaleX(25), Game.HEIGHT, 
+							ID.EnemyBurstWarning, handler));
 			setPos();
 			setVel();
 		} else if (this.side.equals("right")) {
-			handler.object
-					.add(new EnemyBurstWarning(Game.WIDTH - 45, 0, 25, Game.HEIGHT, ID.EnemyBurstWarning, handler));
+			handler.object.add(
+					new EnemyBurstWarning(
+							Game.WIDTH - Game.scaleX(45), 0, (int) Game.scaleX(25), Game.HEIGHT, 
+							ID.EnemyBurstWarning, handler));
 			setPos();
 			setVel();
 
 		} else if (this.side.equals("top")) {
-			handler.object.add(new EnemyBurstWarning(0, 0, Game.WIDTH, 25, ID.EnemyBurstWarning, handler));
+			handler.object.add(
+					new EnemyBurstWarning(
+							0, 0, Game.WIDTH, (int) Game.scaleY(25), 
+							ID.EnemyBurstWarning, handler));
 			setPos();
 			setVel();
 
 		} else if (this.side.equals("bottom")) {
-			handler.object
-					.add(new EnemyBurstWarning(0, Game.HEIGHT - 85, Game.WIDTH, 25, ID.EnemyBurstWarning, handler));
+			handler.object	.add(
+					new EnemyBurstWarning(
+							0, Game.HEIGHT - (int) Game.scaleY(85), Game.WIDTH, (int) Game.scaleY(25), 
+							ID.EnemyBurstWarning, handler));
 			setPos();
 			setVel();
 

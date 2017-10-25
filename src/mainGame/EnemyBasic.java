@@ -26,11 +26,13 @@ public class EnemyBasic extends GameObject {
 		this.x += velX;
 		this.y += velY;
 
-		if (this.y <= 0 || this.y >= Game.HEIGHT - 40){
+		//if (this.y <= 0 || this.y >= Game.HEIGHT - 40){
+		if (this.y <= 0 || this.y >= 1080 - 40){	
 			velY *= -1;
 			handler.removeObject(this); // removes the object when it goes off screen
 		}
-		if (this.x <= 0 || this.x >= Game.WIDTH - 16){
+		//if (this.x <= 0 || this.x >= Game.WIDTH - 16){
+		if (this.x <= 0 || this.x >= 1920 - 16){
 			velX *= -1;
 			handler.removeObject(this); // removes the object when it goes off screen
 		}

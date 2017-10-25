@@ -20,6 +20,7 @@ public class Handler {
 	 * the tick() function on each object
 	 */
 	public void tick() {
+		//System.out.println("Amount is " + this.object.size());
 		for (int i = 0; i < object.size(); i++) {
 			GameObject tempObject = object.get(i);
 			if (tempObject.getId() == ID.Player || tempObject.getId() == ID.Trail
@@ -73,9 +74,9 @@ public class Handler {
 	}
 
 	public void removeObject(GameObject object) {
-		System.out.println("Before " + this.object.size()); // Print the length before the object is removed
+//		System.out.println("Before: " + this.object.size());
 		this.object.remove(object);
-		System.out.println("After " + this.object.size()); // Print the length after the object is removed
+//		System.out.println("After: " + this.object.size());
 	}
 
 	public void addPickup(Pickup object) {

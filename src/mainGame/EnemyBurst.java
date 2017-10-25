@@ -76,7 +76,18 @@ public class EnemyBurst extends GameObject {
 			this.y += velY;
 
 		}
-
+		if (this.side.equals("left") && this.x > Game.WIDTH) {
+			handler.removeObject(this);
+		}
+		if (this.side.equals("right") && this.x < 0) {
+			handler.removeObject(this);
+		}
+		if (this.side.equals("top") && this.y > Game.HEIGHT) {
+			handler.removeObject(this);
+		}
+		if (this.side.equals("bottom") && this.y < 0) {
+			handler.removeObject(this);
+		}
 	}
 
 	public void setPos() {

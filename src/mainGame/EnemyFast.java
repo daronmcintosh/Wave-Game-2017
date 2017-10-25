@@ -28,11 +28,9 @@ public class EnemyFast extends GameObject {
 
 		if (this.y <= 0 || this.y >= Game.HEIGHT - 40) {
 			velY *= -1;
-			handler.removeObject(this); // removes the object when it goes off screen
 		}
 		if (this.x <= 0 || this.x >= Game.WIDTH - 16) {
 			velX *= -1;
-			handler.removeObject(this); // removes the object when it goes off screen
 		}
 
 		handler.addObject(new Trail(x, y, ID.Trail, Color.cyan, 16, 16, 0.025, this.handler));

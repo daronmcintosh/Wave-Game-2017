@@ -27,9 +27,17 @@ public class EnemySweep extends GameObject {
 		this.y += velY;
 
 		// if (this.y <= 0 || this.y >= Game.HEIGHT - 43) velY *= -1;
-		if (this.x <= 0 || this.x >= Game.WIDTH - 16){
+		if (this.x <= 0 || this.x >= Game.WIDTH - 16) {
 			velX *= -1;
-			handler.removeObject(this); // removes the object when it goes off screen
+		}
+		if (this.y >= Game.HEIGHT) { // removes the object from the array list
+										// when it goes off the top of the
+										// screen
+			handler.removeObject(this);
+		}
+		if (this.y <= 0) { // removes the object from the array list when it
+							// goes off the bottom of the screen
+			handler.removeObject(this);
 		}
 
 		handler.addObject(new Trail(x, y, ID.Trail, Color.cyan, 16, 16, 0.025, this.handler));

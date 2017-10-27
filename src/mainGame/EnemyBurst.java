@@ -38,7 +38,7 @@ public class EnemyBurst extends GameObject {
 		} else if (this.side.equals("right")) {
 			handler.object.add(
 					new EnemyBurstWarning(
-							Game.WIDTH - Game.scaleX(45), 0, (int) Game.scaleX(25), Game.HEIGHT, 
+							1920 - 45, 0, (int) Game.scaleX(25), Game.HEIGHT, 
 							ID.EnemyBurstWarning, handler));
 			setPos();
 			setVel();
@@ -46,7 +46,7 @@ public class EnemyBurst extends GameObject {
 		} else if (this.side.equals("top")) {
 			handler.object.add(
 					new EnemyBurstWarning(
-							0, 0, Game.WIDTH, (int) Game.scaleY(25), 
+							0, 90, Game.WIDTH, (int) Game.scaleY(25), 
 							ID.EnemyBurstWarning, handler));
 			setPos();
 			setVel();
@@ -54,7 +54,7 @@ public class EnemyBurst extends GameObject {
 		} else if (this.side.equals("bottom")) {
 			handler.object	.add(
 					new EnemyBurstWarning(
-							0, Game.HEIGHT - (int) Game.scaleY(85), Game.WIDTH, (int) Game.scaleY(25), 
+							0, 1080 - 85, Game.WIDTH, (int) Game.scaleY(25), 
 							ID.EnemyBurstWarning, handler));
 			setPos();
 			setVel();
@@ -92,6 +92,7 @@ public class EnemyBurst extends GameObject {
 
 	public void setPos() {
 		if (this.side.equals("left")) {
+			this.x = -(size);
 			this.y = r.nextInt(((Game.HEIGHT - size) - 0) + 1) + 0;
 		} else if (this.side.equals("right")) {
 			this.x = Game.WIDTH + 200;
@@ -103,7 +104,6 @@ public class EnemyBurst extends GameObject {
 
 		} else if (this.side.equals("bottom")) {
 			this.y = Game.HEIGHT + 200;
-			;
 			this.x = r.nextInt(((Game.WIDTH - size) - 0) + 1) + 0;
 
 		}

@@ -58,7 +58,7 @@ public class Game extends Canvas implements Runnable {
 		 */
 		GraphicsDevice gd = GraphicsEnvironment.getLocalGraphicsEnvironment().getDefaultScreenDevice();
 		WIDTH = gd.getDisplayMode().getWidth();
-		HEIGHT = gd.getDisplayMode().getHeight();
+		HEIGHT = (gd.getDisplayMode().getHeight() - 40); // Taskbars exist, sadly.
 		
 		
 		handler = new Handler();

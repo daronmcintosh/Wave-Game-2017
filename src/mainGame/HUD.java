@@ -53,56 +53,60 @@ public class HUD {
 
 	public void render(Graphics g) {
 		Font font = new Font("Amoebic", 1, 30);
+		//Set a nice background color for the UI
 
 		g.setColor(Color.GRAY);
+		g.fillRect(0,	0,	Game.WIDTH,	(int) (Game.scaleY(90)));
+		
+		g.setColor(Color.BLACK);
 		g.fillRect(
-				(int) (15 * (Game.WIDTH / 1920f)), 
-				(int) (15 * (Game.HEIGHT / 1080f)),
-				(int)	(healthBarWidth * (Game.WIDTH / 1920f)), 
-				(int) (64 * (Game.HEIGHT / 1800f)));
+				(int) (Game.scaleX(15)), 
+				(int) (Game.scaleY(15)),
+				(int) (Game.scaleX(healthBarWidth)), 
+				(int) (Game.scaleY(64)));
 		g.setColor(new Color(75, (int) greenValue, 0));
 		g.fillRect(
-				(int) (15 * (Game.WIDTH / 1920f)), 
-				(int) (15 * (Game.HEIGHT / 1080f)),
-				(int)	((health * 4) * (Game.WIDTH / 1920f)), 
-				(int) (64 * (Game.HEIGHT / 1080f)));
+				(int) (Game.scaleX(15)), 
+				(int) (Game.scaleY(15)),
+				(int) (Game.scaleX((health * 4))), 
+				(int) (Game.scaleY(64)));
 		g.setColor(scoreColor);
 		g.drawRect(
-				(int) (15 * (Game.WIDTH / 1920f)), 
-				(int) (15 * (Game.HEIGHT / 1080f)),
-				(int)	(healthBarWidth * (Game.WIDTH / 1920f)), 
-				(int) (64 * (Game.HEIGHT / 1080f)));
+				(int) (Game.scaleX(15)), 
+				(int) (Game.scaleY(15)),
+				(int) (Game.scaleX(healthBarWidth)), 
+				(int) (Game.scaleY(64)));
 
 		g.setFont(font);
 
 		g.drawString(
 				"Score: " + score, 
-				(int) (15 * (Game.WIDTH / 1920f)), 
-				(int) (115 * (Game.HEIGHT / 1080f)));
+				(int) (Game.scaleX(500)), 
+				(int) (Game.scaleY(64)));
 		g.drawString(
 				"Level: " + level, 
-				(int) (15 * (Game.WIDTH / 1920f)), 
-				(int) (150 * (Game.HEIGHT / 1080f)));
+				(int) (Game.scaleX(900)), 
+				(int) (Game.scaleY(64)));
 		g.drawString(
-				"Extra Lives: " + extraLives, 
-				(int) (15 * (Game.WIDTH / 1920f)), 
-				(int) (185 * (Game.HEIGHT / 1080f)));
+				"Extra Lives: " + extraLives,
+				(int) (Game.scaleX(1300)), 
+				(int) (Game.scaleY(64)));
 
 		if (ability.equals("freezeTime")) {
 			g.drawString(
-					"Time Freezes: " + abilityUses, 
-					Game.WIDTH - ( (int) (300 * (Game.WIDTH / 1920f))), 
-					(int) (185 * (Game.HEIGHT / 1080f)));
+					"Time Freezes: " + abilityUses,
+					(int) (Game.scaleX(1600)), 
+					(int) (Game.scaleY(64)));
 		} else if (ability.equals("clearScreen")) {
 			g.drawString(
-					"Screen Clears: " + abilityUses, 
-					Game.WIDTH - ( (int) (300 * (Game.WIDTH / 1920f))), 
-					(int) (185 * (Game.HEIGHT / 1920f)));
+					"Screen Clears: " + abilityUses,
+					(int) (Game.scaleX(1600)), 
+					(int) (Game.scaleY(64)));
 		} else if (ability.equals("levelSkip")) {
 			g.drawString(
-					"Level Skips: " + abilityUses, 
-					Game.WIDTH - ( (int) (300 * (Game.WIDTH / 1920f))), 
-					(int) (185 * (Game.HEIGHT / 1920f)));
+					"Level Skips: " + abilityUses,
+					(int) (Game.scaleX(1600)), 
+					(int) (Game.scaleY(64)));
 		}
 	}
 

@@ -31,8 +31,8 @@ public class Player extends GameObject {
 		this.hud = hud;
 		this.game = game;
 		this.damage = 2;
-		playerWidth = (int) Game.scaleX(32);
-		playerHeight = (int) Game.scaleY(32);
+		playerWidth = 32;
+		playerHeight = 32;
 	}
 
 	@Override
@@ -40,7 +40,7 @@ public class Player extends GameObject {
 		this.x += velX;
 		this.y += velY;
 		x = Game.clamp(x, 0, Game.WIDTH - 38);
-		y = Game.clamp(y, 0, Game.HEIGHT - 60);
+		y = Game.clamp(y, Game.scaleY(90), Game.HEIGHT - 60);
 
 		// add the trail that follows it
 		handler.addObject(new Trail(x, y, ID.Trail, Color.white, playerWidth, playerHeight, 0.05, this.handler));
@@ -106,13 +106,13 @@ public class Player extends GameObject {
 	public void render(Graphics g) {
 
 		g.setColor(Color.blue);
-		g.fillRect((int) x, (int) y, playerWidth, playerHeight);
+		g.fillRect((int) x, (int) y, (int) Game.scaleX(playerWidth), (int) Game.scaleY(playerHeight));
 
 	}
 
 	@Override
 	public Rectangle getBounds() {
-		return new Rectangle((int) this.x, (int) this.y, (int) Game.scaleX(32), (int) Game.scaleY(32));
+		return new Rectangle((int) this.x, (int) this.y, (int) Game.scaleX(playerWidth), (int) Game.scaleY(playerHeight));
 	}
 
 	public void setDamage(int damage) {

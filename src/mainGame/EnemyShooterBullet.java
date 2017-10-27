@@ -17,6 +17,8 @@ public class EnemyShooterBullet extends GameObject {
 
 	public EnemyShooterBullet(double x, double y, double velX, double velY, ID id, Handler handler) {
 		super(x, y, id);
+		this.x = x; // Same as with the trails: ignore scaling of GameObjects.
+		this.y = y;
 		this.handler = handler;
 		this.velX = velX;
 		this.velY = velY;

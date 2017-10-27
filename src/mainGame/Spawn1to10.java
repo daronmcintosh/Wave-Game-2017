@@ -49,7 +49,7 @@ public class Spawn1to10 {
 		addLevels();
 		index = 0;
 		levelNumber = 1;
-		levelString = new LevelText(Game.WIDTH / 2 - 675, Game.HEIGHT / 2 - 200, "Level " + levelNumber,
+		levelString = new LevelText(Game.WIDTH / 2 - Game.scaleX(675), Game.HEIGHT / 2 - Game.scaleY(150), "Level " + levelNumber,
 				ID.Levels1to10Text);
 
 	}
@@ -66,38 +66,7 @@ public class Spawn1to10 {
 	/**
 	 * Called once every 60 seconds by the Game loop
 	 */
-	public void tick() {
-<<<<<<< HEAD
-		if (levelNumber <= 0) {
-			levelTimer--;
-			if (tempCounter < 1) {// display intro game message ONE time
-				handler.addObject(new LevelText(
-						Game.WIDTH / 2 - Game.scaleX(675), 
-						Game.HEIGHT / 2 - Game.scaleY(200), 
-						"Let's start off easy...",
-						ID.Levels1to10Text));
-				tempCounter++;
-			}
-			if (levelTimer <= 0) {// time to play!
-				handler.clearEnemies();
-				tempCounter = 0;
-				levelNumber = levels.get(index);
-			}
-
-		}
-		/*
-		 * EVERY LEVEL WORKS THE SAME WAY
-		 * 
-		 * Only the first level is commented
-		 * 
-		 * Please refer to this bit of code to understand how each level works
-		 * 
-		 */
-		else if (levelNumber == 1) {// this is level 1
-			spawnTimer--;// keep decrementing the spawning spawnTimer 60 times a second
-			levelTimer--;// keep decrementing the level spawnTimer 60 times a second
-			if (tempCounter < 1) {// called only once, but sets the levelTimer to how long we want this level to
-=======
+	public void tick() {		
 		if (levelNumber == 1) {// this is level 1
 			spawnTimer--;// keep decrementing the spawning spawnTimer 60 times a
 							// second
@@ -105,7 +74,6 @@ public class Spawn1to10 {
 							// second
 			if (tempCounter < 1) {// called only once, but sets the levelTimer
 									// to how long we want this level to
->>>>>>> origin/MarkScrumCycle2
 									// run for
 				levelTimer = 2000;// 2000 / 60 method calls a second = 33.33
 									// seconds long
@@ -222,7 +190,7 @@ public class Spawn1to10 {
 		} else if (levelNumber == 4) {
 			levelTimer--;
 			if (tempCounter < 1) {
-				handler.addObject(new EnemyShooter(r.nextInt(Game.WIDTH) - 35, r.nextInt(Game.HEIGHT) - 75, 100, 100,
+				handler.addObject(new EnemyShooter(r.nextInt(Game.WIDTH) - 35, r.nextInt(Game.HEIGHT) - Game.scaleY(185) + Game.scaleY(90), 100, 100,
 						-20, ID.EnemyShooter, this.handler));
 				levelTimer = 1300;
 				tempCounter++;

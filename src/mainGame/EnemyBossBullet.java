@@ -21,6 +21,8 @@ public class EnemyBossBullet extends GameObject {
 
 	public EnemyBossBullet(double x, double y, ID id, Handler handler) {
 		super(x, y, id);
+		this.x = x;
+		this.y = y;
 		this.handler = handler;
 		velX = (r.nextInt((max - min) + 1) + min);// OFFICIAL WAY TO GET A RANGE FOR randInt()
 		velY = 30;

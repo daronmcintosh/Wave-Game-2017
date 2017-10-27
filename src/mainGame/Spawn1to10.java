@@ -49,7 +49,7 @@ public class Spawn1to10 {
 		addLevels();
 		index = 0;
 		levelNumber = 1;
-		levelString = new LevelText(Game.WIDTH / 2 - Game.scaleX(675), Game.HEIGHT / 2 - Game.scaleY(150), "Level " + levelNumber,
+		levelString = new LevelText(Game.WIDTH / 2 - 675, Game.HEIGHT / 2 - 200, "Level " + levelNumber,
 				ID.Levels1to10Text);
 
 	}
@@ -66,7 +66,7 @@ public class Spawn1to10 {
 	/**
 	 * Called once every 60 seconds by the Game loop
 	 */
-	public void tick() {		
+	public void tick() {
 		if (levelNumber == 1) {// this is level 1
 			spawnTimer--;// keep decrementing the spawning spawnTimer 60 times a
 							// second
@@ -191,7 +191,7 @@ public class Spawn1to10 {
 		} else if (levelNumber == 4) {
 			levelTimer--;
 			if (tempCounter < 1) {
-				handler.addObject(new EnemyShooter(r.nextInt(Game.WIDTH) - 35, r.nextInt(Game.HEIGHT) - Game.scaleY(185) + Game.scaleY(90), 100, 100,
+				handler.addObject(new EnemyShooter(r.nextInt(Game.WIDTH) - 35, r.nextInt(Game.HEIGHT) - 75, 100, 100,
 						-20, ID.EnemyShooter, this.handler));
 				levelTimer = 1300;
 				tempCounter++;

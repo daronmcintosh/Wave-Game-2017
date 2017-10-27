@@ -58,7 +58,7 @@ public class Game extends Canvas implements Runnable {
 		 */
 		GraphicsDevice gd = GraphicsEnvironment.getLocalGraphicsEnvironment().getDefaultScreenDevice();
 		WIDTH = gd.getDisplayMode().getWidth();
-		HEIGHT = (gd.getDisplayMode().getHeight() - 40); // Taskbars exist, sadly.
+		HEIGHT = gd.getDisplayMode().getHeight();
 		
 		
 		handler = new Handler();
@@ -217,15 +217,6 @@ public class Game extends Canvas implements Runnable {
 			return var = min;
 		else
 			return var;
-	}
-	
-	//Add comments later --Nick
-	public static double scaleX(double screenCoordinate) {
-		return (screenCoordinate * (Game.WIDTH/1920f)); 
-	}
-	
-	public static double scaleY(double screenCoordinate) {
-		return (screenCoordinate * (Game.HEIGHT/1080f)); 
 	}
 
 	public static void main(String[] args) {

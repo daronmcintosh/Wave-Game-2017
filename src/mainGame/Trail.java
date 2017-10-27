@@ -30,8 +30,6 @@ public class Trail extends GameObject{
 	
 	public Trail(double x, double y, ID id, Color color, int width, int height, double life, Handler handler) {
 		super(x, y, id);
-		this.x = x; // Reset x and y positions after scaling them.
-		this.y = y; // Inelegant, but it works.
 		this.handler = handler;
 		this.color = color;
 		this.width = width;

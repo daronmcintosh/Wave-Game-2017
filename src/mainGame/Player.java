@@ -40,7 +40,7 @@ public class Player extends GameObject {
 		this.x += velX;
 		this.y += velY;
 		x = Game.clamp(x, 0, Game.WIDTH - 38);
-		y = Game.clamp(y, Game.scaleY(90), Game.HEIGHT - 60);
+		y = Game.clamp(y, 0, Game.HEIGHT - 60);
 
 		// add the trail that follows it
 		handler.addObject(new Trail(x, y, ID.Trail, Color.white, playerWidth, playerHeight, 0.05, this.handler));
@@ -73,14 +73,10 @@ public class Player extends GameObject {
 		for (int i = 0; i < handler.object.size(); i++) {
 			GameObject tempObject = handler.object.get(i);
 
-			if (tempObject.getId() == ID.EnemyBasic 
-					|| tempObject.getId() == ID.EnemyFast
-					|| tempObject.getId() == ID.EnemySmart 
-					|| tempObject.getId() == ID.EnemyBossBullet
-					|| tempObject.getId() == ID.EnemySweep 
-					|| tempObject.getId() == ID.EnemyShooterBullet
-					|| tempObject.getId() == ID.EnemyBurst 
-					|| tempObject.getId() == ID.EnemyShooter
+			if (tempObject.getId() == ID.EnemyBasic || tempObject.getId() == ID.EnemyFast
+					|| tempObject.getId() == ID.EnemySmart || tempObject.getId() == ID.EnemyBossBullet
+					|| tempObject.getId() == ID.EnemySweep || tempObject.getId() == ID.EnemyShooterBullet
+					|| tempObject.getId() == ID.EnemyBurst || tempObject.getId() == ID.EnemyShooter
 					|| tempObject.getId() == ID.BossEye) {// tempObject is an enemy
 
 				// collision code
@@ -105,14 +101,14 @@ public class Player extends GameObject {
 	@Override
 	public void render(Graphics g) {
 
-		g.setColor(Color.blue);
-		g.fillRect((int) x, (int) y, (int) Game.scaleX(playerWidth), (int) Game.scaleY(playerHeight));
+		g.setColor(Color.white);
+		g.fillRect((int) x, (int) y, playerWidth, playerHeight);
 
 	}
 
 	@Override
 	public Rectangle getBounds() {
-		return new Rectangle((int) this.x, (int) this.y, (int) Game.scaleX(playerWidth), (int) Game.scaleY(playerHeight));
+		return new Rectangle((int) this.x, (int) this.y, 32, 32);
 	}
 
 	public void setDamage(int damage) {

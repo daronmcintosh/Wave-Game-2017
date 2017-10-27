@@ -61,8 +61,8 @@ public class EnemyShooter extends GameObject {
 	}
 
 	public void shoot() {
-		double diffX = this.x - player.getX() - Game.scaleX(16);
-		double diffY = this.y - player.getY() - Game.scaleX(16);
+		double diffX = this.x - player.getX() - 16;
+		double diffY = this.y - player.getY() - 16;
 		double distance = Math.sqrt(((this.x - player.getX()) * (this.x - player.getX()))
 				+ ((this.y - player.getY()) * (this.y - player.getY())));
 		////////////////////////////// pythagorean theorem
@@ -85,13 +85,13 @@ public class EnemyShooter extends GameObject {
 
 	public void render(Graphics g) {
 		g.setColor(Color.yellow);
-		g.fillRect((int) x, (int) y, (int) Game.scaleX(16), (int) Game.scaleY(16));
+		g.fillRect((int) x, (int) y, this.sizeX, this.sizeY);
 
 	}
 
 	@Override
 	public Rectangle getBounds() {
-		return new Rectangle((int) this.x, (int) this.y, (int) Game.scaleX(16), (int) Game.scaleY(16));
+		return new Rectangle((int) this.x, (int) this.y, this.sizeX, this.sizeY);
 	}
 
 }

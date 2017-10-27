@@ -52,13 +52,13 @@ public class EnemySmart extends GameObject {
 
 	public void render(Graphics g) {
 		g.setColor(Color.green);
-		g.fillRect((int) x, (int) y, (int) Game.scaleX(16), (int) Game.scaleY(16));
+		g.fillRect((int) x, (int) y, 16, 16);
 
 	}
 
 	@Override
 	public Rectangle getBounds() {
-		return new Rectangle((int) this.x, (int) this.y, (int) Game.scaleX(16), (int) Game.scaleY(16));
+		return new Rectangle((int) this.x, (int) this.y, 16, 16);
 	}
 
 }

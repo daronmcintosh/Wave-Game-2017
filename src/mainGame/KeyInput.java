@@ -17,6 +17,7 @@ public class KeyInput extends KeyAdapter {
 	private Handler handler;
 	private boolean[] keyDown = new boolean[5];
 	private boolean[] keyUp = new boolean[5];
+	private boolean isPaused = false;
 	private int speed;
 	private Game game;
 	private HUD hud;
@@ -65,6 +66,12 @@ public class KeyInput extends KeyAdapter {
 					tempObject.setVelY(-(this.speed));
 					keyDown[0] = true;
 				}
+				
+//				if (key == KeyEvent.VK_P){
+//					isPaused = true;
+//					game.gameState = STATE.pause;
+//				}
+				
 				if (key == KeyEvent.VK_A) {
 					tempObject.setVelX(-(this.speed));
 					keyDown[1] = true;

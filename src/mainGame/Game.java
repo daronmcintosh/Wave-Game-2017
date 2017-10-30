@@ -6,6 +6,13 @@ import java.awt.Graphics;
 import java.awt.GraphicsDevice;
 import java.awt.GraphicsEnvironment;
 import java.awt.image.BufferStrategy;
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.IOException;
+import java.io.InputStream;
+import javax.swing.JOptionPane;
+import sun.audio.AudioPlayer;
+import sun.audio.AudioStream;
 
 /**
  * Main game class. This class is the driver class and it follows the Holder
@@ -41,21 +48,13 @@ public class Game extends Canvas implements Runnable {
 	 * Used to switch between each of the screens shown to the user
 	 */
 	public enum STATE {
-		Menu, Help, Game, GameOver, Upgrade,
+		Menu, Help, Game, GameOver, Upgrade, pause,
 	};
 
 	/**
 	 * Initialize the core mechanics of the game
 	 */
 	public Game() {
-		//God bless you, Stack Overflow users Colin Hebert and Devon_C_Miller.
-		/*
-		 * The purpose of this is to dynamically set the screen size based on the
-		 * user's resolution of their default monitor.
-		 * 
-		 * This can be improved. Most notably: allow for resizing and either
-		 * take a taskbar into account or do a proper fullscreen display.S
-		 */
 		GraphicsDevice gd = GraphicsEnvironment.getLocalGraphicsEnvironment().getDefaultScreenDevice();
 		WIDTH = gd.getDisplayMode().getWidth();
 		HEIGHT = (gd.getDisplayMode().getHeight() - 40); // Taskbars exist, sadly.
@@ -86,6 +85,15 @@ public class Game extends Canvas implements Runnable {
 		thread = new Thread(this);
 		thread.start();
 		running = true;
+		
+		InputStream in;
+	    try {
+	        in = new FileInputStream(new File("Sound.wav"));
+	        AudioStream audio = new AudioStream(in);
+	        AudioPlayer.player.start(audio);
+	    } catch (Exception e) {
+	        JOptionPane.showMessageDialog(null, e);
+	    }
 	}
 
 	public synchronized void stop() {
@@ -141,6 +149,9 @@ public class Game extends Canvas implements Runnable {
 	private void tick() {
 		handler.tick();// ALWAYS TICK HANDLER, NO MATTER IF MENU OR GAME SCREEN
 		if (gameState == STATE.Game) {// game is running
+			
+			//add game theme 
+			
 			hud.tick();
 			if (Spawn1to10.LEVEL_SET == 1) {// user is on levels 1 thru 10, update them
 				spawner.tick();
@@ -149,10 +160,13 @@ public class Game extends Canvas implements Runnable {
 			}
 		} else if (gameState == STATE.Menu || gameState == STATE.Help) {// user is on menu, update the menu items
 			menu.tick();
+		    
+			//add menu theme
 		} else if (gameState == STATE.Upgrade) {// user is on upgrade screen, update the upgrade screen
 			upgradeScreen.tick();
 		} else if (gameState == STATE.GameOver) {// game is over, update the game over screen
 			gameOver.tick();
+			//add game over sound
 		}
 
 	}
@@ -183,11 +197,24 @@ public class Game extends Canvas implements Runnable {
 
 		if (gameState == STATE.Game) {// user is playing game, draw game objects
 			hud.render(g);
-		} else if (gameState == STATE.Menu || gameState == STATE.Help) {// user is in help or the menu, draw the menu
+		} else if (gameState == STATE.Menu || gameState == STATE.Help) { // user is in help or the menu, draw the menu
 																		// and help objects
 			menu.render(g);
+			
+		
+			
+//			InputStream in;
+//		    try {
+//		        in = new FileInputStream(new File("Sound.wav"));
+//		        AudioStream audio = new AudioStream(in);
+//		        AudioPlayer.player.start(audio);
+//		    } catch (Exception e) {
+//		        JOptionPane.showMessageDialog(null, e);
+//		    }
+		    
 		} else if (gameState == STATE.Upgrade) {// user is on the upgrade screen, draw the upgrade screen
 			upgradeScreen.render(g);
+			
 		} else if (gameState == STATE.GameOver) {// game is over, draw the game over screen
 			gameOver.render(g);
 		}

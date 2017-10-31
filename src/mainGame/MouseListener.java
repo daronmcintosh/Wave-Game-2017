@@ -96,7 +96,7 @@ public class MouseListener extends MouseAdapter {
 				game.gameState = STATE.Game;
 				handler.addObject(player);
 				// handler.addPickup(new PickupHealth(100, 100, ID.PickupHealth,
-				// "images/PickupHealth.png", handler));
+				// "../images/PickupHealth.png", handler));
 			}
 
 			// Help Button

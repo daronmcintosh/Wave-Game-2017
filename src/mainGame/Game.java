@@ -88,7 +88,7 @@ public class Game extends Canvas implements Runnable {
 		
 		InputStream in;
 	    try {
-	        in = new FileInputStream(new File("Sound.wav"));
+	        in = new FileInputStream(new File("../Sound.wav"));
 	        AudioStream audio = new AudioStream(in);
 	        AudioPlayer.player.start(audio);
 	    } catch (Exception e) {

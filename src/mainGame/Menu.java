@@ -47,7 +47,11 @@ public class Menu {
 
 		img = null;
 		try {
-			img = ImageIO.read(new File("images/background.jpg"));
+
+			System.out.println("Working Directory = " +
+			             System.getProperty("user.dir"));
+
+			img = ImageIO.read(new File("../images/background.jpg"));
 		} catch (Exception e) {
 			e.printStackTrace();
 		}

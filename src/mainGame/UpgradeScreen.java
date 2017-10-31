@@ -51,16 +51,16 @@ public class UpgradeScreen {
 	}
 
 	public void render(Graphics g) {
-		Font font = new Font("Amoebic", 1, (int) Game.scaleY(175));
+		Font font = new Font("Amoebic", 1, 175);
 		text = "Select an Upgrade!";
 		g.setFont(font);
 		g.setColor(Color.WHITE);
-		g.drawString(text, (int) Game.scaleX(Game.WIDTH / 2 - getTextWidth(font, text) / 2), (int) Game.scaleY(200));
+		g.drawString(text, Game.WIDTH / 2 - getTextWidth(font, text) / 2, 200);
 
 		// All pictures are 1721 x 174
-		g.drawImage(getImage(imagePaths.get(index1)), (int) Game.scaleX(100), (int) Game.scaleY(300), (int) Game.scaleX(1721), (int) Game.scaleY(174), null);
-		g.drawImage(getImage(imagePaths.get(index2)), (int) Game.scaleX(100), (int) Game.scaleY(300 + (60 + Game.HEIGHT / 6)), (int) Game.scaleX(1721), (int) Game.scaleY(174), null);
-		g.drawImage(getImage(imagePaths.get(index3)), (int) Game.scaleX(100), (int) Game.scaleY(300 + 2 * (60 + Game.HEIGHT / 6)), (int) Game.scaleX(1721), (int) Game.scaleY(174), null);
+		g.drawImage(getImage(imagePaths.get(index1)), 100, 300, 1721, 174, null);
+		g.drawImage(getImage(imagePaths.get(index2)), 100, 300 + (60 + Game.HEIGHT / 6), 1721, 174, null);
+		g.drawImage(getImage(imagePaths.get(index3)), 100, 300 + 2 * (60 + Game.HEIGHT / 6), 1721, 174, null);
 
 	}
 
@@ -116,8 +116,7 @@ public class UpgradeScreen {
 	public Image getImage(String path) {
 		Image image = null;
 		try {
-			URL imageURL = Game.class.getResource(path);
-			image = Toolkit.getDefaultToolkit().getImage(imageURL);
+			image = Toolkit.getDefaultToolkit().getImage(path);
 		} catch (Exception e) {
 			System.out.println(e.getMessage());
 		}

@@ -21,8 +21,8 @@ public abstract class GameObject {
 	protected int health;
 
 	public GameObject(double x, double y, ID id) {
-		this.x = Game.scaleX(x);
-		this.y = Game.scaleY(y);
+		this.x = x;
+		this.y = y;
 		this.id = id;
 
 	}

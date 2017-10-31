@@ -61,6 +61,7 @@ public class KeyInput extends KeyAdapter {
 			if (tempObject.getId() == ID.Player) {// find the player object, as
 													// he is the only one the
 													// user can control
+<<<<<<< HEAD
 				// key events for player 1
 				if (key == KeyEvent.VK_W) {
 					tempObject.setVelY(-(this.speed));
@@ -86,6 +87,10 @@ public class KeyInput extends KeyAdapter {
 				}
 
 				// arrow keys as input
+=======
+				
+				//key input	
+>>>>>>> origin/master
 				if (key == KeyEvent.VK_UP) {
 					tempObject.setVelY(-(this.speed));
 					keyUp[0] = true;
@@ -132,17 +137,6 @@ public class KeyInput extends KeyAdapter {
 
 			if (tempObject.getId() == ID.Player) {
 				// key events for player 1
-				if (key == KeyEvent.VK_W)
-					keyDown[0] = false;// tempObject.setVelY(0);
-				if (key == KeyEvent.VK_A)
-					keyDown[1] = false;// tempObject.setVelX(0);
-				if (key == KeyEvent.VK_S)
-					keyDown[2] = false;// tempObject.setVelY(0);
-				if (key == KeyEvent.VK_D) {
-					keyDown[3] = false;// tempObject.setVelX(0);
-					keyDown[4] = false;
-				}
-
 				if (key == KeyEvent.VK_UP)
 					keyUp[0] = false;// tempObject.setVelY(0);
 				if (key == KeyEvent.VK_LEFT)

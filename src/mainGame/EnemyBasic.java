@@ -26,12 +26,10 @@ public class EnemyBasic extends GameObject {
 		this.x += velX;
 		this.y += velY;
 
-		//if (this.y <= 0 || this.y >= Game.HEIGHT - 40){
-		if (this.y <= Game.scaleY(90) || this.y >= (Game.scaleY(1080) - 60)){	
+		if (this.y <= 0 || this.y >= Game.HEIGHT - 40){
 			velY *= -1;
 		}
-		//if (this.x <= 0 || this.x >= Game.WIDTH - 16){
-		if (this.x <= 0 || this.x >= (Game.scaleX(1920) - 40)){
+		if (this.x <= 0 || this.x >= Game.WIDTH - 16){
 			velX *= -1;
 		}
 		handler.addObject(new Trail(x, y, ID.Trail, Color.red, 16, 16, 0.025, this.handler));
@@ -39,13 +37,13 @@ public class EnemyBasic extends GameObject {
 
 	public void render(Graphics g) {
 		g.setColor(Color.red);
-		g.fillRect((int) x, (int) y, (int) Game.scaleX(16), (int) Game.scaleY(16));
+		g.fillRect((int) x, (int) y, 16, 16);
 
 	}
 
 	@Override
 	public Rectangle getBounds() {
-		return new Rectangle((int) this.x, (int) this.y, (int) Game.scaleX(16), (int) Game.scaleY(16));
+		return new Rectangle((int) this.x, (int) this.y, 16, 16);
 	}
 
 }

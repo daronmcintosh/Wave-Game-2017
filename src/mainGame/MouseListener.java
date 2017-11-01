@@ -51,7 +51,6 @@ public class MouseListener extends MouseAdapter {
 			spawner2.restart();
   			spawner2.addLevels();
   			handler.object.clear();
- 			Spawn1to10.levelNumber = 1;
   			Spawn1to10.LEVEL_SET = 1;
   			game.gameState = STATE.Game;
   			 handler.addObject(player);
@@ -110,7 +109,7 @@ public class MouseListener extends MouseAdapter {
 								+ " as the small white box in the center of the screen, with the purpose to try to "
 								+ " \n"
 								+ "stay alive as long as possible while dodging enemies. To start avoiding enemies,"
-								+ " \n" + " you simply use the keys, “W-A-S-D” to navigate the page.",
+								+ " \n" + " you simply use the keys, â€œW-A-S-Dâ€� to navigate the page.",
 						"Help", JOptionPane.INFORMATION_MESSAGE);
 			}
 

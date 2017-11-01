@@ -62,7 +62,7 @@ public class KeyInput extends KeyAdapter {
 													// he is the only one the
 													// user can control
 				// key events for player 1
-				if (key == KeyEvent.VK_W) {
+				if (key == KeyEvent.VK_UP) {
 					tempObject.setVelY(-(this.speed));
 					keyDown[0] = true;
 				}
@@ -72,35 +72,17 @@ public class KeyInput extends KeyAdapter {
 //					game.gameState = STATE.pause;
 //				}
 				
-				if (key == KeyEvent.VK_A) {
+				if (key == KeyEvent.VK_LEFT) {
 					tempObject.setVelX(-(this.speed));
 					keyDown[1] = true;
 				}
-				if (key == KeyEvent.VK_S) {
+				if (key == KeyEvent.VK_DOWN) {
 					tempObject.setVelY(this.speed);
 					keyDown[2] = true;
 				}
-				if (key == KeyEvent.VK_D) {
-					tempObject.setVelX(this.speed);
-					keyDown[3] = true;
-				}
-
-				// arrow keys as input
-				if (key == KeyEvent.VK_UP) {
-					tempObject.setVelY(-(this.speed));
-					keyUp[0] = true;
-				}
-				if (key == KeyEvent.VK_LEFT) {
-					tempObject.setVelX(-(this.speed));
-					keyUp[1] = true;
-				}
-				if (key == KeyEvent.VK_DOWN) {
-					tempObject.setVelY(this.speed);
-					keyUp[2] = true;
-				}
 				if (key == KeyEvent.VK_RIGHT) {
 					tempObject.setVelX(this.speed);
-					keyUp[3] = true;
+					keyDown[3] = true;
 				}
 
 				if (key == KeyEvent.VK_SPACE) {
@@ -131,27 +113,16 @@ public class KeyInput extends KeyAdapter {
 			GameObject tempObject = handler.object.get(i);
 
 			if (tempObject.getId() == ID.Player) {
-				// key events for player 1
-				if (key == KeyEvent.VK_W)
-					keyDown[0] = false;// tempObject.setVelY(0);
-				if (key == KeyEvent.VK_A)
-					keyDown[1] = false;// tempObject.setVelX(0);
-				if (key == KeyEvent.VK_S)
-					keyDown[2] = false;// tempObject.setVelY(0);
-				if (key == KeyEvent.VK_D) {
-					keyDown[3] = false;// tempObject.setVelX(0);
-					keyDown[4] = false;
-				}
 
 				if (key == KeyEvent.VK_UP)
-					keyUp[0] = false;// tempObject.setVelY(0);
+					keyDown[0] = false;// tempObject.setVelY(0);
 				if (key == KeyEvent.VK_LEFT)
-					keyUp[1] = false;// tempObject.setVelX(0);
+					keyDown[1] = false;// tempObject.setVelX(0);
 				if (key == KeyEvent.VK_DOWN)
-					keyUp[2] = false;// tempObject.setVelY(0);
+					keyDown[2] = false;// tempObject.setVelY(0);
 				if (key == KeyEvent.VK_RIGHT) {
-					keyUp[3] = false;// tempObject.setVelX(0);
-					keyUp[4] = false;
+					keyDown[3] = false;// tempObject.setVelX(0);
+					keyDown[4] = false;
 				}
 
 				// vertical movement
@@ -159,13 +130,6 @@ public class KeyInput extends KeyAdapter {
 					tempObject.setVelY(0);
 				// horizontal movement
 				if (!keyDown[1] && !keyDown[3])
-					tempObject.setVelX(0);
-
-				// vertical movement
-				if (!keyUp[0] && !keyUp[2])
-					tempObject.setVelY(0);
-				// horizontal movement
-				if (!keyUp[1] && !keyUp[3])
 					tempObject.setVelX(0);
 			}
 

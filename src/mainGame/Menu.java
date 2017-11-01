@@ -47,11 +47,7 @@ public class Menu {
 
 		img = null;
 		try {
-
-			System.out.println("Working Directory = " +
-			             System.getProperty("user.dir"));
-
-			img = ImageIO.read(new File("images/background.jpg"));
+			img = ImageIO.read(getClass().getResource("images/background.jpg"));
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
@@ -231,7 +227,7 @@ public class Menu {
 	////			String stringToPrint = "How To Play: To play, Waves, you must first understand that you are playing" +" \n"
 	////					 + " as the small white box in the center of the screen, with the purpose to try to " + " \n"
 	////					 + "stay alive as long as possible while dodging enemies. To start avoiding enemies," +  " \n"
-	////					 + " you simply use the keys, “W-A-S-D” to navigate the page.";
+	////					 + " you simply use the keys, â€œW-A-S-Dâ€� to navigate the page.";
 	////			
 	////			g.drawString(stringToPrint, 40, 200);
 	//			

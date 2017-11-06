@@ -33,8 +33,10 @@ public class Game extends Canvas implements Runnable {
 
 	private Handler handler;
 	private HUD hud;
+	private SurvivalHUD survivalHud;
 	private Spawn1to10 spawner;
 	private Spawn10to20 spawner2;
+	private Survival survivalGame;
 	private Menu menu;
 	private GameOver gameOver;
 	private UpgradeScreen upgradeScreen;
@@ -48,7 +50,7 @@ public class Game extends Canvas implements Runnable {
 	 * Used to switch between each of the screens shown to the user
 	 */
 	public enum STATE {
-		Menu, Help, Game, GameOver, Upgrade, pause,
+		Menu, Help, Game, GameOver, Upgrade, pause, Survival
 	};
 
 	/**
@@ -62,11 +64,13 @@ public class Game extends Canvas implements Runnable {
 		
 		handler = new Handler();
 		hud = new HUD();
+		survivalHud = new SurvivalHUD();
 		spawner = new Spawn1to10(this.handler, this.hud, this);
 		spawner2 = new Spawn10to20(this.handler, this.hud, this.spawner, this);
 		menu = new Menu(this, this.handler, this.hud, this.spawner);
 		upgradeScreen = new UpgradeScreen(this, this.handler, this.hud);
 		player = new Player(WIDTH / 2 - 32, HEIGHT / 2 - 32, ID.Player, handler, this.hud, this);
+		survivalGame = new Survival(this.handler, this.hud, this, player);
 		upgrades = new Upgrades(this, this.handler, this.hud, this.upgradeScreen, this.player, this.spawner,
 				this.spawner2);
 		gameOver = new GameOver(this, this.handler, this.hud);
@@ -158,7 +162,10 @@ public class Game extends Canvas implements Runnable {
 			} else if (Spawn1to10.LEVEL_SET == 2) {// user is on levels 10 thru 20, update them
 				spawner2.tick();
 			}
-		} else if (gameState == STATE.Menu || gameState == STATE.Help) {// user is on menu, update the menu items
+		} else if (gameState == STATE.Survival) {
+			survivalHud.tick();
+			survivalGame.tick();
+		}	else if (gameState == STATE.Menu || gameState == STATE.Help) {// user is on menu, update the menu items
 			menu.tick();
 		    
 			//add menu theme
@@ -197,6 +204,8 @@ public class Game extends Canvas implements Runnable {
 
 		if (gameState == STATE.Game) {// user is playing game, draw game objects
 			hud.render(g);
+		} else if (gameState == STATE.Survival) {
+			survivalHud.render(g);
 		} else if (gameState == STATE.Menu || gameState == STATE.Help) { // user is in help or the menu, draw the menu
 																		// and help objects
 			menu.render(g);

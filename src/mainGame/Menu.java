@@ -125,6 +125,8 @@ public class Menu {
 			*/
 			drawMenuItem(g, font2, Color.white, new int[] {990, 135, 400, 400}, 
 				"Waves", new int[] {1110, 215});
+			drawMenuItem(g, font2, Color.white, new int[] {1440, 135, 400, 400}, 
+					"Survival", new int[] {1560, 215});
 			/*
 			g.setColor(Color.white);
 			g.drawRect(1440, 135, 400, 400);

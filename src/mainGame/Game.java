@@ -25,7 +25,7 @@ public class Game extends Canvas implements Runnable {
 
 	private static final long serialVersionUID = 1L;
 
-	//public static final int WIDTH = 1920, HEIGHT = 1080;
+	// public static final int WIDTH = 1920, HEIGHT = 1080;
 	public static int WIDTH;
 	public static int HEIGHT;
 	private Thread thread;
@@ -38,6 +38,7 @@ public class Game extends Canvas implements Runnable {
 	private Spawn10to20 spawner2;
 	private Survival survivalGame;
 	private Menu menu;
+	private PauseMenu pauseMenu;
 	private GameOver gameOver;
 	private UpgradeScreen upgradeScreen;
 	private MouseListener mouseListener;
@@ -45,12 +46,13 @@ public class Game extends Canvas implements Runnable {
 	private Player player;
 	public STATE gameState = STATE.Menu;
 	public static int TEMP_COUNTER;
+	private boolean paused;
 
 	/**
 	 * Used to switch between each of the screens shown to the user
 	 */
 	public enum STATE {
-		Menu, Help, Game, GameOver, Upgrade, pause, Survival
+		Menu, Help, Game, GameOver, Upgrade, PauseMenu, Survival
 	};
 
 	/**
@@ -60,8 +62,7 @@ public class Game extends Canvas implements Runnable {
 		GraphicsDevice gd = GraphicsEnvironment.getLocalGraphicsEnvironment().getDefaultScreenDevice();
 		WIDTH = gd.getDisplayMode().getWidth();
 		HEIGHT = (gd.getDisplayMode().getHeight() - 40); // Taskbars exist, sadly.
-		
-		
+
 		handler = new Handler();
 		hud = new HUD();
 		survivalHud = new SurvivalHUD();
@@ -79,6 +80,9 @@ public class Game extends Canvas implements Runnable {
 		this.addKeyListener(new KeyInput(this.handler, this, this.hud, this.player, this.spawner, this.upgrades));
 		this.addMouseListener(mouseListener);
 		new Window((int) WIDTH, (int) HEIGHT, "Wave Game", this);
+		
+		pauseMenu =  new PauseMenu(this, this.handler, this.hud);
+		paused = false;
 	}
 
 	/**
@@ -89,15 +93,15 @@ public class Game extends Canvas implements Runnable {
 		thread = new Thread(this);
 		thread.start();
 		running = true;
-		
-//		InputStream in;
-//	    try {
-//	        in = new FileInputStream(new File("../Sound.wav"));
-//	        AudioStream audio = new AudioStream(in);
-//	        AudioPlayer.player.start(audio);
-//	    } catch (Exception e) {
-//	        JOptionPane.showMessageDialog(null, e);
-//	    }
+
+		// InputStream in;
+		// try {
+		// in = new FileInputStream(new File("../Sound.wav"));
+		// AudioStream audio = new AudioStream(in);
+		// AudioPlayer.player.start(audio);
+		// } catch (Exception e) {
+		// JOptionPane.showMessageDialog(null, e);
+		// }
 	}
 
 	public synchronized void stop() {
@@ -151,31 +155,34 @@ public class Game extends Canvas implements Runnable {
 	 * appearance, etc).
 	 */
 	private void tick() {
-		handler.tick();// ALWAYS TICK HANDLER, NO MATTER IF MENU OR GAME SCREEN
-		if (gameState == STATE.Game) {// game is running
-			
-			//add game theme 
-			
-			hud.tick();
-			if (Spawn1to10.LEVEL_SET == 1) {// user is on levels 1 thru 10, update them
-				spawner.tick();
-			} else if (Spawn1to10.LEVEL_SET == 2) {// user is on levels 10 thru 20, update them
-				spawner2.tick();
-			}
-		} else if (gameState == STATE.Survival) {
-			survivalHud.tick();
-			survivalGame.tick();
-		}	else if (gameState == STATE.Menu || gameState == STATE.Help) {// user is on menu, update the menu items
-			menu.tick();
-		    
-			//add menu theme
-		} else if (gameState == STATE.Upgrade) {// user is on upgrade screen, update the upgrade screen
-			upgradeScreen.tick();
-		} else if (gameState == STATE.GameOver) {// game is over, update the game over screen
-			gameOver.tick();
-			//add game over sound
-		}
+		if (!paused) {
+			handler.tick();// ALWAYS TICK HANDLER, NO MATTER IF MENU OR GAME SCREEN
+			if (gameState == STATE.Game) {// game is running
 
+				// add game theme
+
+				hud.tick();
+				if (Spawn1to10.LEVEL_SET == 1) {// user is on levels 1 thru 10, update them
+					spawner.tick();
+				} else if (Spawn1to10.LEVEL_SET == 2) {// user is on levels 10 thru 20, update them
+					spawner2.tick();
+				}
+			} else if (gameState == STATE.Survival) {
+			    survivalHud.tick();
+			    survivalGame.tick();
+		    } else if (gameState == STATE.Menu || gameState == STATE.Help) {// user is on menu, update the menu items
+				menu.tick();
+
+				// add menu theme
+			} else if (gameState == STATE.Upgrade) {// user is on upgrade screen, update the upgrade screen
+				upgradeScreen.tick();
+			} else if (gameState == STATE.GameOver) {// game is over, update the game over screen
+				gameOver.tick();
+				// add game over sound
+			} else if(gameState == STATE.PauseMenu) {
+				pauseMenu.tick();
+			}
+		}
 	}
 
 	/**
@@ -203,34 +210,48 @@ public class Game extends Canvas implements Runnable {
 		handler.render(g); // ALWAYS RENDER HANDLER, NO MATTER IF MENU OR GAME SCREEN
 
 		if (gameState == STATE.Game) {// user is playing game, draw game objects
+			pauseMenu.removePrompt();
 			hud.render(g);
 		} else if (gameState == STATE.Survival) {
 			survivalHud.render(g);
 		} else if (gameState == STATE.Menu || gameState == STATE.Help) { // user is in help or the menu, draw the menu
-																		// and help objects
+																			// and help objects
 			menu.render(g);
-			
-		
-			
-//			InputStream in;
-//		    try {
-//		        in = new FileInputStream(new File("Sound.wav"));
-//		        AudioStream audio = new AudioStream(in);
-//		        AudioPlayer.player.start(audio);
-//		    } catch (Exception e) {
-//		        JOptionPane.showMessageDialog(null, e);
-//		    }
-		    
+
+			// InputStream in;
+			// try {
+			// in = new FileInputStream(new File("Sound.wav"));
+			// AudioStream audio = new AudioStream(in);
+			// AudioPlayer.player.start(audio);
+			// } catch (Exception e) {
+			// JOptionPane.showMessageDialog(null, e);
+			// }
+
 		} else if (gameState == STATE.Upgrade) {// user is on the upgrade screen, draw the upgrade screen
 			upgradeScreen.render(g);
-			
+
 		} else if (gameState == STATE.GameOver) {// game is over, draw the game over screen
 			gameOver.render(g);
+		}else if(gameState==STATE.PauseMenu) {
+			hud.render(g);
+			pauseMenu.render(g);
 		}
 
 		///////// Draw things above this//////////////
 		g.dispose();
 		bs.show();
+	}
+
+	public boolean isPaused() {
+		return paused;
+	}
+
+	public void pause() {
+		paused = true;
+	}
+
+	public void unPause() {
+		paused = false;
 	}
 
 	/**
@@ -254,14 +275,14 @@ public class Game extends Canvas implements Runnable {
 		else
 			return var;
 	}
-	
-	//Add comments later --Nick
+
+	// Add comments later --Nick
 	public static double scaleX(double screenCoordinate) {
-		return (screenCoordinate * (Game.WIDTH/1920f)); 
+		return (screenCoordinate * (Game.WIDTH / 1920f));
 	}
-	
+
 	public static double scaleY(double screenCoordinate) {
-		return (screenCoordinate * (Game.HEIGHT/1080f)); 
+		return (screenCoordinate * (Game.HEIGHT / 1080f));
 	}
 
 	public static void main(String[] args) {

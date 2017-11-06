@@ -16,8 +16,7 @@ public class KeyInput extends KeyAdapter {
 
 	private Handler handler;
 	private boolean[] keyDown = new boolean[5];
-	private boolean[] keyUp = new boolean[5];
-	private boolean isPaused = false;
+	private boolean paused;
 	private int speed;
 	private Game game;
 	private HUD hud;
@@ -40,13 +39,7 @@ public class KeyInput extends KeyAdapter {
 		keyDown[2] = false;
 		keyDown[3] = false;
 		keyDown[4] = false;
-
-		keyUp[0] = false;
-		keyUp[1] = false;
-		keyUp[2] = false;
-		keyUp[3] = false;
-		keyUp[4] = false;
-
+		paused = false;
 	}
 
 	public void keyPressed(KeyEvent e) {
@@ -66,12 +59,12 @@ public class KeyInput extends KeyAdapter {
 					tempObject.setVelY(-(this.speed));
 					keyDown[0] = true;
 				}
-				
-//				if (key == KeyEvent.VK_P){
-//					isPaused = true;
-//					game.gameState = STATE.pause;
-//				}
-				
+
+				// if (key == KeyEvent.VK_P){
+				// isPaused = true;
+				// game.gameState = STATE.pause;
+				// }
+
 				if (key == KeyEvent.VK_LEFT) {
 					tempObject.setVelX(-(this.speed));
 					keyDown[1] = true;
@@ -97,6 +90,15 @@ public class KeyInput extends KeyAdapter {
 						upgrades.levelSkipAbility();
 					} else if (ability.equals("freezeTime")) {
 						upgrades.freezeTimeAbility();
+					}
+				}
+				if(key == KeyEvent.VK_P) {
+					if(!game.isPaused()) {
+						game.gameState=STATE.PauseMenu;
+						game.pause();
+					}else {
+						game.gameState=STATE.Game;
+						game.unPause();
 					}
 				}
 

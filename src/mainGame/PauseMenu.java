@@ -19,7 +19,7 @@ public class PauseMenu {
 		this.handler = handler;
 		this.hud = hud;
 		tempCounter = 0;
-		pausePrompt = new LevelText(Game.WIDTH / 2 - 675, Game.HEIGHT / 2 - 200, "Press P to unpause",
+		pausePrompt = new LevelText(Game.WIDTH / 2 - 675, Game.HEIGHT / 2 - 200, "Press P to resume",
 				ID.Levels1to10Text);
 
 	}

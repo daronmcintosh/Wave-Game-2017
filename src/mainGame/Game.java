@@ -89,15 +89,7 @@ public class Game extends Canvas implements Runnable {
 		thread = new Thread(this);
 		thread.start();
 		running = true;
-
-		// InputStream in;
-		// try {
-		// in = new FileInputStream(new File("../Sound.wav"));
-		// AudioStream audio = new AudioStream(in);
-		// AudioPlayer.player.start(audio);
-		// } catch (Exception e) {
-		// JOptionPane.showMessageDialog(null, e);
-		// }
+		playSound();
 	}
 
 	public synchronized void stop() {
@@ -232,6 +224,17 @@ public class Game extends Canvas implements Runnable {
 		g.dispose();
 		bs.show();
 	}
+	
+	//Sound Method testing
+		public void playSound(){
+			if(gameState == STATE.Menu){
+				Sound.playSound();
+			}
+			else if (gameState == STATE.Game){
+				Sound.stopSoundMenu();
+				//Sound.playSound();
+			}
+		}
 
 	public boolean isPaused() {
 		return paused;

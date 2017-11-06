@@ -47,7 +47,7 @@ public class Menu {
 
 		img = null;
 		try {
-			img = ImageIO.read(getClass().getResource("images/background.jpg"));
+			img = ImageIO.read(getClass().getResource("images/HaloTheme.jpg"));
 		} catch (Exception e) {
 			e.printStackTrace();
 		}

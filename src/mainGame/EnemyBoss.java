@@ -80,7 +80,7 @@ public class EnemyBoss extends GameObject {
 
 	public void render(Graphics g) {
 		g.setColor(Color.LIGHT_GRAY);
-		g.drawLine(0, 138, Game.WIDTH, 138);
+		g.drawLine(0, 175, Game.WIDTH, 175);
 		g.drawImage(img, (int) this.x, (int) this.y, 96, 96, null);
 
 		// HEALTH BAR

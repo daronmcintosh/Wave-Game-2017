@@ -45,7 +45,12 @@ public class KeyInput extends KeyAdapter {
 	public void keyPressed(KeyEvent e) {
 		int key = e.getKeyCode();
 		this.speed = Player.playerSpeed;
-
+		
+		//Go back to Menu when hit backspace on leaderboard
+		if(game.gameState == STATE.Leaderboard && key == KeyEvent.VK_BACK_SPACE){
+			game.gameState = STATE.Menu;
+		}
+		
 		// finds what key strokes associate with Player
 		for (int i = 0; i < handler.object.size(); i++) {
 			GameObject tempObject = handler.object.get(i);

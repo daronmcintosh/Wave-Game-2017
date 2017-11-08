@@ -126,6 +126,11 @@ public class MouseListener extends MouseAdapter {
 			else if (mouseOver(mx, my, 80, 735, 850, 250)) {
 				System.exit(1);
 			}
+			
+			//Leaderboard Button
+			else if (mouseOver(mx, my, 995, 730, 850, 250)) {
+				game.gameState=STATE.Leaderboard;
+			}
 		}
 
 		// Back Button for Help screen

@@ -36,7 +36,9 @@ public class Game extends Canvas implements Runnable {
 	private Spawn1to10 spawner;
 	private Spawn10to20 spawner2;
 	private Menu menu;
+	private Score score;
 	private PauseMenu pauseMenu;
+	private Leaderboard leaderboard;
 	private GameOver gameOver;
 	private UpgradeScreen upgradeScreen;
 	private MouseListener mouseListener;
@@ -45,12 +47,12 @@ public class Game extends Canvas implements Runnable {
 	public STATE gameState = STATE.Menu;
 	public static int TEMP_COUNTER;
 	private boolean paused;
-
+	private boolean scoreSaved;
 	/**
 	 * Used to switch between each of the screens shown to the user
 	 */
 	public enum STATE {
-		Menu, Help, Game, GameOver, Upgrade, PauseMenu,
+		Menu, Help, Game, GameOver, Upgrade, PauseMenu,Leaderboard,
 	};
 
 	/**
@@ -61,11 +63,17 @@ public class Game extends Canvas implements Runnable {
 		WIDTH = gd.getDisplayMode().getWidth();
 		HEIGHT = (gd.getDisplayMode().getHeight() - 40); // Taskbars exist, sadly.
 
+		 scoreSaved = false;
+		 
 		handler = new Handler();
 		hud = new HUD();
 		spawner = new Spawn1to10(this.handler, this.hud, this);
 		spawner2 = new Spawn10to20(this.handler, this.hud, this.spawner, this);
 		menu = new Menu(this, this.handler, this.hud, this.spawner);
+		
+		score = new Score();
+		leaderboard = new Leaderboard(this, this.handler, this.hud, this.spawner);
+		
 		upgradeScreen = new UpgradeScreen(this, this.handler, this.hud);
 		player = new Player(WIDTH / 2 - 32, HEIGHT / 2 - 32, ID.Player, handler, this.hud, this);
 		upgrades = new Upgrades(this, this.handler, this.hud, this.upgradeScreen, this.player, this.spawner,
@@ -79,6 +87,8 @@ public class Game extends Canvas implements Runnable {
 		
 		pauseMenu =  new PauseMenu(this, this.handler, this.hud);
 		paused = false;
+		
+
 	}
 
 	/**
@@ -174,6 +184,8 @@ public class Game extends Canvas implements Runnable {
 				// add game over sound
 			} else if(gameState == STATE.PauseMenu) {
 				pauseMenu.tick();
+			} else if(gameState == STATE.Leaderboard) {
+//				leaderboard.tick();
 			}
 		}
 	}
@@ -205,6 +217,8 @@ public class Game extends Canvas implements Runnable {
 		if (gameState == STATE.Game) {// user is playing game, draw game objects
 			pauseMenu.removePrompt();
 			hud.render(g);
+			
+			scoreSaved = false;
 		} else if (gameState == STATE.Menu || gameState == STATE.Help) { // user is in help or the menu, draw the menu
 																			// and help objects
 			menu.render(g);
@@ -223,9 +237,18 @@ public class Game extends Canvas implements Runnable {
 
 		} else if (gameState == STATE.GameOver) {// game is over, draw the game over screen
 			gameOver.render(g);
+			
+			if(!scoreSaved){
+				score.addScore(hud.getScore());
+				scoreSaved = true;
+			}
 		}else if(gameState==STATE.PauseMenu) {
 			hud.render(g);
 			pauseMenu.render(g);
+		}
+		else if(gameState==STATE.Leaderboard) {
+			
+			leaderboard.render(g);
 		}
 
 		///////// Draw things above this//////////////

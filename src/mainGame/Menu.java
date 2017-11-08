@@ -153,6 +153,9 @@ public class Menu {
 			
 			drawMenuItem(g, font, Color.white, new int[] {80, 735, 850, 250}, 
 				"Quit", new int[] {400, 900});
+			
+			drawMenuItem(g, font, Color.white, new int[] {995, 730, 850, 250}, 
+					"Leaderboard", new int[] {1075, 900});
 			/*
 			g.setColor(Color.white);
 			g.drawRect(80, 135, 850, 250);
@@ -226,8 +229,9 @@ public class Menu {
 	////			
 	////			String stringToPrint = "How To Play: To play, Waves, you must first understand that you are playing" +" \n"
 	////					 + " as the small white box in the center of the screen, with the purpose to try to " + " \n"
-	////					 + "stay alive as long as possible while dodging enemies. To start avoiding enemies," +  " \n"
-	////					 + " you simply use the keys, â€œW-A-S-Dâ€� to navigate the page.";
+	////					 + " stay alive as long as possible while dodging enemies. To start avoiding enemies," +  " \n"
+	////					 + " you simply use the arrow keys to navigate the page." + " \n"
+	//// 					 + " To pause the game, press key "P." To resume the game press key "P."";
 	////			
 	////			g.drawString(stringToPrint, 40, 200);
 	//			

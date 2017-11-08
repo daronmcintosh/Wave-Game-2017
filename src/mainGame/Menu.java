@@ -4,12 +4,14 @@ import java.awt.Color;
 import java.awt.Font;
 import java.awt.Graphics;
 import java.awt.Image;
+import java.awt.Toolkit;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.awt.font.FontRenderContext;
 import java.awt.geom.AffineTransform;
 import java.awt.image.BufferedImage;
 import java.io.File;
+import java.net.URL;
 import java.util.ArrayList;
 import java.util.Random;
 
@@ -29,7 +31,7 @@ public class Menu {
 	private Game game;
 	private Handler handler;
 	private HUD hud;
-	private BufferedImage img;
+	private Image img;
 	private int timer;
 	private Random r;
 	private ArrayList<Color> colorPick = new ArrayList<Color>();
@@ -44,10 +46,12 @@ public class Menu {
 		timer = 10;
 		r = new Random();
 		addColors();
+		//Sound.playSoundMenu();
 
 		img = null;
 		try {
-			img = ImageIO.read(getClass().getResource("images/background.jpg"));
+			URL imageURL = Game.class.getResource("images/HaloTheme.jpg");
+			img = Toolkit.getDefaultToolkit().getImage(imageURL);
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
@@ -125,6 +129,8 @@ public class Menu {
 			*/
 			drawMenuItem(g, font2, Color.white, new int[] {990, 135, 400, 400}, 
 				"Waves", new int[] {1110, 215});
+			drawMenuItem(g, font2, Color.white, new int[] {1440, 135, 400, 400}, 
+					"Survival", new int[] {1560, 215});
 			/*
 			g.setColor(Color.white);
 			g.drawRect(1440, 135, 400, 400);

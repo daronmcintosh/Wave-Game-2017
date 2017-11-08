@@ -11,8 +11,7 @@ import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import javax.swing.JOptionPane;
-//import sun.audio.AudioPlayer;
-//import sun.audio.AudioStream;
+
 
 /**
  * Main game class. This class is the driver class and it follows the Holder
@@ -33,8 +32,10 @@ public class Game extends Canvas implements Runnable {
 
 	private Handler handler;
 	private HUD hud;
+	private SurvivalHUD survivalHud;
 	private Spawn1to10 spawner;
 	private Spawn10to20 spawner2;
+	private Survival survivalGame;
 	private Menu menu;
 	private Score score;
 	private PauseMenu pauseMenu;
@@ -52,7 +53,7 @@ public class Game extends Canvas implements Runnable {
 	 * Used to switch between each of the screens shown to the user
 	 */
 	public enum STATE {
-		Menu, Help, Game, GameOver, Upgrade, PauseMenu,Leaderboard,
+		Menu, Help, Game, GameOver, Upgrade, PauseMenu, Survival, Leaderboard
 	};
 
 	/**
@@ -67,6 +68,7 @@ public class Game extends Canvas implements Runnable {
 		 
 		handler = new Handler();
 		hud = new HUD();
+		survivalHud = new SurvivalHUD();
 		spawner = new Spawn1to10(this.handler, this.hud, this);
 		spawner2 = new Spawn10to20(this.handler, this.hud, this.spawner, this);
 		menu = new Menu(this, this.handler, this.hud, this.spawner);
@@ -76,6 +78,7 @@ public class Game extends Canvas implements Runnable {
 		
 		upgradeScreen = new UpgradeScreen(this, this.handler, this.hud);
 		player = new Player(WIDTH / 2 - 32, HEIGHT / 2 - 32, ID.Player, handler, this.hud, this);
+		survivalGame = new Survival(this.handler, this.hud, this, player);
 		upgrades = new Upgrades(this, this.handler, this.hud, this.upgradeScreen, this.player, this.spawner,
 				this.spawner2);
 		gameOver = new GameOver(this, this.handler, this.hud);
@@ -99,15 +102,7 @@ public class Game extends Canvas implements Runnable {
 		thread = new Thread(this);
 		thread.start();
 		running = true;
-
-		// InputStream in;
-		// try {
-		// in = new FileInputStream(new File("../Sound.wav"));
-		// AudioStream audio = new AudioStream(in);
-		// AudioPlayer.player.start(audio);
-		// } catch (Exception e) {
-		// JOptionPane.showMessageDialog(null, e);
-		// }
+		playSound();
 	}
 
 	public synchronized void stop() {
@@ -152,7 +147,6 @@ public class Game extends Canvas implements Runnable {
 			}
 		}
 		stop();
-
 	}
 
 	/**
@@ -164,16 +158,18 @@ public class Game extends Canvas implements Runnable {
 		if (!paused) {
 			handler.tick();// ALWAYS TICK HANDLER, NO MATTER IF MENU OR GAME SCREEN
 			if (gameState == STATE.Game) {// game is running
-
 				// add game theme
-
 				hud.tick();
 				if (Spawn1to10.LEVEL_SET == 1) {// user is on levels 1 thru 10, update them
 					spawner.tick();
 				} else if (Spawn1to10.LEVEL_SET == 2) {// user is on levels 10 thru 20, update them
 					spawner2.tick();
 				}
-			} else if (gameState == STATE.Menu || gameState == STATE.Help) {// user is on menu, update the menu items
+			} else if (gameState == STATE.Survival) {
+			    survivalHud.tick();
+			    survivalGame.tick();
+			    
+		    } else if (gameState == STATE.Menu || gameState == STATE.Help) {// user is on menu, update the menu items
 				menu.tick();
 
 				// add menu theme
@@ -217,24 +213,14 @@ public class Game extends Canvas implements Runnable {
 		if (gameState == STATE.Game) {// user is playing game, draw game objects
 			pauseMenu.removePrompt();
 			hud.render(g);
-			
 			scoreSaved = false;
+		} else if (gameState == STATE.Survival) {
+			survivalHud.render(g);
 		} else if (gameState == STATE.Menu || gameState == STATE.Help) { // user is in help or the menu, draw the menu
 																			// and help objects
 			menu.render(g);
-
-			// InputStream in;
-			// try {
-			// in = new FileInputStream(new File("Sound.wav"));
-			// AudioStream audio = new AudioStream(in);
-			// AudioPlayer.player.start(audio);
-			// } catch (Exception e) {
-			// JOptionPane.showMessageDialog(null, e);
-			// }
-
 		} else if (gameState == STATE.Upgrade) {// user is on the upgrade screen, draw the upgrade screen
 			upgradeScreen.render(g);
-
 		} else if (gameState == STATE.GameOver) {// game is over, draw the game over screen
 			gameOver.render(g);
 			
@@ -242,19 +228,32 @@ public class Game extends Canvas implements Runnable {
 				score.addScore(hud.getScore());
 				scoreSaved = true;
 			}
-		}else if(gameState==STATE.PauseMenu) {
+		} else if(gameState == STATE.PauseMenu) {
 			hud.render(g);
 			pauseMenu.render(g);
 		}
 		else if(gameState==STATE.Leaderboard) {
-			
 			leaderboard.render(g);
 		}
-
+    
 		///////// Draw things above this//////////////
 		g.dispose();
 		bs.show();
 	}
+	
+	//Sound Method testing
+		public void playSound(){
+			if(gameState == STATE.Menu){
+				Sound.playSoundMenu();
+				System.out.println("Playing Menu music");
+			}
+			else if (gameState == STATE.Game){
+				System.out.println("Stopping music");
+				Sound.stopSoundMenu();
+				
+				//Sound.playSound();
+			}
+		}
 
 	public boolean isPaused() {
 		return paused;

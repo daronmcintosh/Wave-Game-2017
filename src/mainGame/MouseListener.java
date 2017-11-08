@@ -98,6 +98,13 @@ public class MouseListener extends MouseAdapter {
 				// handler.addPickup(new PickupHealth(100, 100, ID.PickupHealth,
 				// "../images/PickupHealth.png", handler));
 			}
+			if (mouseOver(mx, my, 1440, 135, 400, 400)) {
+				handler.object.clear();
+				game.gameState = STATE.Survival;
+				handler.addObject(player);
+				// handler.addPickup(new PickupHealth(100, 100, ID.PickupHealth,
+				// "../images/PickupHealth.png", handler));
+			}
 
 			// Help Button
 

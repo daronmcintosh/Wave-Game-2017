@@ -44,6 +44,7 @@ public class Menu {
 		timer = 10;
 		r = new Random();
 		addColors();
+		//Sound.playSoundMenu();
 
 		img = null;
 		try {

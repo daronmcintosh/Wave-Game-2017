@@ -21,16 +21,18 @@ public class Sound {
 			clip = AudioSystem.getClip();
 			clip.open(audioInputStream);
 			clip.start();
-			clip.loop(10);
+			clip.loop(Clip.LOOP_CONTINUOUSLY);
 		}
 
 		catch (Exception e) {
+			System.out.println("Problem starting music");
 			e.printStackTrace();
 		}
 	}
 
 	// Stop method for game sound
 	public static void stopSound() {
+	//	clip.drain();
 		clip.stop();
 		clip.close();
 	}
@@ -42,7 +44,7 @@ public class Sound {
 			clip2 = AudioSystem.getClip();
 			clip2.open(audioInputStream);
 			clip2.start();
-			clip2.loop(10);
+			clip2.loop(Clip.LOOP_CONTINUOUSLY);
 		}
 
 		catch (Exception e) {
@@ -54,6 +56,7 @@ public class Sound {
 	public static void stopSoundMenu() {
 		clip2.stop();
 		clip2.close();
+		System.out.println("clip closed");
 	}
 	
 

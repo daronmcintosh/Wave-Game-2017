@@ -4,14 +4,12 @@ import java.awt.Color;
 import java.awt.Font;
 import java.awt.Graphics;
 import java.awt.Image;
-import java.awt.Toolkit;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.awt.font.FontRenderContext;
 import java.awt.geom.AffineTransform;
 import java.awt.image.BufferedImage;
 import java.io.File;
-import java.net.URL;
 import java.util.ArrayList;
 import java.util.Random;
 
@@ -31,7 +29,7 @@ public class Menu {
 	private Game game;
 	private Handler handler;
 	private HUD hud;
-	private Image img;
+	private BufferedImage img;
 	private int timer;
 	private Random r;
 	private ArrayList<Color> colorPick = new ArrayList<Color>();
@@ -50,8 +48,7 @@ public class Menu {
 
 		img = null;
 		try {
-			URL imageURL = Game.class.getResource("images/HaloTheme.jpg");
-			img = Toolkit.getDefaultToolkit().getImage(imageURL);
+			img = ImageIO.read(new File("images/HaloTheme.jpg"));
 		} catch (Exception e) {
 			e.printStackTrace();
 		}

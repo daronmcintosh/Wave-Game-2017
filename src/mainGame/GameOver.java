@@ -28,8 +28,9 @@ public class GameOver {
 		this.hud = hud;
 		timer = 90;
 		this.retryColor = Color.white;
+		
 	}
-
+   
 	public void tick() {
 		handler.clearPlayer();
 		flash();
@@ -51,7 +52,6 @@ public class GameOver {
 		g.setFont(font2);
 		text = "Click anywhere to play again";
 		g.drawString(text, Game.WIDTH / 2 - getTextWidth(font2, text) / 2, Game.HEIGHT / 2 + 150);
-
 	}
 
 	public void flash() {

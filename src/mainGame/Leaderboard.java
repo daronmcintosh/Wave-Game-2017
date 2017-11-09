@@ -4,12 +4,14 @@ import java.awt.Color;
 import java.awt.Font;
 import java.awt.Graphics;
 import java.awt.Image;
+import java.awt.Toolkit;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.awt.font.FontRenderContext;
 import java.awt.geom.AffineTransform;
 import java.awt.image.BufferedImage;
 import java.io.File;
+import java.net.URL;
 import java.util.ArrayList;
 import java.util.Random;
 
@@ -29,7 +31,7 @@ public class Leaderboard {
 	private Game game;
 	private Handler handler;
 	private HUD hud;
-	private BufferedImage img;
+	private Image img;
 	private int timer;
 	private Random r;
 	private ArrayList<Color> colorPick = new ArrayList<Color>();
@@ -50,7 +52,8 @@ public class Leaderboard {
 
 		img = null;
 		try {
-			img = ImageIO.read(getClass().getResource("images/background.jpg"));
+			URL imageURL = Game.class.getResource("images/LeaderBoard4.jpg");
+			img = Toolkit.getDefaultToolkit().getImage(imageURL);
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
@@ -79,15 +82,15 @@ public class Leaderboard {
 			handler.render(g);
 			Font font = new Font("Amoebic", 1, (int) (100 * (Game.HEIGHT / 1080f)));
 			Font font2 = new Font("Amoebic", 1, (int) (60 * (Game.HEIGHT / 1080f)));
-			
-			drawMenuString(g, font, Color.white, "Leaderboard", new int[] {Game.WIDTH/2, 100});
-			drawMenuString(g, font2, Color.white, "Hit Backspace to return to the main menu", new int[] {Game.WIDTH/4, 200});
+			g.drawImage(img, 0, 0, Game.WIDTH, Game.HEIGHT, null);
+			drawMenuString(g, font, Color.BLACK, "Leaderboard", new int[] {Game.WIDTH/2, 100});
+			drawMenuString(g, font2, Color.WHITE, "Hit Backspace to return to the main menu", new int[] {Game.WIDTH/4, 200});
 	
 			score.loadScores();
 			int[] scores = score.getScores();
 			
 			for(int i = 0; i < scores.length; i++){
-				drawMenuString(g, font, Color.white, 
+				drawMenuString(g, font, Color.BLACK, 
 					Integer.toString(scores[i]), new int[] {Game.WIDTH/2+200, 400 + (100 * i)});
 			}
 	}

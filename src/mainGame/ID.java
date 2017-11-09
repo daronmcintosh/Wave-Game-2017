@@ -24,6 +24,7 @@ public enum ID {
 	CircleTrail(),
 	PickupHealth(),
 	Levels1to10Text(),
+	EnemyRaindrop(),
 	EnemyBasic();
 	
 }

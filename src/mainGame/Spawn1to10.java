@@ -265,18 +265,12 @@ public class Spawn1to10 {
 			}
 			if (spawnTimer == 35) {
 				handler.addObject(
-						new EnemySweep(r.nextInt(Game.WIDTH), r.nextInt(Game.HEIGHT), 25, 2, ID.EnemySweep, handler));
-			} else if (spawnTimer == 25) {
-				handler.addObject(
-						new EnemySweep(r.nextInt(Game.WIDTH), r.nextInt(Game.HEIGHT), 25, -2, ID.EnemySweep, handler));
-			} else if (spawnTimer == 15) {
-				handler.addObject(
-						new EnemySweep(r.nextInt(Game.WIDTH), r.nextInt(Game.HEIGHT), 25, 4, ID.EnemySweep, handler));
+						new EnemyRaindrop(0, 0, 0, 9, ID.EnemyRaindrop, handler));
 			} else if (spawnTimer == 0) {
 				handler.addObject(
-						new EnemySweep(r.nextInt(Game.WIDTH), r.nextInt(Game.HEIGHT), 25, -4, ID.EnemySweep, handler));
-				spawnTimer = 100;
-			}
+						new EnemyRaindrop(0, 0, 0, 9, ID.EnemyRaindrop, handler));
+				spawnTimer=100;
+			} 
 
 			if (levelTimer == 0) {
 				handler.clearEnemies();

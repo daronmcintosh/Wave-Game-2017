@@ -18,7 +18,7 @@ import java.util.Random;
 public class EnemyBoss extends GameObject {
 
 	private Handler handler;
-	private int timer = 80;
+	private int timer = 100;
 	private int timer2 = 50;
 	Random r = new Random();
 	private Image img;
@@ -30,7 +30,7 @@ public class EnemyBoss extends GameObject {
 		velX = 0;
 		velY = 2;
 		img = getImage("images/EnemyBoss.png");
-		this.health = 1000;//full health is 1000
+		this.health = 1000;// full health is 1000
 	}
 
 	public void tick() {
@@ -52,12 +52,12 @@ public class EnemyBoss extends GameObject {
 			if (spawn == 0) {
 				handler.addObject(
 						new EnemyBossBullet((int) this.x + 48, (int) this.y + 96, ID.EnemyBossBullet, handler));
-				this.health -= 3 ; // CHANGE THIS TO 3
+				this.health -= 3; // CHANGE THIS TO 3
 			}
 		}
 
 		// if (this.y <= 0 || this.y >= Game.HEIGHT - 40) velY *= -1;
-		if (this.x <= 0 || this.x >= Game.WIDTH - 96){
+		if (this.x <= 0 || this.x >= Game.WIDTH - 150) {
 			velX *= -1;
 		}
 
@@ -80,7 +80,7 @@ public class EnemyBoss extends GameObject {
 
 	public void render(Graphics g) {
 		g.setColor(Color.LIGHT_GRAY);
-		g.drawLine(0, 175, Game.WIDTH, 175);
+		g.drawLine(0, (int) Game.scaleX(Game.HEIGHT/4 - 80), Game.WIDTH, (int) Game.scaleY(Game.HEIGHT/4 - 80));
 		g.drawImage(img, (int) this.x, (int) this.y, 96, 96, null);
 
 		// HEALTH BAR

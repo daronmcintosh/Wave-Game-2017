@@ -25,6 +25,8 @@ public enum ID {
 	PickupHealth(),
 	Levels1to10Text(),
 	EnemyRaindrop(),
+	EnemyShotgun(),
+	EnemyShotgunBullet(),
 	EnemyBasic();
 	
 }

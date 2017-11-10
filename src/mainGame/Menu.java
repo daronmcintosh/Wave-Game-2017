@@ -4,12 +4,14 @@ import java.awt.Color;
 import java.awt.Font;
 import java.awt.Graphics;
 import java.awt.Image;
+import java.awt.Toolkit;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.awt.font.FontRenderContext;
 import java.awt.geom.AffineTransform;
 import java.awt.image.BufferedImage;
 import java.io.File;
+import java.net.URL;
 import java.util.ArrayList;
 import java.util.Random;
 
@@ -29,7 +31,7 @@ public class Menu {
 	private Game game;
 	private Handler handler;
 	private HUD hud;
-	private BufferedImage img;
+	private Image img;
 	private int timer;
 	private Random r;
 	private ArrayList<Color> colorPick = new ArrayList<Color>();
@@ -44,10 +46,12 @@ public class Menu {
 		timer = 10;
 		r = new Random();
 		addColors();
+		//Sound.playSoundMenu();
 
 		img = null;
 		try {
-			img = ImageIO.read(getClass().getResource("images/background.jpg"));
+			URL imageURL = Game.class.getResource("images/HaloTheme.jpg");
+			img = Toolkit.getDefaultToolkit().getImage(imageURL);
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
@@ -155,6 +159,9 @@ public class Menu {
 			
 			drawMenuItem(g, font, Color.white, new int[] {80, 735, 850, 250}, 
 				"Quit", new int[] {400, 900});
+			
+			drawMenuItem(g, font, Color.white, new int[] {995, 730, 850, 250}, 
+					"Leaderboard", new int[] {1075, 900});
 			/*
 			g.setColor(Color.white);
 			g.drawRect(80, 135, 850, 250);
@@ -228,8 +235,9 @@ public class Menu {
 	////			
 	////			String stringToPrint = "How To Play: To play, Waves, you must first understand that you are playing" +" \n"
 	////					 + " as the small white box in the center of the screen, with the purpose to try to " + " \n"
-	////					 + "stay alive as long as possible while dodging enemies. To start avoiding enemies," +  " \n"
-	////					 + " you simply use the keys, â€œW-A-S-Dâ€� to navigate the page.";
+	////					 + " stay alive as long as possible while dodging enemies. To start avoiding enemies," +  " \n"
+	////					 + " you simply use the arrow keys to navigate the page." + " \n"
+	//// 					 + " To pause the game, press key "P." To resume the game press key "P."";
 	////			
 	////			g.drawString(stringToPrint, 40, 200);
 	//			

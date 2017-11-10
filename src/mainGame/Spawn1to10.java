@@ -27,7 +27,6 @@ public class Spawn1to10 {
 	ArrayList<Integer> levels = new ArrayList<Integer>(); // MAKE THIS AN ARRAY
 															// LIST SO I CAN
 															// REMOVE OBJECTS
-	private int index;
 	private int levelsRemaining;
 	private int levelNumber;
 	private int tempCounter;
@@ -44,14 +43,13 @@ public class Spawn1to10 {
 		spawnTimer = 10;
 		levelTimer = 150;
 		onScreenTimer = 100;
-		levelsRemaining = 9; // 9 Levels then the boss
-		hud.setLevel(1);
+		levelsRemaining = 10; // 10 Levels including the boss
 		tempCounter = 0;
 		addLevels();
-		index = 0;
 		levelNumber = 1;
 		levelString = new LevelText(Game.WIDTH / 2 - Game.scaleX(675), Game.HEIGHT / 2 - Game.scaleY(150),
 				"Level " + levelNumber, ID.Levels1to10Text);
+		hud.setLevel(levelNumber);
 
 	}
 
@@ -59,7 +57,7 @@ public class Spawn1to10 {
 	 * Pre-load every level
 	 */
 	public void addLevels() {
-		for (int i = 1; i <= 10; i++) {
+		for (int i = 0; i <= 9; i++) {
 			levels.add(i);
 		}
 	}
@@ -100,7 +98,6 @@ public class Spawn1to10 {
 													// HUD
 				spawnTimer = 40;
 				tempCounter = 0;// reset tempCounter
-				levels.remove(levelNumber);
 				levelNumber += 1;
 				levelsRemaining -= 1;
 				temp = 0;
@@ -142,7 +139,6 @@ public class Spawn1to10 {
 				handler.clearEnemies();
 				hud.setLevel(hud.getLevel() + 1);
 				tempCounter = 0;
-				levels.remove(levelNumber);
 				levelNumber += 1;
 				levelsRemaining -= 1;
 				temp = 0;
@@ -176,7 +172,7 @@ public class Spawn1to10 {
 				hud.setLevel(hud.getLevel() + 1);
 				spawnTimer = 10;
 				tempCounter = 0;
-				levels.remove(levelNumber);
+
 				levelNumber += 1;
 				levelsRemaining -= 1;
 				temp = 0;
@@ -207,7 +203,7 @@ public class Spawn1to10 {
 				hud.setLevel(hud.getLevel() + 1);
 				spawnTimer = 10;
 				tempCounter = 0;
-				levels.remove(levelNumber);
+
 				levelNumber += 1;
 				levelsRemaining -= 1;
 				temp = 0;
@@ -227,7 +223,7 @@ public class Spawn1to10 {
 			spawnTimer--;
 			levelTimer--;
 			if (tempCounter < 1) {
-				levelTimer = 1400;
+				levelTimer = 1000;
 				tempCounter++;
 			}
 			if (spawnTimer <= 0) {
@@ -240,7 +236,7 @@ public class Spawn1to10 {
 				hud.setLevel(hud.getLevel() + 1);
 				spawnTimer = 10;
 				tempCounter = 0;
-				levels.remove(levelNumber);
+
 				levelNumber += 1;
 				levelsRemaining -= 1;
 				temp = 0;
@@ -264,17 +260,9 @@ public class Spawn1to10 {
 				tempCounter++;
 			}
 			if (spawnTimer == 35) {
-				handler.addObject(
-						new EnemySweep(r.nextInt(Game.WIDTH), r.nextInt(Game.HEIGHT), 25, 2, ID.EnemySweep, handler));
-			} else if (spawnTimer == 25) {
-				handler.addObject(
-						new EnemySweep(r.nextInt(Game.WIDTH), r.nextInt(Game.HEIGHT), 25, -2, ID.EnemySweep, handler));
-			} else if (spawnTimer == 15) {
-				handler.addObject(
-						new EnemySweep(r.nextInt(Game.WIDTH), r.nextInt(Game.HEIGHT), 25, 4, ID.EnemySweep, handler));
+				handler.addObject(new EnemyRaindrop(0, 0, 0, 9, ID.EnemyRaindrop, handler));
 			} else if (spawnTimer == 0) {
-				handler.addObject(
-						new EnemySweep(r.nextInt(Game.WIDTH), r.nextInt(Game.HEIGHT), 25, -4, ID.EnemySweep, handler));
+				handler.addObject(new EnemyRaindrop(0, 0, 0, 9, ID.EnemyRaindrop, handler));
 				spawnTimer = 100;
 			}
 
@@ -282,7 +270,8 @@ public class Spawn1to10 {
 				handler.clearEnemies();
 				hud.setLevel(hud.getLevel() + 1);
 				tempCounter = 0;
-				levels.remove(levelNumber);
+				System.out.println(levels.size());
+
 				levelNumber += 1;
 				levelsRemaining -= 1;
 				temp = 0;
@@ -315,7 +304,7 @@ public class Spawn1to10 {
 				hud.setLevel(hud.getLevel() + 1);
 				spawnTimer = 10;
 				tempCounter = 0;
-				levels.remove(levelNumber);
+
 				levelNumber += 1;
 				levelsRemaining -= 1;
 				temp = 0;
@@ -345,7 +334,7 @@ public class Spawn1to10 {
 				hud.setLevel(hud.getLevel() + 1);
 				spawnTimer = 10;
 				tempCounter = 0;
-				levels.remove(levelNumber);
+
 				levelNumber += 1;
 				levelsRemaining -= 1;
 				temp = 0;
@@ -378,7 +367,7 @@ public class Spawn1to10 {
 				hud.setLevel(hud.getLevel() + 1);
 				spawnTimer = 10;
 				tempCounter = 0;
-				levels.remove(levelNumber);
+
 				levelNumber += 1;
 				levelsRemaining -= 1;
 				temp = 0;
@@ -430,33 +419,26 @@ public class Spawn1to10 {
 
 	public void skipLevel() {
 
-		if (levelsRemaining == 1) {
-			levelsRemaining--;
-			tempCounter = 0;
-			temp = 0;
-			onScreenTimer = 100;
-			levelNumber = 10;
-		} else if (levelsRemaining > 1) {
-			levels.remove(index);
-			levelsRemaining--;
-			System.out.println(levelsRemaining);
-			tempCounter = 0;
-			temp = 0;
-			onScreenTimer = 100;
+		if (levelsRemaining > 0) {
 			levelNumber += 1;
+			levelsRemaining--;
+			tempCounter = 0;
+			temp = 0;
+			onScreenTimer = 100;
 		} else if (levelsRemaining == 0) {
 			LEVEL_SET++;
 			game.gameState = STATE.Upgrade;
 		}
 	}
-
+	
+	// This isn't called yet.
+	public void removeLevels(){
+		for (int i = 0; i <= 9; i++) {
+			levels.remove(i);
+		}
+	}
 	public void restart() {
-		levelNumber = -10;
-		tempCounter = 0;
-		levelTimer = 150;
-		levelsRemaining = 10;
-		index = r.nextInt(levelsRemaining);
-
+		// Implement this
 	}
 
 }

@@ -44,7 +44,11 @@ public class Player extends GameObject {
 
 		// add the trail that follows it
 		handler.addObject(new Trail(x, y, ID.Trail, Color.white, playerWidth, playerHeight, 0.05, this.handler));
-
+		//System.out.println(hud);
+		//System.out.println(game.survivalHud);
+		//hud.health++;
+		//game.survivalHud.health++;
+		//System.out.println(game.gameState);
 		collision();
 		checkIfDead();
 
@@ -85,7 +89,19 @@ public class Player extends GameObject {
 
 				// collision code
 				if (getBounds().intersects(tempObject.getBounds())) {// player hit an enemy
-					hud.health -= damage;
+					switch (game.gameState) {
+						case Game:
+							hud.health -= damage;
+							break;
+						case Survival:
+							game.survivalHud.health -= damage;
+							break;
+						default:
+							break;
+					}
+					//hud.health -= damage;
+					//System.out.println(hud.health);
+					//System.out.println(x);
 					hud.updateScoreColor(Color.red);
 				}
 
@@ -122,6 +138,10 @@ public class Player extends GameObject {
 	public void setPlayerSize(int size) {
 		this.playerWidth = size;
 		this.playerHeight = size;
+	}
+	
+	public void setHUD(HUD newHud) {
+		hud = newHud;
 	}
 
 }

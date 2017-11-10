@@ -33,7 +33,7 @@ public class Game extends Canvas implements Runnable {
 
 	private Handler handler;
 	private HUD hud;
-	private SurvivalHUD survivalHud;
+	public SurvivalHUD survivalHud;
 	private Spawn1to10 spawner;
 	private Spawn10to20 spawner2;
 	private Survival survivalGame;
@@ -71,7 +71,7 @@ public class Game extends Canvas implements Runnable {
 		menu = new Menu(this, this.handler, this.hud, this.spawner);
 		upgradeScreen = new UpgradeScreen(this, this.handler, this.hud);
 		player = new Player(WIDTH / 2 - 32, HEIGHT / 2 - 32, ID.Player, handler, this.hud, this);
-		survivalGame = new Survival(this.handler, this.hud, this, player);
+		survivalGame = new Survival(this.handler, this.survivalHud, this, player);
 		upgrades = new Upgrades(this, this.handler, this.hud, this.upgradeScreen, this.player, this.spawner,
 				this.spawner2);
 		gameOver = new GameOver(this, this.handler, this.hud);
@@ -160,7 +160,7 @@ public class Game extends Canvas implements Runnable {
 			if (gameState == STATE.Game) {// game is running
 
 				// add game theme
-
+				
 				hud.tick();
 				if (Spawn1to10.LEVEL_SET == 1) {// user is on levels 1 thru 10, update them
 					spawner.tick();
@@ -170,7 +170,7 @@ public class Game extends Canvas implements Runnable {
 			} else if (gameState == STATE.Survival) {
 			    survivalHud.tick();
 			    survivalGame.tick();
-		    } else if (gameState == STATE.Menu || gameState == STATE.Help) {// user is on menu, update the menu items
+		  } else if (gameState == STATE.Menu || gameState == STATE.Help) {// user is on menu, update the menu items
 				menu.tick();
 
 				// add menu theme
@@ -252,6 +252,10 @@ public class Game extends Canvas implements Runnable {
 
 	public void unPause() {
 		paused = false;
+	}
+	
+	public Survival getSurvivalGameObject() {
+		return survivalGame;
 	}
 
 	/**

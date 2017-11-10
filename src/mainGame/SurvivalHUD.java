@@ -11,7 +11,7 @@ import java.awt.Graphics;
  *
  */
 
-public class SurvivalHUD {
+public class SurvivalHUD extends HUD{
 
 	public double health = 100;
 	private double healthMax = 100;
@@ -32,14 +32,16 @@ public class SurvivalHUD {
 	private Color scoreColor = Color.white;
 
 	private int extraLives = 0;
+	
+	public SurvivalHUD() {
+		
+	}
 
 	public void tick() {
 		health = Game.clamp(health, 0, health);
-
 		greenValue = Game.clamp(greenValue, 0, 255);
-
 		greenValue = health * healthBarModifier;
-
+		//health--;
 
 		if (regen) {// regenerates health if that ability has been unlocked
 			timer--;
@@ -53,28 +55,28 @@ public class SurvivalHUD {
 	public void render(Graphics g) {
 		Font font = new Font("Amoebic", 1, 30);
 		//Set a nice background color for the UI
-
 		g.setColor(Color.RED);
 		g.fillRect(0,	0,	Game.WIDTH,	(int) (Game.scaleY(90)));
-		
+
+		greenValue = Game.clamp(greenValue, 0, 255);
 		g.setColor(Color.BLACK);
 		g.fillRect(
 				(int) (Game.scaleX(15)), 
 				(int) (Game.scaleY(15)),
 				(int) (Game.scaleX(healthBarWidth)), 
-				(int) (Game.scaleY(64)));
+				(int) (Game.scaleY(32)));
 		g.setColor(new Color(75, (int) greenValue, 0));
 		g.fillRect(
 				(int) (Game.scaleX(15)), 
 				(int) (Game.scaleY(15)),
 				(int) (Game.scaleX((health * 4))), 
-				(int) (Game.scaleY(64)));
+				(int) (Game.scaleY(32)));
 		g.setColor(scoreColor);
 		g.drawRect(
 				(int) (Game.scaleX(15)), 
 				(int) (Game.scaleY(15)),
 				(int) (Game.scaleX(healthBarWidth)), 
-				(int) (Game.scaleY(64)));
+				(int) (Game.scaleY(32)));
 
 		g.setFont(font);
 

@@ -101,7 +101,8 @@ public class MouseListener extends MouseAdapter {
 			if (mouseOver(mx, my, 1440, 135, 400, 400)) {
 				handler.object.clear();
 				game.gameState = STATE.Survival;
-				handler.addObject(player);
+				game.getSurvivalGameObject().initialize();
+				handler.addObject(player);				
 				// handler.addPickup(new PickupHealth(100, 100, ID.PickupHealth,
 				// "../images/PickupHealth.png", handler));
 			}

@@ -35,11 +35,8 @@ public class HUD {
 
 	public void tick() {
 		health = Game.clamp(health, 0, health);
-
 		greenValue = Game.clamp(greenValue, 0, 255);
-
 		greenValue = health * healthBarModifier;
-
 		score++;
 
 		if (regen) {// regenerates health if that ability has been unlocked

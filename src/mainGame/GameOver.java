@@ -6,8 +6,6 @@ import java.awt.Graphics;
 import java.awt.font.FontRenderContext;
 import java.awt.geom.AffineTransform;
 
-import javax.swing.JOptionPane;
-
 /**
  * The game over screen
  * 
@@ -30,8 +28,6 @@ public class GameOver {
 		this.hud = hud;
 		timer = 90;
 		this.retryColor = Color.white;
-		//JOptionPane.showInputDialog("Please Enter you name");
-		
 		
 	}
    
@@ -56,9 +52,7 @@ public class GameOver {
 		g.setFont(font2);
 		text = "Click anywhere to play again";
 		g.drawString(text, Game.WIDTH / 2 - getTextWidth(font2, text) / 2, Game.HEIGHT / 2 + 150);
-		
-	
-}
+	}
 
 	public void flash() {
 		timer--;

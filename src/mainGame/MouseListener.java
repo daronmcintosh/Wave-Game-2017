@@ -25,9 +25,7 @@ public class MouseListener extends MouseAdapter {
 	private Upgrades upgrades;
 	private Player player;
 	private String upgradeText;
-	private Sound sound;
-	
-	
+
 	public MouseListener(Game game, Handler handler, HUD hud, Spawn1to10 spawner, Spawn10to20 spawner2,
 			UpgradeScreen upgradeScreen, Player player, Upgrades upgrades) {
 		this.game = game;
@@ -55,8 +53,7 @@ public class MouseListener extends MouseAdapter {
   			handler.object.clear();
   			Spawn1to10.LEVEL_SET = 1;
   			game.gameState = STATE.Game;
-  			handler.addObject(player);
- 
+  			 handler.addObject(player);
 		}
 
 		else if (game.gameState == STATE.Game) {
@@ -93,12 +90,8 @@ public class MouseListener extends MouseAdapter {
 		}
 
 		else if (game.gameState == STATE.Menu) {
-				if(game.gameState == STATE.Menu){
-					Sound.playSoundMenu();
-				}
 			// Waves Button
 			if (mouseOver(mx, my, 990, 135, 400, 400)) {
-				Sound.stopSoundMenu();
 				handler.object.clear();
 				game.gameState = STATE.Game;
 				handler.addObject(player);
@@ -124,7 +117,7 @@ public class MouseListener extends MouseAdapter {
 								+ " as the small white box in the center of the screen, with the purpose to try to "
 								+ " \n"
 								+ "stay alive as long as possible while dodging enemies. To start avoiding enemies,"
-								+ " \n" + " you simply use the arrow keys, to navigate the page.",
+								+ " \n" + " you simply use the keys, â€œW-A-S-Dâ€� to navigate the page.",
 						"Help", JOptionPane.INFORMATION_MESSAGE);
 			}
 
@@ -136,7 +129,7 @@ public class MouseListener extends MouseAdapter {
 								+ "\n\nThis game is grossly unfinished with minor bugs. However,"
 								+ " it is 100% playable, enjoy!");
 			}
-			
+
 			// Quit Button
 			else if (mouseOver(mx, my, 80, 735, 850, 250)) {
 				System.exit(1);

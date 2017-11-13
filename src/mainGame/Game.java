@@ -49,15 +49,12 @@ public class Game extends Canvas implements Runnable {
 	public static int TEMP_COUNTER;
 	private boolean paused;
 	private boolean scoreSaved;
-	private Sound sound;
-	private Game game;
 	/**
 	 * Used to switch between each of the screens shown to the user
 	 */
 	public enum STATE {
 		Menu, Help, Game, GameOver, Upgrade, PauseMenu, Survival, Leaderboard
 	};
-	
 
 	/**
 	 * Initialize the core mechanics of the game
@@ -94,8 +91,6 @@ public class Game extends Canvas implements Runnable {
 		pauseMenu =  new PauseMenu(this, this.handler, this.hud);
 		paused = false;
 		
-		//Sound.playSoundMenu();
-		//Sound.getSound();
 
 	}
 
@@ -107,6 +102,7 @@ public class Game extends Canvas implements Runnable {
 		thread = new Thread(this);
 		thread.start();
 		running = true;
+		playSound();
 	}
 
 	public synchronized void stop() {
@@ -244,7 +240,7 @@ public class Game extends Canvas implements Runnable {
 	}
 	
 	//Sound Method testing
-		public void playSound2(){
+		public void playSound(){
 			if(gameState == STATE.Menu){
 				Sound.playSoundMenu();
 				System.out.println("Playing Menu music");

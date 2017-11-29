@@ -28,7 +28,6 @@ public class Score{
 	}
 	
 	public void loadScores(){
-		System.out.println("Loading scores...");
 		
 		try {
 			BufferedReader reader = new BufferedReader(new FileReader(saveFile));
@@ -48,7 +47,6 @@ public class Score{
 			
 			line = reader.readLine();
 			
-			System.out.println("Names: " + line);
 			String[] readNames = line.split(",");
 		
 			for(int i = 0; i < names.length; i++){
@@ -63,7 +61,6 @@ public class Score{
 				names[i] = curName;
 			}
 			
-			System.out.println(String.join(",", names));
 		} catch (FileNotFoundException e) {
 			// TODO Auto-generated catch block
 			System.out.println("No save file found");
@@ -75,10 +72,7 @@ public class Score{
 	
 	public void addScore(int score, String name){
 		
-		
 		loadScores();
-		
-		System.out.println("Before " + String.join(",", names));
 		
 		for(int i = 0 ; i<scores.length; i++){
 			if(score > scores[i]){
@@ -92,8 +86,6 @@ public class Score{
 				 break;
 			}
 		}
-		
-		System.out.println("After: " + String.join(",", names));
 		
 		saveScores();
 	}

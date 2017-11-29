@@ -82,4 +82,9 @@ public abstract class GameObject {
 		return this.health;
 	}
 
+	public void paintComponent(Graphics g) {
+		// TODO Auto-generated method stub
+		
+	}
+
 }

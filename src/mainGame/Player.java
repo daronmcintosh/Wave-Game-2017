@@ -59,12 +59,19 @@ public class Player extends GameObject {
 
 			if (hud.getExtraLives() == 0) {
 				game.gameState = STATE.GameOver;
+				Sound.stopSoundMenu();
+				Sound.stopSound();
+				Sound.playSoundOver();
 			}
 
 			else if (hud.getExtraLives() > 0) {// has an extra life, game continues
 				hud.setExtraLives(hud.getExtraLives() - 1);
 				hud.setHealth(100);
 			}
+		}
+		if(hud.health == 30){
+			//Add health is low sound
+			Sound.playLowHealth();
 		}
 	}
 
@@ -88,10 +95,11 @@ public class Player extends GameObject {
 					|| tempObject.getId() == ID.BossEye
 					|| tempObject.getId() == ID.EnemyRaindrop
 					|| tempObject.getId() == ID.EnemyShotgun
-					|| tempObject.getId() == ID.EnemyShotgunBullet) {// tempObject is an enemy
+					|| tempObject.getId() == ID.EnemyShotgunBullet
+					|| tempObject.getId() == ID.EnemyBossLazer) {// tempObject is an enemy
 
 				// collision code
-				if (getBounds().intersects(tempObject.getBounds())) {// player hit an enemy
+				if (getBounds().intersects(tempObject.getBounds())) { // player hit an enemy
 					switch (game.gameState) {
 						case Game:
 							hud.health -= damage;

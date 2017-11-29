@@ -44,6 +44,7 @@ public class MouseListener extends MouseAdapter {
 		int my = e.getY();
 
 		if (game.gameState == STATE.GameOver) {
+			game.gameState = STATE.GameOver;
 			handler.object.clear();
 			upgrades.resetUpgrades();
 			hud.health = 100;
@@ -54,7 +55,7 @@ public class MouseListener extends MouseAdapter {
   			handler.object.clear();
   			Spawn1to10.LEVEL_SET = 1;
   			game.gameState = STATE.Game;
-  			handler.addObject(player);		
+  			handler.addObject(player);	
 		}
 
 		else if (game.gameState == STATE.Game) {
@@ -96,9 +97,12 @@ public class MouseListener extends MouseAdapter {
 				handler.object.clear();
 				game.gameState = STATE.Game;
 				handler.addObject(player);
+				Sound.stopSoundMenu();
+				Sound.playSound();
 				// handler.addPickup(new PickupHealth(100, 100, ID.PickupHealth,
 				// "../images/PickupHealth.png", handler));
 			}
+			
 			// Survival Button
 			if (mouseOver(mx, my, 805, 610, 300, 55)) {
 				handler.object.clear();
@@ -111,19 +115,20 @@ public class MouseListener extends MouseAdapter {
 
 			// Help Button
 			else if (mouseOver(mx, my, 805, 740, 300, 55)) {
-				// game.gameState = STATE.Help;
-
+				Sound.playButtonPress();
+				//game.gameState = STATE.Help;
 				JOptionPane.showMessageDialog(game,
 						"How To Play: To play, Waves, you must first understand that you are playing" + " \n"
 								+ " as the small white box in the center of the screen, with the purpose to try to "
 								+ " \n"
 								+ "stay alive as long as possible while dodging enemies. To start avoiding enemies,"
 								+ " \n" + " you simply use the keys, â€œW-A-S-Dâ€� to navigate the page.",
-						"Help", JOptionPane.INFORMATION_MESSAGE);
+						"Help Menu", JOptionPane.INFORMATION_MESSAGE);
 			}
 
 			// Credits
 			else if (mouseOver(mx, my, 805, 805, 300, 55)) {
+				Sound.playButtonPress();
 				JOptionPane.showMessageDialog(game,
 						"Made by Brandon Loehle for his "
 								+ "final project in AP Computer Science senior year, 2015 - 2016."
@@ -139,6 +144,7 @@ public class MouseListener extends MouseAdapter {
 			//Leaderboard Button
 			else if (mouseOver(mx, my, 805, 675, 300, 55)) {
 				game.gameState=STATE.Leaderboard;
+				Sound.playButtonPress();
 			}
 		}
 

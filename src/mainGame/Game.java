@@ -102,7 +102,11 @@ public class Game extends Canvas implements Runnable {
 		thread = new Thread(this);
 		thread.start();
 		running = true;
-		playSound();
+		Sound.playSoundMenu();
+		
+		if(gameState == STATE.GameOver){
+			Sound.playSoundOver();
+		}
 	}
 
 	public synchronized void stop() {
@@ -240,18 +244,18 @@ public class Game extends Canvas implements Runnable {
 	}
 	
 	//Sound Method testing
-		public void playSound(){
-			if(gameState == STATE.Menu){
-				Sound.playSoundMenu();
-				System.out.println("Playing Menu music");
-			}
-			else if (gameState == STATE.Game){
-				System.out.println("Stopping music");
-				Sound.stopSoundMenu();
-				
-				//Sound.playSound();
-			}
-		}
+//		public void playSound(){
+//			if(gameState == STATE.Menu){
+//				Sound.playSoundMenu();
+//				System.out.println("Playing Menu music");
+//			}
+//			else if (gameState == STATE.Game){
+//				System.out.println("Stopping music");
+//				Sound.stopSoundMenu();
+//				
+//				//Sound.playSound();
+//			}
+		//}
 
 	public boolean isPaused() {
 		return paused;

@@ -170,22 +170,22 @@ public class Menu {
 			g.drawString("Quit", 400, 900);
 
 			*/
-		} else if (game.gameState == STATE.Help) {// if the user clicks on "help"
-		Font font = new Font("impact", 1, 50);
-		Font font2 = new Font("impact", 1, 30);
+//		} else if (game.gameState == STATE.Help) {// if the user clicks on "help"
+//		Font font = new Font("impact", 1, 50);
+//		Font font2 = new Font("impact", 1, 30);
+//
+//		g.setFont(font);
+//		g.setColor(Color.white);
+//		g.drawString("Help", 900, 70);
 
-		g.setFont(font);
-		g.setColor(Color.white);
-		g.drawString("Help", 900, 70);
-
-		g.setFont(font2);
-		g.drawString("Waves: Simply use WASD to avoid enemies. Once you avoid" + " \n"
-			+ "them long enough, a new batch will spawn in! Defeat each boss to win!", 40, 200);
-
-		g.setFont(font2);
-		g.setColor(Color.white);
-		g.drawRect(850, 300, 200, 64);
-		g.drawString("Back", 920, 340);
+//		g.setFont(font2);
+//		g.drawString("Waves: Simply use WASD to avoid enemies. Once you avoid" + " \n"
+//			+ "them long enough, a new batch will spawn in! Defeat each boss to win!", 40, 200);
+//
+//		g.setFont(font2);
+//		g.setColor(Color.white);
+//		g.drawRect(850, 300, 200, 64);
+//		g.drawString("Back", 920, 340);
 		}
 	}
 

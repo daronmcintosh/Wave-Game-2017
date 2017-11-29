@@ -37,7 +37,13 @@ public class Score{
 			String[] readScores = line.split(",");
 		
 			for(int i = 0 ; i < scores.length; i++){
-				scores[i] = Integer.parseInt(readScores[i]);
+				String score = "";
+				
+				if(i < readScores.length){
+					scores[i] = Integer.parseInt(readScores[i]);
+				} else{
+					scores[i] = 0;
+				}
 			}
 			
 			line = reader.readLine();

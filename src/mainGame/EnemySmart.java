@@ -60,5 +60,10 @@ public class EnemySmart extends GameObject {
 	public Rectangle getBounds() {
 		return new Rectangle((int) this.x, (int) this.y, (int) Game.scaleX(16), (int) Game.scaleY(16));
 	}
+	
+	@Override
+	public String toString() {
+		return id.toString();
+	}
 
 }

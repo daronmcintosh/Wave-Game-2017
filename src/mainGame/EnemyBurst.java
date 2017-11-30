@@ -135,5 +135,10 @@ public class EnemyBurst extends GameObject {
 	public Rectangle getBounds() {
 		return new Rectangle((int) this.x, (int) this.y, 200, 200);
 	}
+	
+	@Override
+	public String toString() {
+		return id.toString();
+	}
 
 }

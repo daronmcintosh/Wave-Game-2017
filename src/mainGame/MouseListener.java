@@ -43,17 +43,6 @@ public class MouseListener extends MouseAdapter {
 		int my = e.getY();
 
 		if (game.gameState == STATE.GameOver) {
-			handler.object.clear();
-			upgrades.resetUpgrades();
-			hud.health = 100;
-			hud.setScore(0);
-			hud.setLevel(1);
-			spawner2.restart();
-  			spawner2.addLevels();
-  			handler.object.clear();
-  			Spawn1to10.LEVEL_SET = 1;
-  			game.gameState = STATE.Game;
-  			 handler.addObject(player);
 			if (game.previousGameState == STATE.Game) {
 				handler.object.clear();
 				upgrades.resetUpgrades();
@@ -122,7 +111,6 @@ public class MouseListener extends MouseAdapter {
 			if (mouseOver(mx, my, 1440, 135, 400, 400)) {
 				handler.object.clear();
 				game.gameState = STATE.Survival;
-				game.getSurvivalGameObject().initialize();
 				player.initialize();
 				game.getSurvival().initialize();
 				handler.addObject(player);				

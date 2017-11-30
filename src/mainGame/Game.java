@@ -32,7 +32,6 @@ public class Game extends Canvas implements Runnable {
 
 	private Handler handler;
 	private HUD hud;
-	public SurvivalHUD survivalHud;
 	private SurvivalHUD survivalHud;
 	private Spawn1to10 spawner;
 	private Spawn10to20 spawner2;
@@ -79,7 +78,6 @@ public class Game extends Canvas implements Runnable {
 		leaderboard = new Leaderboard(this, this.handler, this.hud, this.spawner);
 		
 		upgradeScreen = new UpgradeScreen(this, this.handler, this.hud);
-		player = new Player(WIDTH / 2 - 32, HEIGHT / 2 - 32, ID.Player, handler, this.hud, this);
 		player = new Player(WIDTH / 2 - 32, HEIGHT / 2 - 32, ID.Player, handler, this);
 		survivalGame = new Survival(this.handler, this.survivalHud, this, player);
 		upgrades = new Upgrades(this, this.handler, this.hud, this.upgradeScreen, this.player, this.spawner,
@@ -279,8 +277,7 @@ public class Game extends Canvas implements Runnable {
 	public void unPause() {
 		paused = false;
 	}
-	
-	public Survival getSurvivalGameObject() {
+
 	public Survival getSurvival() {
 		return survivalGame;
 	}

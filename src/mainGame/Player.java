@@ -31,7 +31,6 @@ public class Player extends GameObject {
 	private Ability ability = Ability.None;
 	private int damage;
 	private int playerWidth, playerHeight;
-	public static int playerSpeed = 10;
 	
 	private final int reducedDamageValue = 1;
 	private final double speedBoostMod = 2;
@@ -45,9 +44,6 @@ public class Player extends GameObject {
 	private final int startingPlayerHeight = 32;
 	private final int startingPlayerSpeed = 10;
 	
-	
-
-	public Player(double x, double y, ID id, Handler handler, HUD hud, Game game) {
 	public enum Ability {
 		None,
 		FreezeTime,
@@ -113,18 +109,13 @@ public class Player extends GameObject {
 	}
 
 	public void checkIfDead() {
-		if (hud.health <= 0) {// player is dead, game over!
 		if (health <= 0) {// player is dead, game over!
 
-			if (hud.getExtraLives() == 0) {
 			if (extraLives == 0) {
 				game.previousGameState = game.gameState;
 				game.gameState = STATE.GameOver;
 			}
 
-			else if (hud.getExtraLives() > 0) {// has an extra life, game continues
-				hud.setExtraLives(hud.getExtraLives() - 1);
-				hud.setHealth(100);
 			else if (extraLives > 0) {// has an extra life, game continues
 				extraLives--;
 				health = startingHealth;
@@ -156,23 +147,8 @@ public class Player extends GameObject {
 
 				// collision code
 				if (getBounds().intersects(tempObject.getBounds())) {// player hit an enemy
-					switch (game.gameState) {
-						case Game:
-							hud.health -= damage;
-							break;
-						case Survival:
-							game.survivalHud.health -= damage;
-							break;
-						default:
-							break;
-					}
-					//hud.health -= damage;
-					//System.out.println(hud.health);
-					//System.out.println(x);
 					hud.updateScoreColor(Color.red);
 							health -= damage;
-							System.out.println(hud.name);
-							System.out.println(hud);
 							hud.updateScoreColor(Color.red);
 				}
 				hud.updateHealth(health);
@@ -182,7 +158,6 @@ public class Player extends GameObject {
 				// Allows player time to get out of upper area where they will get hurt once the
 				// boss starts moving
 				if (this.y <= 138 && tempObject.isMoving) {
-					hud.health -= 2;
 					health -= 2;
 					hud.updateScoreColor(Color.red);
 				}
@@ -247,9 +222,6 @@ public class Player extends GameObject {
 		this.playerHeight = size;
 	}
 	
-	public void setHUD(HUD newHud) {
-		hud = newHud;
-
 	public Ability getAbility() {
 		return ability;
 	}

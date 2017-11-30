@@ -28,13 +28,7 @@ public class Survival {
 	}
 	
 	public void initialize() {
-		player.setHUD(hud);	
-		System.out.println(hud);
-		hud.health = 100;
 		spawnTimer = 600;
-		levelTimer = 580;
-		factory = new EnemyFactory(handler);
-		logToConsole();
 		levelTimer = 590;
 		factory = new EnemyFactory();
 		createdEnemies.clear();
@@ -53,15 +47,12 @@ public class Survival {
 		levelTimer++;
 		if (levelTimer >= spawnTimer) {
 			levelTimer = 0;
-			createdEnemies.add(factory.generateEnemy());
+			createdEnemies.addAll(factory.generateEnemy());
 			logToConsole();
 			spawnEnemy();
 			if (createdEnemies.size() > (difficulty + 3)) {
 				removeEnemy();
 			}
-			spawnTimer -= 50;
-			if (spawnTimer <= 400) {
-				factory.increaseDifficulty();
 			spawnTimer -= 75;
 			if (spawnTimer <= 150) {
 				factory.increaseDifficulty(0.5);
@@ -127,12 +118,9 @@ public class Survival {
 		
 		private int spawnDistance = 0;
 		
-		public EnemyFactory(Handler handler) {
-			this.handler = handler;
 		public EnemyFactory() {
 			recentSpawns = new LinkedList<Integer>();
 			enemyIDs = new ArrayList<ID>();
-			populateIDList();
 			enemySpawnCounts = new ArrayList<Integer>();
 			enemyScoreFactors = new ArrayList<Integer>();
 			populateLists();
@@ -186,7 +174,6 @@ public class Survival {
 					return new EnemySmart(
 							spawnPosition[0], 
 							spawnPosition[1],
-							(int) ((difficulty + 5) * -1), 
 							Math.max(-6, (int) (((difficulty / 2) + 1) * -1)), 
 							enemyID, 
 							handler);
@@ -235,11 +222,9 @@ public class Survival {
 			}
 		}
 		
-		public GameObject generateEnemy() {
 		public ArrayList<GameObject> generateEnemy() {
 			GameObject spawnedEnemy = selectEnemy();
 			handler.addObject(spawnedEnemy);
-			return spawnedEnemy;
 			ArrayList<GameObject> spawnedEnemies = new ArrayList<GameObject>();
 			spawnedEnemies.add(spawnedEnemy);
 			int enemyIndex = enemyIDs.indexOf(spawnedEnemy.id);
@@ -249,7 +234,6 @@ public class Survival {
 			return spawnedEnemies;
 		}
 		
-		private void populateIDList() {
 		private void populateLists() {
 			enemyIDs.add(ID.EnemyBasic);
 			enemyIDs.add(ID.EnemySmart);
@@ -304,8 +288,6 @@ public class Survival {
 			}
 		}
 		
-		public void increaseDifficulty() {
-			difficulty += 0.5;
 		public void increaseDifficulty(double amount) {
 			difficulty += amount;
 		}

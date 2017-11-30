@@ -39,7 +39,6 @@ public class Spawn10to20 {
 		this.handler = handler;
 		this.hud = hud;
 		this.game = game;
-		hud.restoreHealth();
 		spawnTimer = 10;
 		levelTimer = 150;
 		onScreenTimer = 100;

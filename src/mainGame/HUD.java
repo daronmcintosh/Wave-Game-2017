@@ -92,6 +92,7 @@ public class HUD {
 				timer = 60;
 			}
 		}
+		this.greenValue = Game.clamp(greenValue, 0, 255);	
 	}
 
 	public void render(Graphics g) {

@@ -98,7 +98,7 @@ public class MouseListener extends MouseAdapter {
 				game.gameState = STATE.Game;
 				handler.addObject(player);
 				Sound.stopSoundMenu();
-				Sound.playSound();
+				Sound.playSoundWaves();
 				// handler.addPickup(new PickupHealth(100, 100, ID.PickupHealth,
 				// "../images/PickupHealth.png", handler));
 			}
@@ -108,7 +108,10 @@ public class MouseListener extends MouseAdapter {
 				handler.object.clear();
 				game.gameState = STATE.Survival;
 				game.getSurvivalGameObject().initialize();
-				handler.addObject(player);				
+				handler.addObject(player);	
+				Sound.playButtonPress();
+				Sound.stopSoundMenu();
+				Sound.playSoundSurvival();
 				// handler.addPickup(new PickupHealth(100, 100, ID.PickupHealth,
 				// "../images/PickupHealth.png", handler));
 			}

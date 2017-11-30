@@ -41,6 +41,7 @@ public class Game extends Canvas implements Runnable {
 	private PauseMenu pauseMenu;
 	private Leaderboard leaderboard;
 	private GameOver gameOver;
+	private GameWin gameWin;
 	private UpgradeScreen upgradeScreen;
 	private MouseListener mouseListener;
 	private Upgrades upgrades;
@@ -53,7 +54,7 @@ public class Game extends Canvas implements Runnable {
 	 * Used to switch between each of the screens shown to the user
 	 */
 	public enum STATE {
-		Menu, Help, Game, GameOver, Upgrade, PauseMenu, Survival, Leaderboard
+		Menu, Help, Game, GameOver, Upgrade, PauseMenu, Survival, Leaderboard, GameWin 
 	};
 
 	/**
@@ -82,6 +83,7 @@ public class Game extends Canvas implements Runnable {
 		upgrades = new Upgrades(this, this.handler, this.hud, this.upgradeScreen, this.player, this.spawner,
 				this.spawner2);
 		gameOver = new GameOver(this, this.handler, this.hud);
+		gameWin = new GameWin(this, this.handler, this.hud);
 		mouseListener = new MouseListener(this, this.handler, this.hud, this.spawner, this.spawner2, this.upgradeScreen,
 				this.player, this.upgrades);
 		this.addKeyListener(new KeyInput(this.handler, this, this.hud, this.player, this.spawner, this.upgrades));
@@ -103,10 +105,6 @@ public class Game extends Canvas implements Runnable {
 		thread.start();
 		running = true;
 		Sound.playSoundMenu();
-		
-		if(gameState == STATE.GameOver){
-			Sound.playSoundOver();
-		}
 	}
 
 	public synchronized void stop() {
@@ -184,6 +182,8 @@ public class Game extends Canvas implements Runnable {
 				pauseMenu.tick();
 			} else if(gameState == STATE.Leaderboard) {
 //				leaderboard.tick();
+			} else if(gameState == STATE.GameWin){
+				gameWin.tick();
 			}
 		}
 	}
@@ -236,6 +236,14 @@ public class Game extends Canvas implements Runnable {
 		}
 		else if(gameState==STATE.Leaderboard) {
 			leaderboard.render(g);
+		}
+		else if (gameState == STATE.GameWin) {// game is over, draw the game over screen
+			gameWin.render(g);
+			
+			if(!scoreSaved){
+				score.addScore(hud.getScore());
+				scoreSaved = true;
+			}
 		}
     
 		///////// Draw things above this//////////////

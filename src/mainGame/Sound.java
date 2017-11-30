@@ -26,14 +26,14 @@ public class Sound {
 	private static Clip clip6;
 
 	// Sound Method for the game sound
-	public static void playSound() {
+	public static void playSoundWaves() {
 		// Try catch audio
 		try {
 			AudioInputStream audioInputStream = AudioSystem.getAudioInputStream(new File("Sound.wav"));
 			clip = AudioSystem.getClip();
 			clip.open(audioInputStream);
 			FloatControl gainControl = (FloatControl) clip2.getControl(FloatControl.Type.MASTER_GAIN);
-			gainControl.setValue(-60.0f); // Reduce volume by 10 decibels.
+			gainControl.setValue(-60.0f); // Reduce volume per decibels.
 			clip.start();
 			clip.loop(Clip.LOOP_CONTINUOUSLY);
 		}
@@ -44,8 +44,8 @@ public class Sound {
 		}
 	}
 
-	// Stop method for game sound
-	public static void stopSound() {
+	// Stop method for waves game sound
+	public static void stopSoundWaves() {
 		clip.stop();
 		clip.close();
 	}
@@ -58,7 +58,7 @@ public class Sound {
 			clip2.open(audioInputStream);
 			// adjusts the volume of the sound
 			FloatControl gainControl = (FloatControl) clip2.getControl(FloatControl.Type.MASTER_GAIN);
-			gainControl.setValue(-10.0f); // Reduce volume by 10 decibels.
+			gainControl.setValue(-10.0f); // Reduce volume per decibels.
 			clip2.start();
 			clip2.loop(Clip.LOOP_CONTINUOUSLY);
 
@@ -76,6 +76,32 @@ public class Sound {
 		System.out.println("clip closed");
 	}
 
+	//Survival Game mode theme
+	public static void playSoundSurvival() {
+		try {
+			AudioInputStream audioInputStream = AudioSystem.getAudioInputStream(new File("SurvivalTheme.wav"));
+			clip2 = AudioSystem.getClip();
+			clip2.open(audioInputStream);
+			// adjusts the volume of the sound
+			FloatControl gainControl = (FloatControl) clip2.getControl(FloatControl.Type.MASTER_GAIN);
+			gainControl.setValue(-10.0f); // Reduce volume per decibels.
+			clip2.start();
+			clip2.loop(Clip.LOOP_CONTINUOUSLY);
+
+		}
+
+		catch (Exception e) {
+			e.printStackTrace();
+		}
+	}
+
+	// Stop method for survival theme
+	public static void stopSoundSurvival() {
+		clip2.stop();
+		clip2.close();
+		System.out.println("clip closed");
+	}
+
 	// Game over sound
 	public static void playSoundOver() {
 		try {
@@ -83,6 +109,21 @@ public class Sound {
 			clip3 = AudioSystem.getClip();
 			clip3.open(audioInputStream);
 			clip3.start();
+		}
+
+		catch (Exception e) {
+			e.printStackTrace();
+		}
+	}
+
+	// Sound when the user passes level 20 and wins
+	public static void playSoundWin() {
+		try {
+			AudioInputStream audioInputStream = AudioSystem.getAudioInputStream(new File("GameWon.wav"));
+			clip3 = AudioSystem.getClip();
+			clip3.open(audioInputStream);
+			clip3.start();
+			clip3.loop(Clip.LOOP_CONTINUOUSLY);
 		}
 
 		catch (Exception e) {
@@ -138,7 +179,6 @@ public class Sound {
 			FloatControl gainControl = (FloatControl) clip6.getControl(FloatControl.Type.MASTER_GAIN);
 			gainControl.setValue(5.0f);
 			clip6.start();
-			clip6.drain();
 			System.out.println("LowHealth");
 
 		}

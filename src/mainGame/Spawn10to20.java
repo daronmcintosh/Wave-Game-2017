@@ -419,7 +419,10 @@ public class Spawn10to20 {
 				tempCounter++;
 			}
 
+		} else if(levelNumber > 20){
+			
 		}
+		
 		// WINNER
 		// else if(levelNumber){
 		// levelTimer --;
@@ -458,7 +461,10 @@ public class Spawn10to20 {
 			onScreenTimer = 100;
 			levelNumber += 1;
 		} else if (levelsRemaining <= 0) {
-			System.exit(0); // quits the game for now
+			game.gameState = STATE.GameWin;
+			//System.exit(0); // quits the game for now
+			Sound.stopSoundWaves();
+			Sound.playSoundWin();
 		}
 	}
 

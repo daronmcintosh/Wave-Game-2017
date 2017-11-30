@@ -60,7 +60,7 @@ public class Player extends GameObject {
 			if (hud.getExtraLives() == 0) {
 				game.gameState = STATE.GameOver;
 				Sound.stopSoundMenu();
-				Sound.stopSound();
+				Sound.stopSoundWaves();
 				Sound.playSoundOver();
 			}
 
@@ -69,10 +69,10 @@ public class Player extends GameObject {
 				hud.setHealth(100);
 			}
 		}
-		if(hud.health == 30){
-			//Add health is low sound
-			Sound.playLowHealth();
-		}
+//		if(this.getHealth() == 90){
+//			//Add health is low sound
+//			Sound.playLowHealth();
+//		}
 	}
 
 	/**
@@ -96,7 +96,9 @@ public class Player extends GameObject {
 					|| tempObject.getId() == ID.EnemyRaindrop
 					|| tempObject.getId() == ID.EnemyShotgun
 					|| tempObject.getId() == ID.EnemyShotgunBullet
-					|| tempObject.getId() == ID.EnemyBossLazer) {// tempObject is an enemy
+					|| tempObject.getId() == ID.EnemyBossLazer
+					|| tempObject.getId() == ID.EnemyBossGhost
+					|| tempObject.getId() == ID.EnemyBossGhostTrail) {// tempObject is an enemy
 
 				// collision code
 				if (getBounds().intersects(tempObject.getBounds())) { // player hit an enemy

@@ -54,6 +54,26 @@ public class MouseListener extends MouseAdapter {
   			Spawn1to10.LEVEL_SET = 1;
   			game.gameState = STATE.Game;
   			 handler.addObject(player);
+			if (game.previousGameState == STATE.Game) {
+				handler.object.clear();
+				upgrades.resetUpgrades();
+				player.initialize();
+				hud.setLevel(1);
+				spawner.restart();
+				spawner2.restart();
+	  			spawner2.addLevels();
+	  			handler.object.clear();
+	  			Spawn1to10.LEVEL_SET = 1;
+	  			game.gameState = STATE.Game;
+	  			 handler.addObject(player);
+			} else if (game.previousGameState == STATE.Survival) {
+				handler.object.clear();
+				player.initialize();
+				hud.setLevel(1);
+				game.getSurvival().initialize();
+				game.gameState = STATE.Survival;
+				handler.addObject(player);
+			}
 		}
 
 		else if (game.gameState == STATE.Game) {
@@ -94,6 +114,7 @@ public class MouseListener extends MouseAdapter {
 			if (mouseOver(mx, my, 990, 135, 400, 400)) {
 				handler.object.clear();
 				game.gameState = STATE.Game;
+				player.initialize();
 				handler.addObject(player);
 				// handler.addPickup(new PickupHealth(100, 100, ID.PickupHealth,
 				// "../images/PickupHealth.png", handler));
@@ -102,6 +123,8 @@ public class MouseListener extends MouseAdapter {
 				handler.object.clear();
 				game.gameState = STATE.Survival;
 				game.getSurvivalGameObject().initialize();
+				player.initialize();
+				game.getSurvival().initialize();
 				handler.addObject(player);				
 				// handler.addPickup(new PickupHealth(100, 100, ID.PickupHealth,
 				// "../images/PickupHealth.png", handler));

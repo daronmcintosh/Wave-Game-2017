@@ -138,6 +138,7 @@ public class Spawn1to10 {
 			if (levelTimer == 0) {
 				handler.clearEnemies();
 				hud.setLevel(hud.getLevel() + 1);
+				
 				tempCounter = 0;
 				levelNumber += 1;
 				levelsRemaining -= 1;
@@ -416,6 +417,7 @@ public class Spawn1to10 {
 
 		}
 
+		hud.updateLevelText(levelNumber);
 	}
 
 	public void skipLevel() {

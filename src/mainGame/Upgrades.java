@@ -1,5 +1,7 @@
 package mainGame;
 
+import mainGame.Player.Ability;
+
 /**
  * The upgrades that a user can have (they modify the game for the user)
  * 
@@ -17,6 +19,9 @@ public class Upgrades {
 	private Spawn10to20 spawner2;
 	private UpgradeScreen upgradeScreen;
 	private String ability;
+	private final int freezeTimeUses = 3;
+	private final int clearScreenUses = 3;	
+	private final int levelSkipUses = 3;
 
 	public Upgrades(Game game, Handler handler, HUD hud, UpgradeScreen upgradeScreen, Player player, Spawn1to10 spawner,
 			Spawn10to20 spawner2) {
@@ -52,12 +57,14 @@ public class Upgrades {
 
 	public void healthRegeneration() {
 		hud.setRegen();
+		player.decrementAbilityUses();
 	}
 
 	public void improvedDamageResistance() {
 		player.setDamage(1);
 	}
 
+	
 	public void levelSkipAbility() {
 		handler.clearEnemies();
 		hud.setLevel(hud.getLevel() + 1);
@@ -71,6 +78,7 @@ public class Upgrades {
 			ability = "";
 		}
 
+		player.decrementAbilityUses();
 	}
 
 	public void freezeTimeAbility() {
@@ -83,6 +91,7 @@ public class Upgrades {
 
 	public void speedBoost() {
 		Player.playerSpeed *= 2;
+		player.decrementAbilityUses();
 	}
 
 	public String getAbility() {
@@ -120,6 +129,36 @@ public class Upgrades {
 			hud.setAbilityUses(5);
 		} else if (path.equals("../images/speedboost.png")) {
 			speedBoost();
+		switch (path) {
+			case "../images/clearscreenability.png":
+				player.activateTriggeredAbility(Ability.ClearScreen, clearScreenUses);
+				break;
+			case "../images/decreaseplayersize.png":
+				player.activateReducedSize();
+				break;
+			case "../images/extralife.png":
+				player.setExtraLives(player.getExtraLives() + 1);
+				break;
+			case "../images/healthincrease.png":
+				player.activateDoubleHealth();
+				break;
+			case "../images/healthregeneration.png":
+				player.activateRegen();
+				break;
+			case "../images/improveddamageresistance.png":
+				player.activateDamageResistance();
+				break;
+			case "../images/levelskipability.png":
+				player.activateTriggeredAbility(Ability.LevelSkip, levelSkipUses);
+				break;
+			case "../images/freezetimeability.png":
+				player.activateTriggeredAbility(Ability.FreezeTime, freezeTimeUses);
+				break;
+			case "../images/speedboost.png":
+				player.activateSpeedBoost();
+				break;
+			default:
+				break;
 		}
 
 	}

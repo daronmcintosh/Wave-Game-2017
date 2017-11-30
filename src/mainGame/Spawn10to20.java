@@ -440,6 +440,7 @@ public class Spawn10to20 {
 		//
 		// }
 
+		hud.updateLevelText(levelNumber);
 	}
 
 	public void skipLevel() {

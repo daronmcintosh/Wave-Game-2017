@@ -21,11 +21,41 @@ public class Player extends GameObject {
 	Handler handler;
 	private HUD hud;
 	private Game game;
+	private int health = 0;
+	public int playerSpeed = 10;
+	private boolean doubleHealth = false;
+	private boolean regen = false;
+	private int score = 0;
+	private int abilityUses = 0;
+	private int extraLives = 0;
+	private Ability ability = Ability.None;
 	private int damage;
 	private int playerWidth, playerHeight;
 	public static int playerSpeed = 10;
+	
+	private final int reducedDamageValue = 1;
+	private final double speedBoostMod = 2;
+	
+	private final int reducedPlayerSize = 24;
+	
+	
+	private final int startingHealth = 100;
+	private final int startingDamage = 2;
+	private final int startingPlayerWidth = 32;
+	private final int startingPlayerHeight = 32;
+	private final int startingPlayerSpeed = 10;
+	
+	
 
 	public Player(double x, double y, ID id, Handler handler, HUD hud, Game game) {
+	public enum Ability {
+		None,
+		FreezeTime,
+		ClearScreen,
+		LevelSkip
+	}
+	
+	public Player(double x, double y, ID id, Handler handler, Game game) {
 		super(x, y, id);
 		this.handler = handler;
 		this.hud = hud;
@@ -33,6 +63,31 @@ public class Player extends GameObject {
 		this.damage = 2;
 		playerWidth = 32;
 		playerHeight = 32;
+	}
+	
+	public void initialize() {
+		switch (game.gameState) {
+			case Game:
+				hud = game.getHud();
+				break;
+			case Survival:
+				hud = game.getSurvivalHud();
+				break;
+			default:
+				break;
+		}
+		health = startingHealth;
+		doubleHealth = false;
+		regen = false;
+		extraLives = 0;
+		ability = Ability.None;
+		abilityUses = 0;
+		damage = startingDamage;
+		playerWidth = startingPlayerWidth;
+		playerHeight = startingPlayerHeight;
+		playerSpeed = startingPlayerSpeed;
+		hud.updateHealth(health);
+		hud.updateLivesText(extraLives);
 	}
 
 	@Override
@@ -52,18 +107,27 @@ public class Player extends GameObject {
 		collision();
 		checkIfDead();
 
+		hud.tickScore();
+		hud.updateHealth(health);
+		hud.updateLivesText(extraLives);
 	}
 
 	public void checkIfDead() {
 		if (hud.health <= 0) {// player is dead, game over!
+		if (health <= 0) {// player is dead, game over!
 
 			if (hud.getExtraLives() == 0) {
+			if (extraLives == 0) {
+				game.previousGameState = game.gameState;
 				game.gameState = STATE.GameOver;
 			}
 
 			else if (hud.getExtraLives() > 0) {// has an extra life, game continues
 				hud.setExtraLives(hud.getExtraLives() - 1);
 				hud.setHealth(100);
+			else if (extraLives > 0) {// has an extra life, game continues
+				extraLives--;
+				health = startingHealth;
 			}
 		}
 	}
@@ -106,7 +170,12 @@ public class Player extends GameObject {
 					//System.out.println(hud.health);
 					//System.out.println(x);
 					hud.updateScoreColor(Color.red);
+							health -= damage;
+							System.out.println(hud.name);
+							System.out.println(hud);
+							hud.updateScoreColor(Color.red);
 				}
+				hud.updateHealth(health);
 
 			}
 			if (tempObject.getId() == ID.EnemyBoss) {
@@ -114,6 +183,7 @@ public class Player extends GameObject {
 				// boss starts moving
 				if (this.y <= 138 && tempObject.isMoving) {
 					hud.health -= 2;
+					health -= 2;
 					hud.updateScoreColor(Color.red);
 				}
 			}
@@ -133,6 +203,40 @@ public class Player extends GameObject {
 	public Rectangle getBounds() {
 		return new Rectangle((int) this.x, (int) this.y, (int) Game.scaleX(playerWidth), (int) Game.scaleY(playerHeight));
 	}
+	
+	public void activateDoubleHealth() {
+		doubleHealth = true;
+		health = 2 * startingHealth;
+		hud.activateDoubleHealth();
+	}
+	
+	public void activateRegen() {
+		regen = true;
+	}
+	
+	public void activateDamageResistance() {
+		damage = reducedDamageValue;
+	}
+	
+	public void activateTriggeredAbility(Ability ability, int uses) {
+		this.ability = ability;
+		abilityUses = uses;
+	}
+	
+	public void decrementAbilityUses() {
+		abilityUses--;
+		if (abilityUses < 1) {
+			ability = Ability.None;
+		}
+	}
+	
+	public void activateSpeedBoost() {
+		playerSpeed *= speedBoostMod;
+	}
+	
+	public void activateReducedSize() {
+		setPlayerSize(reducedPlayerSize);
+	}
 
 	public void setDamage(int damage) {
 		this.damage = damage;
@@ -145,6 +249,32 @@ public class Player extends GameObject {
 	
 	public void setHUD(HUD newHud) {
 		hud = newHud;
+
+	public Ability getAbility() {
+		return ability;
 	}
 
+	public void setAbility(Ability ability) {
+		this.ability = ability;
+	}
+
+	public int getAbilityUses() {
+		return abilityUses;
+	}
+
+	public void setAbilityUses(int abilityUses) {
+		this.abilityUses = abilityUses;
+	}
+
+	public int getExtraLives() {
+		return extraLives;
+	}
+
+	public void setExtraLives(int extraLives) {
+		this.extraLives = extraLives;
+	}
+
+	public Game getGame() {
+		return game;
+	}	
 }

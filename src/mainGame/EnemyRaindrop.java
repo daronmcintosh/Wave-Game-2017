@@ -47,5 +47,10 @@ public class EnemyRaindrop extends GameObject {
 	public Rectangle getBounds() {
 		return new Rectangle((int) this.x, (int) this.y, (int) Game.scaleX(40), (int) Game.scaleY(70));
 	}
+	
+	@Override
+	public String toString() {
+		return id.toString();
+	}
 
 }

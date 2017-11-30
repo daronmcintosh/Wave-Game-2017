@@ -93,5 +93,10 @@ public class EnemyShooter extends GameObject {
 	public Rectangle getBounds() {
 		return new Rectangle((int) this.x, (int) this.y, (int) Game.scaleX(100), (int) Game.scaleY(100));
 	}
+	
+	@Override
+	public String toString() {
+		return id.toString();
+	}
 
 }

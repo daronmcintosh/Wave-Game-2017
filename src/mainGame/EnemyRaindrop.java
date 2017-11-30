@@ -27,6 +27,9 @@ public class EnemyRaindrop extends GameObject {
 				player = handler.object.get(i);
 		}
 		this.x = player.getX(); // overrides the position set in the spawn class so that it spawns on top of the player
+		if (((Player) player).getGame().gameState == Game.STATE.Game) {
+			this.x = player.getX(); // overrides the position set in the spawn class so that it spawns on top of the player
+		}
 	}
 
 	public void tick() {

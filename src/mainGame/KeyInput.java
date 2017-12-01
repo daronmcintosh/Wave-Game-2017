@@ -28,7 +28,7 @@ public class KeyInput extends KeyAdapter {
 	// uses current handler created in Game as parameter
 	public KeyInput(Handler handler, Game game, HUD hud, Player player, Spawn1to10 spawner, Upgrades upgrades) {
 		this.handler = handler;
-		this.speed = Player.playerSpeed;
+		this.speed = player.playerSpeed;
 		this.game = game;
 		this.player = player;
 		this.hud = hud;
@@ -44,7 +44,7 @@ public class KeyInput extends KeyAdapter {
 
 	public void keyPressed(KeyEvent e) {
 		int key = e.getKeyCode();
-		this.speed = Player.playerSpeed;
+		this.speed = player.playerSpeed;
 		
 		//Go back to Menu when hit backspace on leaderboard
 		if(game.gameState == STATE.Leaderboard && key == KeyEvent.VK_BACK_SPACE){
@@ -83,7 +83,7 @@ public class KeyInput extends KeyAdapter {
 					keyDown[3] = true;
 				}
 
-				if (key == KeyEvent.VK_SPACE) {
+				if ((key == KeyEvent.VK_SPACE) && game.gameState == Game.STATE.Game) {
 					upgrades.levelSkipAbility();
 				}
 
@@ -99,18 +99,17 @@ public class KeyInput extends KeyAdapter {
 				}
 				if(key == KeyEvent.VK_P) {
 					if(!game.isPaused()) {
+						game.previousGameState = game.gameState;
 						game.gameState=STATE.PauseMenu;
 						game.pause();
 					}else {
 						game.gameState=STATE.Game;
+						game.gameState=game.previousGameState;
 						game.unPause();
 					}
 				}
-
 			}
-
 		}
-
 	}
 
 	public void keyReleased(KeyEvent e) {

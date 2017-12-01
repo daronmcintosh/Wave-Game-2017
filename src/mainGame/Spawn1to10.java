@@ -37,13 +37,12 @@ public class Spawn1to10 {
 		this.hud = hud;
 		this.game = game;
 		handler.object.clear();
-		hud.health = 100;
 		hud.setScore(0);
 		hud.setLevel(1);
 		spawnTimer = 10;
 		levelTimer = 150;
 		onScreenTimer = 100;
-		levelsRemaining = 10; // 10 Levels including the boss
+		levelsRemaining = 9; // 10 Levels excluding the boss
 		tempCounter = 0;
 		addLevels();
 		levelNumber = 1;
@@ -428,7 +427,7 @@ public class Spawn1to10 {
 			}
 
 		}
-
+		hud.updateLevelText(levelNumber);
 	}
 
 	public void skipLevel() {

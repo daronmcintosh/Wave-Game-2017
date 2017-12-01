@@ -44,18 +44,27 @@ public class MouseListener extends MouseAdapter {
 		int my = e.getY();
 
 		if (game.gameState == STATE.GameOver) {
-			game.gameState = STATE.GameOver;
-			handler.object.clear();
-			upgrades.resetUpgrades();
-			hud.health = 100;
-			hud.setScore(0);
-			hud.setLevel(1);
-			spawner2.restart();
-  			spawner2.addLevels();
-  			handler.object.clear();
-  			Spawn1to10.LEVEL_SET = 1;
-  			game.gameState = STATE.Game;
-  			handler.addObject(player);	
+
+			if (game.previousGameState == STATE.Game) {
+				handler.object.clear();
+				upgrades.resetUpgrades();
+				player.initialize();
+				hud.setLevel(1);
+				spawner.restart();
+				spawner2.restart();
+	  			spawner2.addLevels();
+	  			handler.object.clear();
+	  			Spawn1to10.LEVEL_SET = 1;
+	  			game.gameState = STATE.Game;
+	  			 handler.addObject(player);
+			} else if (game.previousGameState == STATE.Survival) {
+				handler.object.clear();
+				player.initialize();
+				hud.setLevel(1);
+				game.getSurvival().initialize();
+				game.gameState = STATE.Survival;
+				handler.addObject(player);
+			}
 		}
 
 		else if (game.gameState == STATE.Game) {
@@ -96,30 +105,31 @@ public class MouseListener extends MouseAdapter {
 			if (mouseOver(mx, my, 805, 545, 300, 55)) {
 				handler.object.clear();
 				game.gameState = STATE.Game;
+				player.initialize();
 				handler.addObject(player);
 				Sound.stopSoundMenu();
 				Sound.playSoundWaves();
-				// handler.addPickup(new PickupHealth(100, 100, ID.PickupHealth,
-				// "../images/PickupHealth.png", handler));
 			}
-			
+
 			// Survival Button
 			if (mouseOver(mx, my, 805, 610, 300, 55)) {
 				handler.object.clear();
 				game.gameState = STATE.Survival;
-				game.getSurvivalGameObject().initialize();
-				handler.addObject(player);	
-				Sound.playButtonPress();
+
+				player.initialize();
+				game.getSurvival().initialize();
+				handler.addObject(player);
+        
+        Sound.playButtonPress();
 				Sound.stopSoundMenu();
 				Sound.playSoundSurvival();
-				// handler.addPickup(new PickupHealth(100, 100, ID.PickupHealth,
-				// "../images/PickupHealth.png", handler));
 			}
 
 			// Help Button
 			else if (mouseOver(mx, my, 805, 740, 300, 55)) {
-				Sound.playButtonPress();
-				//game.gameState = STATE.Help;
+				// game.gameState = STATE.Help;
+        Sound.playButtonPress();
+        
 				JOptionPane.showMessageDialog(game,
 						"How To Play: To play, Waves, you must first understand that you are playing" + " \n"
 								+ " as the small white box in the center of the screen, with the purpose to try to "

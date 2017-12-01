@@ -27,10 +27,7 @@ public enum ID {
 	EnemyRaindrop(),
 	EnemyShotgun(),
 	EnemyShotgunBullet(),
-	EnemyBasic(), 
-	EnemyBossLazer, 
-	EnemyBossGhostTrail,
-	EnemyBossGhost;
-	
-	
+	EnemyBasic(),
+	EnemySmarter(),
+	EnemyCircle();
 }

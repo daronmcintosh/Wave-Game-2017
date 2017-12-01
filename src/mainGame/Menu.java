@@ -89,49 +89,6 @@ public class Menu {
 			Font font = new Font("Amoebic", 1, (int) (100 * (Game.HEIGHT / 1080f)));
 			Font font2 = new Font("Amoebic", 1, (int) (60 * (Game.HEIGHT / 1080f)));
 
-			/*
-			 * Note to self:
-			 * 
-			 * Abstract each of these calls out to a window.
-			 * 
-			 * Each of these buttons should be drawn at a relative location.
-			 * Since each was placed precisely at 1920x1080, every position
-			 * should instead be multiplied by found width/height divided by
-			 * 1920/1080 depending.
-			 * 
-			 * Really it should be a layout manager, but baby steps.
-
-			g.setFont(font);
-			g.setColor(Color.white);
-			g.drawString("Game Modes", 1140, 100);
-						
-			g.setFont(font);
-			g.setColor(Color.white);
-			g.drawString("Loehle's Sandbox", 75, 100);
-			g.setColor(Color.white);
-			g.drawRect(990, 135, 400, 400);
-			g.setFont(font2);
-			g.setColor(Color.white);
-			g.drawString("Waves", 1110, 215);
-
-			g.setColor(Color.white);
-			g.drawRect(1440, 135, 400, 400);
-			g.setFont(font2);
-			g.setColor(Color.white);
-			g.drawString("Bosses", 1550, 215);
-
-			g.setColor(Color.white);
-			g.drawRect(990, 585, 400, 400);
-			g.setFont(font2);
-			g.setColor(Color.white);
-			g.drawString("Attack", 1095, 665);
-
-			g.setColor(Color.white);
-			g.drawRect(1440, 585, 400, 400);
-			g.setFont(font2);
-			g.setColor(Color.white);
-			g.drawString("Hunger", 1550, 665);
-			
 				//Waves
 			drawMenuItem(g, font2, Color.white, new int[] {805, 545, 300, 55}, 
 				"", new int[] {1110, 215});
@@ -150,42 +107,6 @@ public class Menu {
 			//Leaderboard
 			drawMenuItem(g, font, Color.white, new int[] {805, 675, 300, 55}, 
 				"", new int[] {1075, 900});
-			
-			g.setColor(Color.white);
-			g.drawRect(80, 135, 850, 250);
-			g.setFont(font);
-			g.setColor(Color.white);
-			g.drawString("Help", 400, 280);
-
-			g.setColor(Color.white);
-			g.drawRect(80, 435, 850, 250);
-			g.setFont(font);
-			g.setColor(Color.white);
-			g.drawString("Credits", 340, 600);
-
-			g.setColor(Color.white);
-			g.drawRect(80, 735, 850, 250);
-			g.setFont(font);
-			g.setColor(Color.white);
-			g.drawString("Quit", 400, 900);
-
-			*/
-//		} else if (game.gameState == STATE.Help) {// if the user clicks on "help"
-//		Font font = new Font("impact", 1, 50);
-//		Font font2 = new Font("impact", 1, 30);
-//
-//		g.setFont(font);
-//		g.setColor(Color.white);
-//		g.drawString("Help", 900, 70);
-
-//		g.setFont(font2);
-//		g.drawString("Waves: Simply use WASD to avoid enemies. Once you avoid" + " \n"
-//			+ "them long enough, a new batch will spawn in! Defeat each boss to win!", 40, 200);
-//
-//		g.setFont(font2);
-//		g.setColor(Color.white);
-//		g.drawRect(850, 300, 200, 64);
-//		g.drawString("Back", 920, 340);
 		}
 	}
 
@@ -210,29 +131,4 @@ public class Menu {
 			(int) (textPos[0] * (Game.WIDTH / 1920f)), 
 			(int) (textPos[1] * (Game.HEIGHT / 1080f)));
 	}
-
-			//else if (game.gameState == STATE.Help) {// if the user clicks on "help"
-	//			Font font = new Font("impact", 1, 50);
-	//			Font font2 = new Font("impact", 1, 30);
-	//
-	//			g.setFont(font);
-	//			g.setColor(Color.white);
-	//			g.drawString("Help", 900, 70);
-	//
-	//			g.setFont(font2);
-	////			
-	////			String stringToPrint = "How To Play: To play, Waves, you must first understand that you are playing" +" \n"
-	////					 + " as the small white box in the center of the screen, with the purpose to try to " + " \n"
-	////					 + " stay alive as long as possible while dodging enemies. To start avoiding enemies," +  " \n"
-	////					 + " you simply use the arrow keys to navigate the page." + " \n"
-	//// 					 + " To pause the game, press key "P." To resume the game press key "P."";
-	////			
-	////			g.drawString(stringToPrint, 40, 200);
-	//			
-	//			g.setFont(font2);
-	//			g.setColor(Color.white);
-	//			g.drawRect(850, 300, 200, 64);
-	//			g.drawString("Back", 920, 340);
-	//		}
-	//
 }

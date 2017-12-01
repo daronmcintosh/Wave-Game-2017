@@ -37,7 +37,6 @@ public class Spawn1to10 {
 		this.hud = hud;
 		this.game = game;
 		handler.object.clear();
-		hud.health = 100;
 		hud.setScore(0);
 		hud.setLevel(1);
 		spawnTimer = 10;
@@ -415,7 +414,7 @@ public class Spawn1to10 {
 			}
 
 		}
-
+		hud.updateLevelText(levelNumber);
 	}
 
 	public void skipLevel() {

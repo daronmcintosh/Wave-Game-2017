@@ -23,12 +23,12 @@ public class Score{
 		return scores;
 	}
 	
+	
 	public String[] getNames(){
 		return names;
 	}
 	
 	public void loadScores(){
-		
 		try {
 			BufferedReader reader = new BufferedReader(new FileReader(saveFile));
 			

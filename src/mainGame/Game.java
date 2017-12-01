@@ -46,6 +46,7 @@ public class Game extends Canvas implements Runnable {
 	private Upgrades upgrades;
 	private Player player;
 	public STATE gameState = STATE.Menu;
+	public STATE previousGameState = STATE.Menu;
 	public static int TEMP_COUNTER;
 	private boolean paused;
 	private boolean scoreSaved;
@@ -77,7 +78,7 @@ public class Game extends Canvas implements Runnable {
 		leaderboard = new Leaderboard(this, this.handler, this.hud, this.spawner);
 		
 		upgradeScreen = new UpgradeScreen(this, this.handler, this.hud);
-		player = new Player(WIDTH / 2 - 32, HEIGHT / 2 - 32, ID.Player, handler, this.hud, this);
+		player = new Player(WIDTH / 2 - 32, HEIGHT / 2 - 32, ID.Player, handler, this);
 		survivalGame = new Survival(this.handler, this.survivalHud, this, player);
 		upgrades = new Upgrades(this, this.handler, this.hud, this.upgradeScreen, this.player, this.spawner,
 				this.spawner2);
@@ -213,6 +214,7 @@ public class Game extends Canvas implements Runnable {
 			hud.render(g);
 			scoreSaved = false;
 		} else if (gameState == STATE.Survival) {
+			pauseMenu.removePrompt();
 			survivalHud.render(g);
 		} else if (gameState == STATE.Menu || gameState == STATE.Help) { // user is in help or the menu, draw the menu
 																			// and help objects
@@ -225,11 +227,20 @@ public class Game extends Canvas implements Runnable {
 			if(!scoreSaved){
 				String name = JOptionPane.showInputDialog("Enter your name for the leaderboard:");
 				score.addScore(hud.getScore(), name);
-				
 				scoreSaved = true;
 			}
 		} else if(gameState == STATE.PauseMenu) {
-			hud.render(g);
+			switch (previousGameState) {
+				case Game:
+					hud.render(g);
+					break;
+				case Survival:
+					survivalHud.render(g);
+					break;
+				default:
+					hud.render(g);
+					break;
+			}
 			pauseMenu.render(g);
 		}
 		else if(gameState==STATE.Leaderboard) {
@@ -266,7 +277,26 @@ public class Game extends Canvas implements Runnable {
 	public void unPause() {
 		paused = false;
 	}
-	
+	public Survival getSurvival() {
+		return survivalGame;
+	}
+
+	public HUD getHud() {
+		return hud;
+	}
+
+	public void setHud(HUD hud) {
+		this.hud = hud;
+	}
+
+	public SurvivalHUD getSurvivalHud() {
+		return survivalHud;
+	}
+
+	public void setSurvivalHud(SurvivalHUD survivalHud) {
+		this.survivalHud = survivalHud;
+	}
+
 	public Survival getSurvivalGameObject() {
 		return survivalGame;
 	}

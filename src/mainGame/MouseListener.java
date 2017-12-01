@@ -44,17 +44,26 @@ public class MouseListener extends MouseAdapter {
 		int my = e.getY();
 
 		if (game.gameState == STATE.GameOver) {
-			handler.object.clear();
-			upgrades.resetUpgrades();
-			hud.health = 100;
-			hud.setScore(0);
-			hud.setLevel(1);
-			spawner2.restart();
-  			spawner2.addLevels();
-  			handler.object.clear();
-  			Spawn1to10.LEVEL_SET = 1;
-  			game.gameState = STATE.Game;
-  			handler.addObject(player);		
+			if (game.previousGameState == STATE.Game) {
+				handler.object.clear();
+				upgrades.resetUpgrades();
+				player.initialize();
+				hud.setLevel(1);
+				spawner.restart();
+				spawner2.restart();
+	  			spawner2.addLevels();
+	  			handler.object.clear();
+	  			Spawn1to10.LEVEL_SET = 1;
+	  			game.gameState = STATE.Game;
+	  			 handler.addObject(player);
+			} else if (game.previousGameState == STATE.Survival) {
+				handler.object.clear();
+				player.initialize();
+				hud.setLevel(1);
+				game.getSurvival().initialize();
+				game.gameState = STATE.Survival;
+				handler.addObject(player);
+			}
 		}
 
 		else if (game.gameState == STATE.Game) {
@@ -95,6 +104,7 @@ public class MouseListener extends MouseAdapter {
 			if (mouseOver(mx, my, 805, 545, 300, 55)) {
 				handler.object.clear();
 				game.gameState = STATE.Game;
+				player.initialize();
 				handler.addObject(player);
 				// handler.addPickup(new PickupHealth(100, 100, ID.PickupHealth,
 				// "../images/PickupHealth.png", handler));
@@ -103,13 +113,15 @@ public class MouseListener extends MouseAdapter {
 			if (mouseOver(mx, my, 805, 610, 300, 55)) {
 				handler.object.clear();
 				game.gameState = STATE.Survival;
-				game.getSurvivalGameObject().initialize();
-				handler.addObject(player);				
+				player.initialize();
+				game.getSurvival().initialize();
+				handler.addObject(player);
 				// handler.addPickup(new PickupHealth(100, 100, ID.PickupHealth,
 				// "../images/PickupHealth.png", handler));
 			}
 
 			// Help Button
+
 			else if (mouseOver(mx, my, 805, 740, 300, 55)) {
 				// game.gameState = STATE.Help;
 
@@ -123,7 +135,7 @@ public class MouseListener extends MouseAdapter {
 			}
 
 			// Credits
-			else if (mouseOver(mx, my, 805, 805, 300, 55)) {
+			else if (mouseOver(mx, my, 80, 435, 850, 250)) {
 				JOptionPane.showMessageDialog(game,
 						"Made by Brandon Loehle for his "
 								+ "final project in AP Computer Science senior year, 2015 - 2016."

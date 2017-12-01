@@ -6,6 +6,8 @@ import java.awt.Graphics;
 import java.awt.font.FontRenderContext;
 import java.awt.geom.AffineTransform;
 
+import mainGame.Game.STATE;
+
 /**
  * The game over screen
  * 
@@ -37,6 +39,11 @@ public class GameOver {
 	}
 
 	public void render(Graphics g) {
+		if (game.previousGameState == Game.STATE.Survival) {
+			this.hud = game.getSurvivalHud();
+		} else {
+			this.hud = game.getHud();
+		}
 		Font font = new Font("Amoebic", 1, 100);
 		Font font2 = new Font("Amoebic", 1, 60);
 		g.setFont(font);

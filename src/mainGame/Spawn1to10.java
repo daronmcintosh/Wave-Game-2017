@@ -1,5 +1,6 @@
 package mainGame;
 
+import java.awt.event.KeyEvent;
 import java.util.ArrayList;
 import java.util.Random;
 
@@ -444,8 +445,13 @@ public class Spawn1to10 {
 			levels.remove(i);
 		}
 	}
+	
 	public void restart() {
-		// Implement this
+		if(game.gameState == STATE.Menu){
+			levelNumber = 1;
+			tempCounter = 0;
+			levelTimer = 0;
+			levelsRemaining = 10;
+		}
 	}
-
 }

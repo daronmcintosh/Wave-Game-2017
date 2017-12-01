@@ -54,10 +54,16 @@ public class GameOver {
 		g.drawString(text, Game.WIDTH / 2 - getTextWidth(font2, text) / 2, Game.HEIGHT / 2 - 50);
 		text = "Score: " + hud.getScore();
 		g.drawString(text, Game.WIDTH / 2 - getTextWidth(font2, text) / 2, Game.HEIGHT / 2 + 50);
+		
 		g.setColor(this.retryColor);
 		g.setFont(font2);
 		text = "Click anywhere to play again";
 		g.drawString(text, Game.WIDTH / 2 - getTextWidth(font2, text) / 2, Game.HEIGHT / 2 + 150);
+		
+		//g.setColor(Color.green);
+		g.setFont(font2);
+		text = "Press H To Return To the Main Menu";
+		g.drawString(text, Game.WIDTH / 2 - getTextWidth(font2, text) / 2, Game.HEIGHT / 2 + 250);
 	}
 
 	public void flash() {

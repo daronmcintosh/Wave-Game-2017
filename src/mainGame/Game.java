@@ -178,7 +178,6 @@ public class Game extends Canvas implements Runnable {
 				upgradeScreen.tick();
 			} else if (gameState == STATE.GameOver) {// game is over, update the game over screen
 				gameOver.tick();
-				// add game over sound
 			} else if(gameState == STATE.PauseMenu) {
 				pauseMenu.tick();
 			} else if(gameState == STATE.Leaderboard) {
@@ -264,20 +263,6 @@ public class Game extends Canvas implements Runnable {
 		g.dispose();
 		bs.show();
 	}
-	
-	//Sound Method testing
-//		public void playSound(){
-//			if(gameState == STATE.Menu){
-//				Sound.playSoundMenu();
-//				System.out.println("Playing Menu music");
-//			}
-//			else if (gameState == STATE.Game){
-//				System.out.println("Stopping music");
-//				Sound.stopSoundMenu();
-//				
-//				//Sound.playSound();
-//			}
-		//}
 
 	public boolean isPaused() {
 		return paused;

@@ -23,7 +23,7 @@ public class KeyInput extends KeyAdapter {
 	private Player player;
 	private Spawn1to10 spawner;
 	private Upgrades upgrades;
-	private String ability;
+	private String ability;;
 
 	// uses current handler created in Game as parameter
 	public KeyInput(Handler handler, Game game, HUD hud, Player player, Spawn1to10 spawner, Upgrades upgrades) {
@@ -49,6 +49,18 @@ public class KeyInput extends KeyAdapter {
 		//Go back to Menu when hit backspace on leaderboard
 		if(game.gameState == STATE.Leaderboard && key == KeyEvent.VK_BACK_SPACE){
 			game.gameState = STATE.Menu;
+		}
+		
+		if(game.gameState == STATE.GameOver){
+			if(key == KeyEvent.VK_H){
+				game.gameState = STATE.Menu;
+				handler.object.clear();
+				hud.setLevel(1);
+				hud.setScore(0);
+				spawner.restart();
+				spawner.addLevels();
+				
+			}
 		}
 		
 		// finds what key strokes associate with Player
@@ -97,6 +109,8 @@ public class KeyInput extends KeyAdapter {
 						upgrades.freezeTimeAbility();
 					}
 				}
+				
+				
 				if(key == KeyEvent.VK_P) {
 					if(!game.isPaused()) {
 						game.previousGameState = game.gameState;

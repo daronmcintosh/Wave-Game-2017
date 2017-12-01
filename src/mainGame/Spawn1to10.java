@@ -80,15 +80,6 @@ public class Spawn1to10 {
 			if (spawnTimer == 0) {// time to spawn another enemy
 				handler.addObject(
 						new EnemyBasic(r.nextInt(Game.WIDTH), r.nextInt(Game.HEIGHT), 9, 9, ID.EnemyBasic, handler));// add
-																														// them
-																														// to
-																														// the
-																														// handler,
-																														// which
-																														// handles
-																														// all
-																														// game
-																														// objects
 				spawnTimer = 100;// reset the spawn timer
 			}
 			if (levelTimer == 0) {// level is over
@@ -103,10 +94,9 @@ public class Spawn1to10 {
 				onScreenTimer = 100;
 			}
 			if (onScreenTimer != 0) {
-				if (temp < 1) { // used the same way as tempCounter
+				if (temp < 1) { // us
 					Sound.playSoundNewLevel();
 					levelString.setString("Level " + levelNumber);
-					
 					handler.addObject(levelString);
 					temp++;
 				}
@@ -150,7 +140,7 @@ public class Spawn1to10 {
 					Sound.playSoundNewLevel();
 					levelString.setString("Level " + levelNumber);
 					handler.addObject(levelString);
-					temp++;	
+					temp++;
 				}
 				onScreenTimer--;
 			} else if (onScreenTimer == 0) {
@@ -182,7 +172,6 @@ public class Spawn1to10 {
 			}
 			if (onScreenTimer != 0) {
 				if (temp < 1) {
-					//play new level sound
 					Sound.playSoundNewLevel();
 					levelString.setString("Level " + levelNumber);
 					handler.addObject(levelString);
@@ -225,15 +214,16 @@ public class Spawn1to10 {
 			} else if (onScreenTimer == 0) {
 				handler.removeObject(levelString);
 			}
-			
-			
-			
 		} else if (levelNumber == 5) {
+			spawnTimer--;
 			levelTimer--;
 			if (tempCounter < 1) {
-				handler.addObject(new EnemyBossGhost(r.nextInt(Game.WIDTH), r.nextInt(Game.HEIGHT), -5, ID.EnemyBossGhost, handler));
-				levelTimer = 1300;
+				levelTimer = 1000;
 				tempCounter++;
+			}
+			if (spawnTimer <= 0) {
+				handler.addObject(new EnemyBurst(-200, 200, 50, 50, 200, side[r.nextInt(4)], ID.EnemyBurst, handler));
+				spawnTimer = 180;
 			}
 
 			if (levelTimer == 0) {
@@ -249,11 +239,9 @@ public class Spawn1to10 {
 			}
 			if (onScreenTimer != 0) {
 				if (temp < 1) {
-					levelString.setString("Ghost Watch Out!");
-					handler.addObject(levelString);
 					Sound.playSoundNewLevel();
-//					levelString.setString("Level " + levelNumber);
-//					handler.addObject(levelString);
+					levelString.setString("Level " + levelNumber);
+					handler.addObject(levelString);
 					temp++;
 				}
 				onScreenTimer--;
@@ -430,6 +418,14 @@ public class Spawn1to10 {
 		hud.updateLevelText(levelNumber);
 	}
 
+	public void playSound(){
+		if(onScreenTimer != 0){
+		if(temp < 1){
+			Sound.playSoundNewLevel();
+		}
+		}
+	}
+
 	public void skipLevel() {
 
 		if (levelsRemaining > 0) {
@@ -441,14 +437,6 @@ public class Spawn1to10 {
 		} else if (levelsRemaining == 0) {
 			LEVEL_SET++;
 			game.gameState = STATE.Upgrade;
-		}
-	}
-	
-	public void playSound(){
-		if(onScreenTimer != 0){
-		if(temp < 1){
-			Sound.playSoundNewLevel();
-		}
 		}
 	}
 	

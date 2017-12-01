@@ -254,7 +254,8 @@ public class Game extends Canvas implements Runnable {
 			gameWin.render(g);
 			
 			if(!scoreSaved){
-				score.addScore(hud.getScore());
+				String name = JOptionPane.showInputDialog("Enter your name for the leaderboard:");
+				score.addScore(hud.getScore(), name);
 				scoreSaved = true;
 			}
 		}

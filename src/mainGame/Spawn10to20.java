@@ -59,29 +59,6 @@ public class Spawn10to20 {
 	}
 
 	public void tick() {
-		// // if(LEVEL_SET_2_RESET < 1){
-		// // restart();
-		// // LEVEL_SET_2_RESET ++;
-		// // }
-		// if (levelNumber <= 0) {
-		// levelTimer--;
-		// if (tempCounter < 1) {
-		// handler.addObject(new LevelText(Game.WIDTH / 2 - 675, Game.HEIGHT / 2
-		// - 200, "Same levels...",
-		// ID.Levels1to10Text));
-		// handler.addObject(new LevelText(Game.WIDTH / 2 - 675, Game.HEIGHT /
-		// 2, "...but a little harder now",
-		// ID.Levels1to10Text));
-		// tempCounter++;
-		// }
-		// if (levelTimer <= 0) {
-		// handler.clearEnemies();
-		// tempCounter = 0;
-		// levelNumber = levels.get(index);
-		// }
-		//
-		// }
-
 		if (levelNumber == 11) {
 			spawnTimer--;
 			levelTimer--;
@@ -90,8 +67,8 @@ public class Spawn10to20 {
 				tempCounter++;
 			}
 			if (spawnTimer == 0) {
-				handler.addObject(
-						new EnemyBasic(r.nextInt(Game.WIDTH), r.nextInt(Game.HEIGHT), 13, 13, ID.EnemyBasic, handler));
+				handler.addObject(new EnemyCircle(r.nextInt(Game.WIDTH), r.nextInt(Game.HEIGHT), 13, 13, ID.EnemyCircle,
+						handler));
 				spawnTimer = 80;
 			}
 			if (levelTimer == 0) {
@@ -166,22 +143,22 @@ public class Spawn10to20 {
 			}
 			if (spawnTimer == 0) {
 				handler.addObject(
-						new EnemySmart(r.nextInt(Game.WIDTH), r.nextInt(Game.HEIGHT), -7, ID.EnemySmart, handler));
-				spawnTimer = 60;
+						new EnemySmarter(r.nextInt(Game.WIDTH), r.nextInt(Game.HEIGHT), -5, ID.EnemySmarter, handler));
+				spawnTimer = 100;
 			}
 			if (levelTimer == 0) {
-				handler.clearEnemies();// clear the enemies
-				hud.setLevel(hud.getLevel() + 1);// Increment level number on
-													// HUD
-				spawnTimer = 40;
-				tempCounter = 0;// reset tempCounter
-				levels.remove(levelNumber);
+				handler.clearEnemies();
+				hud.setLevel(hud.getLevel() + 1);
+				spawnTimer = 10;
+				tempCounter = 0;
+
 				levelNumber += 1;
+				levelsRemaining -= 1;
 				temp = 0;
 				onScreenTimer = 100;
 			}
 			if (onScreenTimer != 0) {
-				if (temp < 1) { // used the same way as tempCounter
+				if (temp < 1) {
 					levelString.setString("Level " + levelNumber);
 					handler.addObject(levelString);
 					temp++;
@@ -438,7 +415,7 @@ public class Spawn10to20 {
 		// }
 		//
 		// }
-		hud.updateLevelText(levelNumber);
+
 	}
 
 	public void skipLevel() {

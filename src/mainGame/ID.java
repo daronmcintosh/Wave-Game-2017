@@ -27,6 +27,8 @@ public enum ID {
 	EnemyRaindrop(),
 	EnemyShotgun(),
 	EnemyShotgunBullet(),
-	EnemyBasic();
+	EnemyBasic(),
+	EnemySmarter(),
+	EnemyCircle();
 	
 }

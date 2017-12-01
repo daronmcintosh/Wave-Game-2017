@@ -42,7 +42,7 @@ public class Spawn1to10 {
 		spawnTimer = 10;
 		levelTimer = 150;
 		onScreenTimer = 100;
-		levelsRemaining = 10; // 10 Levels including the boss
+		levelsRemaining = 9; // 10 Levels excluding the boss
 		tempCounter = 0;
 		addLevels();
 		levelNumber = 1;

@@ -139,7 +139,9 @@ public class Player extends GameObject {
 					|| tempObject.getId() == ID.BossEye
 					|| tempObject.getId() == ID.EnemyRaindrop
 					|| tempObject.getId() == ID.EnemyShotgun
-					|| tempObject.getId() == ID.EnemyShotgunBullet) {// tempObject is an enemy
+					|| tempObject.getId() == ID.EnemyShotgunBullet
+					|| tempObject.getId() == ID.EnemySmarter
+					|| tempObject.getId() == ID.EnemyCircle) {// tempObject is an enemy
 
 				// collision code
 				if (getBounds().intersects(tempObject.getBounds())) {// player hit an enemy

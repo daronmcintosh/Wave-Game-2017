@@ -5,10 +5,6 @@ import java.awt.Font;
 import java.awt.Graphics;
 import java.util.ArrayList;
 
-import mainGame.HUD.HUDElement;
-import mainGame.HUD.HUDRectangle;
-import mainGame.HUD.HUDText;
-
 /**
  * The main Heads Up Display of the game
  * 
@@ -17,7 +13,6 @@ import mainGame.HUD.HUDText;
  */
 
 public class SurvivalHUD extends HUD{
-
 	private double greenValue = 255;
 
 	private int difficulty = 1;

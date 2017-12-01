@@ -32,7 +32,7 @@ public class Game extends Canvas implements Runnable {
 
 	private Handler handler;
 	private HUD hud;
-	private SurvivalHUD survivalHud;
+	public SurvivalHUD survivalHud;
 	private Spawn1to10 spawner;
 	private Spawn10to20 spawner2;
 	private Survival survivalGame;
@@ -225,11 +225,11 @@ public class Game extends Canvas implements Runnable {
 			gameOver.render(g);
 			
 			if(!scoreSaved){
-				score.addScore(hud.getScore());
+				String name = JOptionPane.showInputDialog("Enter your name for the leaderboard:");
+				score.addScore(hud.getScore(), name);
 				scoreSaved = true;
 			}
 		} else if(gameState == STATE.PauseMenu) {
-			hud.render(g);
 			switch (previousGameState) {
 				case Game:
 					hud.render(g);
@@ -277,7 +277,6 @@ public class Game extends Canvas implements Runnable {
 	public void unPause() {
 		paused = false;
 	}
-
 	public Survival getSurvival() {
 		return survivalGame;
 	}
@@ -296,6 +295,10 @@ public class Game extends Canvas implements Runnable {
 
 	public void setSurvivalHud(SurvivalHUD survivalHud) {
 		this.survivalHud = survivalHud;
+	}
+
+	public Survival getSurvivalGameObject() {
+		return survivalGame;
 	}
 
 	/**

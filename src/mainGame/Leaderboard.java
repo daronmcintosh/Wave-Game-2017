@@ -88,10 +88,13 @@ public class Leaderboard {
 	
 			score.loadScores();
 			int[] scores = score.getScores();
+			String[] names = score.getNames();
 			
 			for(int i = 0; i < scores.length; i++){
-				drawMenuString(g, font, Color.BLACK, 
-					Integer.toString(scores[i]), new int[] {Game.WIDTH/2+200, 400 + (100 * i)});
+				drawMenuString(g, font, Color.WHITE, 
+					Integer.toString(scores[i]), new int[] {Game.WIDTH/2+500, 300 + (100 * i)});
+				drawMenuString(g, font, Color.WHITE, 
+						names[i], new int[] {Game.WIDTH/2-322, 300 + 100 * i});
 			}
 	}
 

@@ -83,7 +83,6 @@ public class KeyInput extends KeyAdapter {
 					keyDown[3] = true;
 				}
 
-				if (key == KeyEvent.VK_SPACE) {
 				if ((key == KeyEvent.VK_SPACE) && game.gameState == Game.STATE.Game) {
 					upgrades.levelSkipAbility();
 				}
@@ -112,7 +111,6 @@ public class KeyInput extends KeyAdapter {
 			}
 		}
 	}
-}
 
 	public void keyReleased(KeyEvent e) {
 		int key = e.getKeyCode();

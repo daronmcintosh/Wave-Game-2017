@@ -26,7 +26,6 @@ public class EnemyRaindrop extends GameObject {
 			if (handler.object.get(i).getId() == ID.Player)
 				player = handler.object.get(i);
 		}
-		this.x = player.getX(); // overrides the position set in the spawn class so that it spawns on top of the player
 		if (((Player) player).getGame().gameState == Game.STATE.Game) {
 			this.x = player.getX(); // overrides the position set in the spawn class so that it spawns on top of the player
 		}
@@ -50,7 +49,7 @@ public class EnemyRaindrop extends GameObject {
 	public Rectangle getBounds() {
 		return new Rectangle((int) this.x, (int) this.y, (int) Game.scaleX(40), (int) Game.scaleY(70));
 	}
-	
+
 	@Override
 	public String toString() {
 		return id.toString();

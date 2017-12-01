@@ -50,7 +50,7 @@ public class Menu {
 
 		img = null;
 		try {
-			URL imageURL = Game.class.getResource("images/HaloTheme.jpg");
+			URL imageURL = Game.class.getResource("images/background.png");
 			img = Toolkit.getDefaultToolkit().getImage(imageURL);
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -90,48 +90,6 @@ public class Menu {
 			Font font2 = new Font("Amoebic", 1, (int) (60 * (Game.HEIGHT / 1080f)));
 
 			/*
-			 * Note to self:
-			 * 
-			 * Abstract each of these calls out to a window.
-			 * 
-			 * Each of these buttons should be drawn at a relative location.
-			 * Since each was placed precisely at 1920x1080, every position
-			 * should instead be multiplied by found width/height divided by
-			 * 1920/1080 depending.
-			 * 
-			 * Really it should be a layout manager, but baby steps.
-			 */
-			
-			
-			/*
-
-			g.setFont(font);
-			g.setColor(Color.white);
-			g.drawString("Game Modes", 1140, 100);
-						
-			g.setFont(font);
-			g.setColor(Color.white);
-			g.drawString("Loehle's Sandbox", 75, 100);
-
-			*/
-			
-			drawMenuString(g, font, Color.white, 
-				"Game Modes", new int[] {1140, 100});
-
-			drawMenuString(g, font, Color.white, 
-				"Loehle's Sandbox", new int[] {75, 100});
-			/*
-			g.setColor(Color.white);
-			g.drawRect(990, 135, 400, 400);
-			g.setFont(font2);
-			g.setColor(Color.white);
-			g.drawString("Waves", 1110, 215);
-			*/
-			drawMenuItem(g, font2, Color.white, new int[] {990, 135, 400, 400}, 
-				"Waves", new int[] {1110, 215});
-			drawMenuItem(g, font2, Color.white, new int[] {1440, 135, 400, 400}, 
-					"Survival", new int[] {1560, 215});
-			/*
 			g.setColor(Color.white);
 			g.drawRect(1440, 135, 400, 400);
 			g.setFont(font2);
@@ -149,20 +107,26 @@ public class Menu {
 			g.setFont(font2);
 			g.setColor(Color.white);
 			g.drawString("Hunger", 1550, 665);
-			*/
-			
-			drawMenuItem(g, font, Color.white, new int[] {80, 135, 850, 250}, 
-				"Help", new int[] {400, 280});
-			
-			drawMenuItem(g, font, Color.white, new int[] {80, 435, 850, 250}, 
-				"Credits", new int[] {340, 600});
-			
-			drawMenuItem(g, font, Color.white, new int[] {80, 735, 850, 250}, 
-				"Quit", new int[] {400, 900});
-			
-			drawMenuItem(g, font, Color.white, new int[] {995, 730, 850, 250}, 
-					"Leaderboard", new int[] {1075, 900});
-			/*
+		 */			
+				//Waves
+			drawMenuItem(g, font2, Color.white, new int[] {805, 545, 300, 55}, 
+				"", new int[] {1110, 215});
+			//Survival
+			drawMenuItem(g, font2, Color.white, new int[] {805, 610, 300, 55}, 
+				"", new int[] {1560, 215});
+			//Help
+			drawMenuItem(g, font, Color.white, new int[] {805, 740, 300, 55}, 
+				"", new int[] {400, 280});
+			//Credits
+			drawMenuItem(g, font, Color.white, new int[] {805, 805, 300, 55}, 
+				"", new int[] {340, 600});
+			//Quit
+			drawMenuItem(g, font, Color.white, new int[] {805, 870, 300, 55}, 
+				"", new int[] {400, 900});
+			//Leaderboard
+			drawMenuItem(g, font, Color.white, new int[] {805, 675, 300, 55}, 
+				"", new int[] {1075, 900});
+/*			
 			g.setColor(Color.white);
 			g.drawRect(80, 135, 850, 250);
 			g.setFont(font);

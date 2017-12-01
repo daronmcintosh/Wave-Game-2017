@@ -5,6 +5,7 @@ import java.awt.Font;
 import java.awt.Graphics;
 import java.awt.Rectangle;
 import java.util.Random;
+import javax.swing.JOptionPane;
 
 import mainGame.Game.STATE;
 
@@ -95,11 +96,6 @@ public class Player extends GameObject {
 
 		// add the trail that follows it
 		handler.addObject(new Trail(x, y, ID.Trail, Color.white, playerWidth, playerHeight, 0.05, this.handler));
-		//System.out.println(hud);
-		//System.out.println(game.survivalHud);
-		//hud.health++;
-		//game.survivalHud.health++;
-		//System.out.println(game.gameState);
 		collision();
 		checkIfDead();
 
@@ -249,4 +245,9 @@ public class Player extends GameObject {
 	public Game getGame() {
 		return game;
 	}	
+
+	public void setHUD(HUD newHud) {
+		hud = newHud;
+	}
+
 }

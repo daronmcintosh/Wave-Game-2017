@@ -30,10 +30,11 @@ public class Survival {
 	public void initialize() {
 		spawnTimer = 600;
 		levelTimer = 590;
-		factory = new EnemyFactory();
+		factory = new EnemyFactory(handler);
 		createdEnemies.clear();
 		enemyWaitingList.clear();
 		difficulty = 0;
+		hud.score = 0;
 		//logToConsole();
 	}
 
@@ -47,14 +48,13 @@ public class Survival {
 		levelTimer++;
 		if (levelTimer >= spawnTimer) {
 			levelTimer = 0;
-			createdEnemies.addAll(factory.generateEnemy());
-			logToConsole();
 			spawnEnemy();
+			logToConsole();
 			if (createdEnemies.size() > (difficulty + 3)) {
 				removeEnemy();
 			}
-			spawnTimer -= 75;
-			if (spawnTimer <= 150) {
+			spawnTimer -= 50;
+			if (spawnTimer <= 400) {
 				factory.increaseDifficulty(0.5);
 				spawnTimer = 600;
 			}
@@ -118,7 +118,8 @@ public class Survival {
 		
 		private int spawnDistance = 0;
 		
-		public EnemyFactory() {
+		public EnemyFactory(Handler handler) {
+			this.handler = handler;
 			recentSpawns = new LinkedList<Integer>();
 			enemyIDs = new ArrayList<ID>();
 			enemySpawnCounts = new ArrayList<Integer>();
@@ -141,7 +142,6 @@ public class Survival {
 			 * 2 = EnemySmart
 			 * 3 = EnemyShooter
 			 * 4 = EnemyBurst
-			 * 5 = EnemyFast <--Is this implemented yet?
 			 * 5 = EnemyShotgun
 			 * 6 = EnemyRaindrop
 			 */
@@ -152,7 +152,6 @@ public class Survival {
 			addToRecent(enemyType);
 			ID enemyID = enemyIDs.get(enemyType);
 			setSpawnPosition();
-			
 			switch (enemyType) {
 				case 0:
 					return new EnemyBasic(
@@ -236,7 +235,6 @@ public class Survival {
 		
 		private void populateLists() {
 			enemyIDs.add(ID.EnemyBasic);
-			enemyIDs.add(ID.EnemySmart);
 			enemySpawnCounts.add(enemyBasicSpawnCount);
 			enemyScoreFactors.add(enemyBasicScoreFactor);
 			
@@ -253,7 +251,6 @@ public class Survival {
 			enemyScoreFactors.add(enemyShooterScoreFactor);
 			
 			enemyIDs.add(ID.EnemyBurst);
-			enemyIDs.add(ID.EnemyFast);
 			enemySpawnCounts.add(enemyBurstSpawnCount);
 			enemyScoreFactors.add(enemyBurstScoreFactor);
 			

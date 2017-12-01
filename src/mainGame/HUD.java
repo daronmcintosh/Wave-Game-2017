@@ -4,7 +4,6 @@ import java.awt.Color;
 import java.awt.Font;
 import java.awt.Graphics;
 import java.util.ArrayList;
-
 /**
  * The main Heads Up Display of the game
  * 
@@ -16,12 +15,6 @@ public class HUD {
 
 	private double greenValue = 255;
 
-	private int timer = 60;
-	private int healthBarWidth = 400;
-	private int healthBarModifier = 2;
-	private boolean doubleHealth = false;
-	private String ability = "";
-	private int abilityUses;
 	protected Font font;
 	protected int score = 0;
 	private int level = 1;
@@ -74,18 +67,6 @@ public class HUD {
 		for (HUDElement element : this.HUDElementList) {
 			element.render(g);
 		}
-	}
-
-	public void setAbility(String ability) {
-		this.ability = ability;
-	}
-
-	public int getAbilityUses() {
-		return this.abilityUses;
-	}
-
-	public void setAbilityUses(int abilityUses) {
-		this.abilityUses = abilityUses;
 	}
 
 	public void updateScoreColor(Color color) {
@@ -254,5 +235,4 @@ public class HUD {
 			this.text = text;
 		}
 	}
-	
 }

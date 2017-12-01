@@ -1,5 +1,6 @@
 package mainGame;
 
+import java.awt.event.KeyEvent;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 
@@ -100,7 +101,7 @@ public class MouseListener extends MouseAdapter {
 
 		else if (game.gameState == STATE.Menu) {
 			// Waves Button
-			if (mouseOver(mx, my, 990, 135, 400, 400)) {
+			if (mouseOver(mx, my, 805, 545, 300, 55)) {
 				handler.object.clear();
 				game.gameState = STATE.Game;
 				player.initialize();
@@ -108,19 +109,20 @@ public class MouseListener extends MouseAdapter {
 				// handler.addPickup(new PickupHealth(100, 100, ID.PickupHealth,
 				// "../images/PickupHealth.png", handler));
 			}
-			if (mouseOver(mx, my, 1440, 135, 400, 400)) {
+			// Survival Button
+			if (mouseOver(mx, my, 805, 610, 300, 55)) {
 				handler.object.clear();
 				game.gameState = STATE.Survival;
 				player.initialize();
 				game.getSurvival().initialize();
-				handler.addObject(player);				
+				handler.addObject(player);
 				// handler.addPickup(new PickupHealth(100, 100, ID.PickupHealth,
 				// "../images/PickupHealth.png", handler));
 			}
 
 			// Help Button
 
-			else if (mouseOver(mx, my, 80, 135, 850, 250)) {
+			else if (mouseOver(mx, my, 805, 740, 300, 55)) {
 				// game.gameState = STATE.Help;
 
 				JOptionPane.showMessageDialog(game,
@@ -142,12 +144,12 @@ public class MouseListener extends MouseAdapter {
 			}
 
 			// Quit Button
-			else if (mouseOver(mx, my, 80, 735, 850, 250)) {
+			else if (mouseOver(mx, my, 805, 870, 300, 55)) {
 				System.exit(1);
 			}
 			
 			//Leaderboard Button
-			else if (mouseOver(mx, my, 995, 730, 850, 250)) {
+			else if (mouseOver(mx, my, 805, 675, 300, 55)) {
 				game.gameState=STATE.Leaderboard;
 			}
 		}

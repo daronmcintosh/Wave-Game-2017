@@ -37,8 +37,8 @@ public class Upgrades {
 
 	public void clearScreenAbility() {
 		handler.clearEnemies();
-		hud.setAbilityUses(hud.getAbilityUses() - 1);
-		if (hud.getAbilityUses() == 0) {
+		player.setAbilityUses(player.getAbilityUses() - 1);
+		if (player.getAbilityUses() == 0) {
 			ability = "";
 		}
 	}
@@ -55,7 +55,6 @@ public class Upgrades {
 		player.setDamage(1);
 	}
 
-	
 	public void levelSkipAbility() {
 		handler.clearEnemies();
 		hud.setLevel(hud.getLevel() + 1);
@@ -64,8 +63,8 @@ public class Upgrades {
 		} else if (Spawn1to10.LEVEL_SET == 2) {
 			spawner2.skipLevel();
 		}
-		hud.setAbilityUses(hud.getAbilityUses() - 1);
-		if (hud.getAbilityUses() == 0) {
+		player.setAbilityUses(player.getAbilityUses() - 1);
+		if (player.getAbilityUses() == 0) {
 			ability = "";
 		}
 
@@ -74,8 +73,8 @@ public class Upgrades {
 
 	public void freezeTimeAbility() {
 		handler.pause();
-		hud.setAbilityUses(hud.getAbilityUses() - 1);
-		if (hud.getAbilityUses() == 0) {
+		player.setAbilityUses(player.getAbilityUses() - 1);
+		if (player.getAbilityUses() == 0) {
 			ability = "";
 		}
 	}

@@ -148,6 +148,8 @@ public class Player extends GameObject {
 					|| tempObject.getId() == ID.EnemyShotgun
 					|| tempObject.getId() == ID.EnemyShotgunBullet
 					|| tempObject.getId() == ID.EnemySmarter
+					|| tempObject.getId() == ID.EnemyBossGhost
+					|| tempObject.getId() == ID.EnemyBossGhostTrail
 					|| tempObject.getId() == ID.EnemyCircle) {// tempObject is an enemy
 
 				// collision code

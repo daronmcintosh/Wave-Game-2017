@@ -1,2 +1,2 @@
-1249,1070,500,400,300
-Taylor,Daron,Chris,Mark,Nick
+1249,1215,1085,1070,742
+Taylor,Mark, Mark,Mark,Nick
